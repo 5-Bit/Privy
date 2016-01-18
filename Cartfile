@@ -1,0 +1,4 @@
+#
+github "yannickl/DynamicButton" >= 1.2.0
+#
+github "ninjaprox/NVActivityIndicatorView"
