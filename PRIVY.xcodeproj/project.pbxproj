@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,8 +13,14 @@
 		0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1501C4C5FF30076F176 /* PRIVY.xcdatamodeld */; };
 		0040F1541C4C5FF30076F176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0040F1531C4C5FF30076F176 /* Assets.xcassets */; };
 		0040F1571C4C5FF30076F176 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0040F1551C4C5FF30076F176 /* LaunchScreen.storyboard */; };
-		0040F1621C4C5FF30076F176 /* PRIVYTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1611C4C5FF30076F176 /* PRIVYTests.swift */; };
-		0040F16D1C4C5FF30076F176 /* PRIVYUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F16C1C4C5FF30076F176 /* PRIVYUITests.swift */; };
+		0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1611C4C5FF30076F176 /* PrivyTests.swift */; };
+		0040F16D1C4C5FF30076F176 /* PrivyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F16C1C4C5FF30076F176 /* PrivyUITests.swift */; };
+		0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17A1C4C60510076F176 /* PRVGradientView.swift */; };
+		0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */; };
+		0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */; };
+		0040F1821C4C64240076F176 /* PRVRootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1811C4C64240076F176 /* PRVRootTabBarController.swift */; };
+		0040F1871C4C7E820076F176 /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
+		0040F18A1C4C832A0076F176 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0040F1461C4C5FF30076F176 /* PRIVY.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PRIVY.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0040F1461C4C5FF30076F176 /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F1491C4C5FF30076F176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0040F14B1C4C5FF30076F176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0040F14E1C4C5FF30076F176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,12 +49,19 @@
 		0040F1531C4C5FF30076F176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0040F1561C4C5FF30076F176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0040F1581C4C5FF30076F176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0040F15D1C4C5FF30076F176 /* PRIVYTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PRIVYTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0040F1611C4C5FF30076F176 /* PRIVYTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRIVYTests.swift; sourceTree = "<group>"; };
+		0040F15D1C4C5FF30076F176 /* PrivyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0040F1611C4C5FF30076F176 /* PrivyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivyTests.swift; sourceTree = "<group>"; };
 		0040F1631C4C5FF30076F176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0040F1681C4C5FF30076F176 /* PRIVYUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PRIVYUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0040F16C1C4C5FF30076F176 /* PRIVYUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRIVYUITests.swift; sourceTree = "<group>"; };
+		0040F1681C4C5FF30076F176 /* PrivyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0040F16C1C4C5FF30076F176 /* PrivyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivyUITests.swift; sourceTree = "<group>"; };
 		0040F16E1C4C5FF30076F176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0040F17A1C4C60510076F176 /* PRVGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRVGradientView.swift; sourceTree = "<group>"; };
+		0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
+		0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRVExchangeViewController.swift; sourceTree = "<group>"; };
+		0040F1811C4C64240076F176 /* PRVRootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRVRootTabBarController.swift; sourceTree = "<group>"; };
+		0040F1861C4C7E820076F176 /* DynamicButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicButton.framework; path = Carthage/Build/iOS/DynamicButton.framework; sourceTree = "<group>"; };
+		0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
+		0040F18C1C4C83610076F176 /* Privy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Privy-Bridging-Header.h"; path = "../Privy-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0040F18A1C4C832A0076F176 /* NVActivityIndicatorView.framework in Frameworks */,
+				0040F1871C4C7E820076F176 /* DynamicButton.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,9 +94,10 @@
 		0040F13D1C4C5FF30076F176 = {
 			isa = PBXGroup;
 			children = (
-				0040F1481C4C5FF30076F176 /* PRIVY */,
-				0040F1601C4C5FF30076F176 /* PRIVYTests */,
-				0040F16B1C4C5FF30076F176 /* PRIVYUITests */,
+				0040F18B1C4C833A0076F176 /* Carthage */,
+				0040F1481C4C5FF30076F176 /* Privy */,
+				0040F1601C4C5FF30076F176 /* PrivyTests */,
+				0040F16B1C4C5FF30076F176 /* PrivyUITests */,
 				0040F1471C4C5FF30076F176 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,68 +105,118 @@
 		0040F1471C4C5FF30076F176 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0040F1461C4C5FF30076F176 /* PRIVY.app */,
-				0040F15D1C4C5FF30076F176 /* PRIVYTests.xctest */,
-				0040F1681C4C5FF30076F176 /* PRIVYUITests.xctest */,
+				0040F1461C4C5FF30076F176 /* Privy.app */,
+				0040F15D1C4C5FF30076F176 /* PrivyTests.xctest */,
+				0040F1681C4C5FF30076F176 /* PrivyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0040F1481C4C5FF30076F176 /* PRIVY */ = {
+		0040F1481C4C5FF30076F176 /* Privy */ = {
 			isa = PBXGroup;
 			children = (
 				0040F1491C4C5FF30076F176 /* AppDelegate.swift */,
+				0040F17C1C4C61070076F176 /* Extensions */,
+				0040F1841C4C772E0076F176 /* General */,
 				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
+				0040F1811C4C64240076F176 /* PRVRootTabBarController.swift */,
+				0040F1831C4C771D0076F176 /* Exchange */,
+				0040F18C1C4C83610076F176 /* Privy-Bridging-Header.h */,
 				0040F14D1C4C5FF30076F176 /* Main.storyboard */,
 				0040F1531C4C5FF30076F176 /* Assets.xcassets */,
 				0040F1551C4C5FF30076F176 /* LaunchScreen.storyboard */,
 				0040F1581C4C5FF30076F176 /* Info.plist */,
 				0040F1501C4C5FF30076F176 /* PRIVY.xcdatamodeld */,
 			);
+			name = Privy;
 			path = PRIVY;
 			sourceTree = "<group>";
 		};
-		0040F1601C4C5FF30076F176 /* PRIVYTests */ = {
+		0040F1601C4C5FF30076F176 /* PrivyTests */ = {
 			isa = PBXGroup;
 			children = (
-				0040F1611C4C5FF30076F176 /* PRIVYTests.swift */,
+				0040F1611C4C5FF30076F176 /* PrivyTests.swift */,
 				0040F1631C4C5FF30076F176 /* Info.plist */,
 			);
+			name = PrivyTests;
 			path = PRIVYTests;
 			sourceTree = "<group>";
 		};
-		0040F16B1C4C5FF30076F176 /* PRIVYUITests */ = {
+		0040F16B1C4C5FF30076F176 /* PrivyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0040F16C1C4C5FF30076F176 /* PRIVYUITests.swift */,
+				0040F16C1C4C5FF30076F176 /* PrivyUITests.swift */,
 				0040F16E1C4C5FF30076F176 /* Info.plist */,
 			);
+			name = PrivyUITests;
 			path = PRIVYUITests;
+			sourceTree = "<group>";
+		};
+		0040F17C1C4C61070076F176 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		0040F1831C4C771D0076F176 /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */,
+			);
+			name = Exchange;
+			sourceTree = "<group>";
+		};
+		0040F1841C4C772E0076F176 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				0040F1851C4C773A0076F176 /* Views */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
+		0040F1851C4C773A0076F176 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0040F17A1C4C60510076F176 /* PRVGradientView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		0040F18B1C4C833A0076F176 /* Carthage */ = {
+			isa = PBXGroup;
+			children = (
+				0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */,
+				0040F1861C4C7E820076F176 /* DynamicButton.framework */,
+			);
+			name = Carthage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0040F1451C4C5FF30076F176 /* PRIVY */ = {
+		0040F1451C4C5FF30076F176 /* Privy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0040F1711C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVY" */;
+			buildConfigurationList = 0040F1711C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "Privy" */;
 			buildPhases = (
 				0040F1421C4C5FF30076F176 /* Sources */,
 				0040F1431C4C5FF30076F176 /* Frameworks */,
 				0040F1441C4C5FF30076F176 /* Resources */,
+				0040F1881C4C7F070076F176 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PRIVY;
+			name = Privy;
 			productName = PRIVY;
-			productReference = 0040F1461C4C5FF30076F176 /* PRIVY.app */;
+			productReference = 0040F1461C4C5FF30076F176 /* Privy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0040F15C1C4C5FF30076F176 /* PRIVYTests */ = {
+		0040F15C1C4C5FF30076F176 /* PrivyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0040F1741C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVYTests" */;
+			buildConfigurationList = 0040F1741C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PrivyTests" */;
 			buildPhases = (
 				0040F1591C4C5FF30076F176 /* Sources */,
 				0040F15A1C4C5FF30076F176 /* Frameworks */,
@@ -161,14 +227,14 @@
 			dependencies = (
 				0040F15F1C4C5FF30076F176 /* PBXTargetDependency */,
 			);
-			name = PRIVYTests;
+			name = PrivyTests;
 			productName = PRIVYTests;
-			productReference = 0040F15D1C4C5FF30076F176 /* PRIVYTests.xctest */;
+			productReference = 0040F15D1C4C5FF30076F176 /* PrivyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0040F1671C4C5FF30076F176 /* PRIVYUITests */ = {
+		0040F1671C4C5FF30076F176 /* PrivyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0040F1771C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVYUITests" */;
+			buildConfigurationList = 0040F1771C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PrivyUITests" */;
 			buildPhases = (
 				0040F1641C4C5FF30076F176 /* Sources */,
 				0040F1651C4C5FF30076F176 /* Frameworks */,
@@ -179,9 +245,9 @@
 			dependencies = (
 				0040F16A1C4C5FF30076F176 /* PBXTargetDependency */,
 			);
-			name = PRIVYUITests;
+			name = PrivyUITests;
 			productName = PRIVYUITests;
-			productReference = 0040F1681C4C5FF30076F176 /* PRIVYUITests.xctest */;
+			productReference = 0040F1681C4C5FF30076F176 /* PrivyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -190,6 +256,7 @@
 		0040F13E1C4C5FF30076F176 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PRV;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Michael MacCallum";
@@ -207,8 +274,8 @@
 					};
 				};
 			};
-			buildConfigurationList = 0040F1411C4C5FF30076F176 /* Build configuration list for PBXProject "PRIVY" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 0040F1411C4C5FF30076F176 /* Build configuration list for PBXProject "Privy" */;
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -220,9 +287,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0040F1451C4C5FF30076F176 /* PRIVY */,
-				0040F15C1C4C5FF30076F176 /* PRIVYTests */,
-				0040F1671C4C5FF30076F176 /* PRIVYUITests */,
+				0040F1451C4C5FF30076F176 /* Privy */,
+				0040F15C1C4C5FF30076F176 /* PrivyTests */,
+				0040F1671C4C5FF30076F176 /* PrivyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,12 +321,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0040F1881C4C7F070076F176 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/DynamicButton.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0040F1421C4C5FF30076F176 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */,
+				0040F1821C4C64240076F176 /* PRVRootTabBarController.swift in Sources */,
+				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
+				0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */,
+				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */,
 				0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */,
 			);
@@ -269,7 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0040F1621C4C5FF30076F176 /* PRIVYTests.swift in Sources */,
+				0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0040F16D1C4C5FF30076F176 /* PRIVYUITests.swift in Sources */,
+				0040F16D1C4C5FF30076F176 /* PrivyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,12 +375,12 @@
 /* Begin PBXTargetDependency section */
 		0040F15F1C4C5FF30076F176 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0040F1451C4C5FF30076F176 /* PRIVY */;
+			target = 0040F1451C4C5FF30076F176 /* Privy */;
 			targetProxy = 0040F15E1C4C5FF30076F176 /* PBXContainerItemProxy */;
 		};
 		0040F16A1C4C5FF30076F176 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0040F1451C4C5FF30076F176 /* PRIVY */;
+			target = 0040F1451C4C5FF30076F176 /* Privy */;
 			targetProxy = 0040F1691C4C5FF30076F176 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -401,10 +490,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PRIVY/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVY";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
+				PRODUCT_NAME = Privy;
+				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -412,10 +509,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = PRIVY/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVY";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
+				PRODUCT_NAME = Privy;
+				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -425,9 +530,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PRIVYTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVYTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PRIVY.app/PRIVY";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyTests";
+				PRODUCT_NAME = PrivyTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.temp_caseinsensitive_rename.app/Privy.temp_caseinsensitive_rename";
 			};
 			name = Debug;
 		};
@@ -437,9 +542,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = PRIVYTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVYTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PRIVY.app/PRIVY";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyTests";
+				PRODUCT_NAME = PrivyTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.temp_caseinsensitive_rename.app/Privy.temp_caseinsensitive_rename";
 			};
 			name = Release;
 		};
@@ -448,8 +553,8 @@
 			buildSettings = {
 				INFOPLIST_FILE = PRIVYUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVYUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
+				PRODUCT_NAME = PrivyUITests;
 				TEST_TARGET_NAME = PRIVY;
 				USES_XCTRUNNER = YES;
 			};
@@ -460,8 +565,8 @@
 			buildSettings = {
 				INFOPLIST_FILE = PRIVYUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PRIVYUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
+				PRODUCT_NAME = PrivyUITests;
 				TEST_TARGET_NAME = PRIVY;
 				USES_XCTRUNNER = YES;
 			};
@@ -470,7 +575,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0040F1411C4C5FF30076F176 /* Build configuration list for PBXProject "PRIVY" */ = {
+		0040F1411C4C5FF30076F176 /* Build configuration list for PBXProject "Privy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0040F16F1C4C5FF30076F176 /* Debug */,
@@ -479,7 +584,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0040F1711C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVY" */ = {
+		0040F1711C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "Privy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0040F1721C4C5FF30076F176 /* Debug */,
@@ -487,7 +592,7 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		0040F1741C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVYTests" */ = {
+		0040F1741C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PrivyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0040F1751C4C5FF30076F176 /* Debug */,
@@ -495,7 +600,7 @@
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		0040F1771C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PRIVYUITests" */ = {
+		0040F1771C4C5FF30076F176 /* Build configuration list for PBXNativeTarget "PrivyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0040F1781C4C5FF30076F176 /* Debug */,
