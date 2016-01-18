@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PRVRootTabBarController: UITabBarController {
+class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class PRVRootTabBarController: UITabBarController {
 
 }
 
-extension PRVRootTabBarController: UITabBarControllerDelegate {
+extension RootTabBarController: UITabBarControllerDelegate {
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         
         guard let controllers = tabBarController.viewControllers else {
