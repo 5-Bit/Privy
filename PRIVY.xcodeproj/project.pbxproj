@@ -21,6 +21,7 @@
 		0040F1821C4C64240076F176 /* PRVRootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1811C4C64240076F176 /* PRVRootTabBarController.swift */; };
 		0040F1871C4C7E820076F176 /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0040F18A1C4C832A0076F176 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
+		0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		0040F1861C4C7E820076F176 /* DynamicButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicButton.framework; path = Carthage/Build/iOS/DynamicButton.framework; sourceTree = "<group>"; };
 		0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		0040F18C1C4C83610076F176 /* Privy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Privy-Bridging-Header.h"; path = "../Privy-Bridging-Header.h"; sourceTree = "<group>"; };
+		0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVMediaType+Shim.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
