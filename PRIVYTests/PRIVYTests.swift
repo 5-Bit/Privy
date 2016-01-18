@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import PRIVY
+@testable import Privy
 
 class PRIVYTests: XCTestCase {
     
