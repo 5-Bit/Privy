@@ -24,6 +24,7 @@
 		0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */; };
 		0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */; };
 		0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */; };
+		0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1941C4CB7490076F176 /* ObservableOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSQualityOfService+qos_class_t.swift"; sourceTree = "<group>"; };
 		0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVMediaType+Shim.swift"; sourceTree = "<group>"; };
 		0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPermissionOperation.swift; sourceTree = "<group>"; };
+		0040F1941C4CB7490076F176 /* ObservableOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
