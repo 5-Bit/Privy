@@ -1,4 +1,4 @@
-#### Privy
+## Privy
 An information sharing application. This repository houses the iOS client for Privy.
 
 ##### Build Instructions (OS X only)
