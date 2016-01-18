@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0040F15C1C4C5FF30076F176"
-               BuildableName = "Privy.xctest"
+               BuildableName = "PrivyTests.xctest"
                BlueprintName = "PrivyTests"
                ReferencedContainer = "container:Privy.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0040F1671C4C5FF30076F176"
-               BuildableName = "Privy.xctest"
+               BuildableName = "PrivyUITests.xctest"
                BlueprintName = "PrivyUITests"
                ReferencedContainer = "container:Privy.xcodeproj">
             </BuildableReference>
