@@ -26,6 +26,8 @@
 		0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */; };
 		0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1941C4CB7490076F176 /* ObservableOperation.swift */; };
 		0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1951C4CB7490076F176 /* QRScanOperation.swift */; };
+		0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */; };
+		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPermissionOperation.swift; sourceTree = "<group>"; };
 		0040F1941C4CB7490076F176 /* ObservableOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableOperation.swift; sourceTree = "<group>"; };
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
+		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
+		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,8 @@
 				0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */,
 				0040F1941C4CB7490076F176 /* ObservableOperation.swift */,
 				0040F1951C4CB7490076F176 /* QRScanOperation.swift */,
+				0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */,
+				0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */,
 				0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */,
 				0040F1851C4C773A0076F176 /* Views */,
 			);
@@ -271,7 +277,7 @@
 		0040F13E1C4C5FF30076F176 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = "";
+				CLASSPREFIX = PRV;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Michael MacCallum";
@@ -363,10 +369,12 @@
 				0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */,
 				0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */,
 				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
+				0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */,
 				0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
+				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,
 				0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */,
