@@ -2,6 +2,7 @@
 An information sharing application. This repository houses the iOS client for Privy.
 
 ##### Build Instructions (OS X only)
+0. Download Xcode 7.3 beta 3 (7D141l) or later.
 1. Clone this repository to your computer
 2. If you don't have Homebrew installed, run this command to install it `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 3. Install Carthage with `brew install carthage`
