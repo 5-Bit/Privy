@@ -29,6 +29,8 @@
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
 		0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */; };
 		0063646D1C6AB49D009990F2 /* MockupBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */; };
+		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
+		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */; };
 		00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */; };
 		00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */; };
@@ -94,6 +96,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */,
+				008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */,
+				0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +251,7 @@
 				0040F1421C4C5FF30076F176 /* Sources */,
 				0040F1431C4C5FF30076F176 /* Frameworks */,
 				0040F1441C4C5FF30076F176 /* Resources */,
+				0086953B1C70E3C700C7C35C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -363,6 +368,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0086953B1C70E3C700C7C35C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/DynamicButton.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0040F1421C4C5FF30076F176 /* Sources */ = {
