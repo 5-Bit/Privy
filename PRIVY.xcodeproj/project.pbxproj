@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00317EF81C6D2F6500882EFC /* AVFoundation.framework */; };
 		0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1491C4C5FF30076F176 /* AppDelegate.swift */; };
 		0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F14B1C4C5FF30076F176 /* ViewController.swift */; };
 		0040F14F1C4C5FF30076F176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0040F14D1C4C5FF30076F176 /* Main.storyboard */; };
@@ -19,8 +20,6 @@
 		0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */; };
 		0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */; };
 		0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1811C4C64240076F176 /* RootTabBarController.swift */; };
-		0040F1871C4C7E820076F176 /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
-		0040F18A1C4C832A0076F176 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */; };
 		0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */; };
 		0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */; };
@@ -28,6 +27,11 @@
 		0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1951C4CB7490076F176 /* QRScanOperation.swift */; };
 		0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */; };
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
+		0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */; };
+		0063646D1C6AB49D009990F2 /* MockupBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */; };
+		00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */; };
+		00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */; };
+		00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00317EF81C6D2F6500882EFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0040F1461C4C5FF30076F176 /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F1491C4C5FF30076F176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0040F14B1C4C5FF30076F176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +81,11 @@
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
+		0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupScanViewController.swift; sourceTree = "<group>"; };
+		0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupBaseNavigationController.swift; sourceTree = "<group>"; };
+		00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupEntryViewController.swift; sourceTree = "<group>"; };
+		00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupQRReaderViewController.swift; sourceTree = "<group>"; };
+		00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0040F18A1C4C832A0076F176 /* NVActivityIndicatorView.framework in Frameworks */,
-				0040F1871C4C7E820076F176 /* DynamicButton.framework in Frameworks */,
+				00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +117,7 @@
 		0040F13D1C4C5FF30076F176 = {
 			isa = PBXGroup;
 			children = (
+				00317EF81C6D2F6500882EFC /* AVFoundation.framework */,
 				0040F18B1C4C833A0076F176 /* Carthage */,
 				0040F1481C4C5FF30076F176 /* Privy */,
 				0040F1601C4C5FF30076F176 /* PrivyTests */,
@@ -129,6 +139,7 @@
 		0040F1481C4C5FF30076F176 /* Privy */ = {
 			isa = PBXGroup;
 			children = (
+				006364691C6AB3FF009990F2 /* Mockup */,
 				0040F1491C4C5FF30076F176 /* AppDelegate.swift */,
 				0040F17C1C4C61070076F176 /* Extensions */,
 				0040F1841C4C772E0076F176 /* General */,
@@ -150,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				0040F1611C4C5FF30076F176 /* PrivyTests.swift */,
+				00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */,
 				0040F1631C4C5FF30076F176 /* Info.plist */,
 			);
 			name = PrivyTests;
@@ -214,6 +226,17 @@
 			name = Carthage;
 			sourceTree = "<group>";
 		};
+		006364691C6AB3FF009990F2 /* Mockup */ = {
+			isa = PBXGroup;
+			children = (
+				00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */,
+				0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */,
+				0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */,
+				00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */,
+			);
+			name = Mockup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -224,7 +247,6 @@
 				0040F1421C4C5FF30076F176 /* Sources */,
 				0040F1431C4C5FF30076F176 /* Frameworks */,
 				0040F1441C4C5FF30076F176 /* Resources */,
-				0040F1881C4C7F070076F176 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -342,30 +364,13 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0040F1881C4C7F070076F176 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/DynamicButton.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/local/bin/carthage copy-frameworks";
-			shellScript = "";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		0040F1421C4C5FF30076F176 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */,
+				00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */,
 				0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */,
 				0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */,
 				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
@@ -373,10 +378,13 @@
 				0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
+				00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
 				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
+				0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,
+				0063646D1C6AB49D009990F2 /* MockupBaseNavigationController.swift in Sources */,
 				0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */,
 				0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */,
 			);
@@ -386,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */,
 				0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +533,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PRIVY/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
 				PRODUCT_NAME = Privy;
@@ -543,7 +552,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = PRIVY/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
 				PRODUCT_NAME = Privy;
@@ -560,7 +569,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyTests";
 				PRODUCT_NAME = PrivyTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.temp_caseinsensitive_rename.app/Privy.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.app/Privy";
 			};
 			name = Debug;
 		};
@@ -572,7 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyTests";
 				PRODUCT_NAME = PrivyTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.temp_caseinsensitive_rename.app/Privy.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Privy.app/Privy";
 			};
 			name = Release;
 		};

@@ -9,7 +9,7 @@
 import XCTest
 @testable import Privy
 
-class PRIVYTests: XCTestCase {
+class PrivyTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

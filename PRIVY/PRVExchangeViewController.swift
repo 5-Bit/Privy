@@ -7,30 +7,30 @@
 //
 
 import UIKit
-import DynamicButton
-import NVActivityIndicatorView
+////import DynamicButton
+//import NVActivityIndicatorView
 
 class PRVExchangeViewController: UIViewController {
-    @IBOutlet private weak var closeButton: DynamicButton! {
-        didSet {
-            closeButton.setStyle(DynamicButton.Style.Close, animated: false)
-
-            closeButton.lineWidth           = 2
-            closeButton.strokeColor         = UIColor.appLightBlueColor()
-            closeButton.highlightStokeColor = UIColor.whiteColor()
-            closeButton.backgroundColor     = UIColor.whiteColor()
-            closeButton.layer.cornerRadius  = closeButton.bounds.width / 2.0
-            closeButton.layer.masksToBounds = true
-        }
-    }
+//    @IBOutlet private weak var closeButton: DynamicButton! {
+//        didSet {
+//            closeButton.setStyle(DynamicButton.Style.Close, animated: false)
+//
+//            closeButton.lineWidth           = 2
+//            closeButton.strokeColor         = UIColor.appLightBlueColor()
+//            closeButton.highlightStokeColor = UIColor.whiteColor()
+//            closeButton.backgroundColor     = UIColor.whiteColor()
+//            closeButton.layer.cornerRadius  = closeButton.bounds.width / 2.0
+//            closeButton.layer.masksToBounds = true
+//        }
+//    }
     
-    @IBOutlet private weak var loadingIndicator: NVActivityIndicatorView! {
-        didSet {
-            loadingIndicator.type = NVActivityIndicatorType.BallClipRotateMultiple
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.size = loadingIndicator.bounds.size
-        }
-    }
+//    @IBOutlet private weak var loadingIndicator: NVActivityIndicatorView! {
+//        didSet {
+//            loadingIndicator.type = NVActivityIndicatorType.BallClipRotateMultiple
+//            loadingIndicator.hidesWhenStopped = true
+//            loadingIndicator.size = loadingIndicator.bounds.size
+//        }
+//    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +41,13 @@ class PRVExchangeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        loadingIndicator.startAnimation()
+//        loadingIndicator.startAnimation()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        loadingIndicator.stopAnimation()
+//        loadingIndicator.stopAnimation()
     }
 
     override func didReceiveMemoryWarning() {

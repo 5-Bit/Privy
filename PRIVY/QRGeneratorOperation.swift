@@ -10,55 +10,73 @@ import UIKit
 import CoreImage
 import CoreGraphics
 
-typealias QRGeneratorCompletion = UIImage? -> Void
-
+/// An NSOperation subclass that generates a UIImage representing a QR code from an input string/size/scale.
 class QRGeneratorOperation: ObservableOperation {
-    private let data: NSData
+    private let qrString: String
     private let size: CGSize
     private let scale: CGFloat
-    private let completionHandler: QRGeneratorCompletion
+    private let correctionLevel: QrCorrectionLevel
+    private let completionHandler: UIImage? -> Void
+    private let queue = dispatch_queue_create("com.Privy.QRGeneratorOperation.queue", DISPATCH_QUEUE_SERIAL)
+
+    /// Used exclusively by `waitUntilFinished`
+    private var semaphore = dispatch_semaphore_create(0)
     
     override var asynchronous: Bool {
         return true
     }
     
-    required init(data: NSData, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = 1.0, completionHandler: QRGeneratorCompletion) {
-        self.data = data
+    /**
+     Creates a QRGeneratorOperation from the input data. Calls the given completion handler when done.
+     
+     - parameter qrString:          An arbitrary String to be encoded into a QR code. This string is expected
+                                    to be encoded using ISO Latin 1 encoding.
+     - parameter size:              The size the output image should be rendered as, in points.
+     - parameter scale:             The scale factor to apply to the output image. If for example, a size
+                                    of 300x300 is specificed with a scale factor of 2, the resultant image
+                                    will be 600x600 pixels.
+     - parameter correctionLevel:   See the QRCorrectionLevel enum.
+     - parameter completionHandler: Called after the operation has finished. If the operation successfully
+                                    created a QR code, a UIImage will be given. Otherwise, the closure's
+                                    parameter will be nil.
+     */
+    required init(qrString: String, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = 1.0, correctionLevel: QrCorrectionLevel = .High, completionHandler: UIImage? -> Void) {
+        self.qrString = qrString
         self.size = size
         self.scale = scale
+        self.correctionLevel = correctionLevel
         self.completionHandler = completionHandler
     }
     
     override func start() {
         super.start()
-        
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
-            if let image = QRGeneratorOperation.imageFromData(self.data, size: self.size, scale: self.scale) {
-                self.finished = true
-                self.completionHandler(image)
-                return
-            } else {
-                self.cancel()
-                self.completionHandler(nil)
-            }
+
+        if let image = QRGeneratorOperation.imageFromQrString(self.qrString, size: self.size, scale: self.scale, correctionLevel: self.correctionLevel) {
+            self.finished = true
+            self.completionHandler(image)
+            return
+        } else {
+            self.cancel()
+            self.completionHandler(nil)
         }
+        
+        dispatch_semaphore_signal(self.semaphore)
     }
     
-    /**
-     <#Description#>
-     
-     - parameter data:  <#data description#>
-     - parameter size:  <#size description#>
-     - parameter scale: <#scale description#>
-     
-     - returns: <#return value description#>
-     */
-    static func imageFromData(data: NSData, size: CGSize, scale: CGFloat) -> UIImage? {
-        let options: NSDataBase64EncodingOptions = [.EncodingEndLineWithCarriageReturn, .EncodingEndLineWithLineFeed]
-        let base64 = data.base64EncodedStringWithOptions(options)
+    override func waitUntilFinished() {
+        if let semaphore = semaphore {
+            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        }
         
-        // If we fail to encoded the base 64 data as ISO Latin 1, fail.
-        guard let isoLatin = base64.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false) else {
+        super.waitUntilFinished()
+    }
+
+    /**
+     Generates a UIImage representation of a QR code from the input data at the input size and scale.
+     Returns nil if not successful.
+     */
+    private static func imageFromQrString(qrString: String, size: CGSize, scale: CGFloat, correctionLevel: QrCorrectionLevel) -> UIImage? {
+        guard let isoLatin = qrString.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false) else {
             return nil
         }
         
@@ -68,7 +86,7 @@ class QRGeneratorOperation: ObservableOperation {
         }
         
         filter.setValue(isoLatin, forKey: "inputMessage")
-        filter.setValue(QrCorrectionLevel.High, forKey: "inputCorrectionLevel")
+        filter.setValue(correctionLevel, forKey: "inputCorrectionLevel")
         
         // If the filter didn't generate an output image, fail.
         guard let outputImage = filter.outputImage else {

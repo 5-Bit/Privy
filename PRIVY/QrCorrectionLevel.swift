@@ -44,7 +44,7 @@ enum QrCorrectionLevel: NSString, CustomStringConvertible {
 
 extension NSObject {
     /**
-     Overloads NSObject's `setValue(:forKey:)` to accept arbitry enums whose RawValue is AnyObject
+     Overloads NSObject's `setValue(_:forKey:)` to accept arbitrary enums whose RawValue is AnyObject
      */
     func setValue <RawType: RawRepresentable where RawType.RawValue: AnyObject> (value: RawType?, forKey key: String) {
         setValue(value?.rawValue, forKey: key)

@@ -8,7 +8,15 @@
 
 import Foundation
 
+// MARK: - <#Description#>
 extension NSQualityOfService {
+    /**
+     <#Description#>
+     
+     - parameter qosClass: <#qosClass description#>
+     
+     - returns: <#return value description#>
+     */
     init?(qosClass: qos_class_t) {
         switch qosClass {
         case QOS_CLASS_USER_INTERACTIVE:
@@ -26,6 +34,11 @@ extension NSQualityOfService {
         }
     }
     
+    /**
+     <#Description#>
+     
+     - returns: <#return value description#>
+     */
     func toQosClass() -> qos_class_t {
         switch self {
         case .UserInteractive:
