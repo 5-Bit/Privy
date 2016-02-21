@@ -26,7 +26,7 @@ class PRVGradientView: UIView {
             return
         }
         
-        gradientLayer.colors = [UIColor.appDarkBlueColor().CGColor, UIColor.appLightBlueColor().CGColor]
+        gradientLayer.colors = [UIColor.privyDarkBlueColor.CGColor, UIColor.privyLightBlueColor.CGColor]
         gradientLayer.locations = [0.0, 1.0]
     }
     
