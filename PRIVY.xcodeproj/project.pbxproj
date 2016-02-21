@@ -18,7 +18,7 @@
 		0040F16D1C4C5FF30076F176 /* PrivyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F16C1C4C5FF30076F176 /* PrivyUITests.swift */; };
 		0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17A1C4C60510076F176 /* PRVGradientView.swift */; };
 		0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */; };
-		0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */; };
+		0040F1801C4C62E70076F176 /* ExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F17F1C4C62E70076F176 /* ExchangeViewController.swift */; };
 		0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1811C4C64240076F176 /* RootTabBarController.swift */; };
 		0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */; };
 		0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */; };
@@ -71,7 +71,7 @@
 		0040F16E1C4C5FF30076F176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0040F17A1C4C60510076F176 /* PRVGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRVGradientView.swift; sourceTree = "<group>"; };
 		0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
-		0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PRVExchangeViewController.swift; sourceTree = "<group>"; };
+		0040F17F1C4C62E70076F176 /* ExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExchangeViewController.swift; sourceTree = "<group>"; };
 		0040F1811C4C64240076F176 /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		0040F1861C4C7E820076F176 /* DynamicButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DynamicButton.framework; path = Carthage/Build/iOS/DynamicButton.framework; sourceTree = "<group>"; };
 		0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 		0040F1831C4C771D0076F176 /* Exchange */ = {
 			isa = PBXGroup;
 			children = (
-				0040F17F1C4C62E70076F176 /* PRVExchangeViewController.swift */,
+				0040F17F1C4C62E70076F176 /* ExchangeViewController.swift */,
 			);
 			name = Exchange;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 				0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */,
 				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
 				0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */,
-				0040F1801C4C62E70076F176 /* PRVExchangeViewController.swift in Sources */,
+				0040F1801C4C62E70076F176 /* ExchangeViewController.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */,

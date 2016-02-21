@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10109" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3Yd-yP-cjq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10109" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="R1a-BI-J7F">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10083"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--History-->
         <scene sceneID="FrM-MO-rNb">
             <objects>
                 <viewController id="71N-37-J5K" sceneMemberID="viewController">
@@ -18,13 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Hc9-dB-EwL"/>
+                    <tabBarItem key="tabBarItem" title="History" image="history" selectedImage="history-selected" id="Hc9-dB-EwL"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UW0-XN-pEe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="343" y="-715"/>
         </scene>
-        <!--Item 1-->
+        <!--My Info-->
         <scene sceneID="aUt-my-dyW">
             <objects>
                 <viewController id="hnn-5D-GMw" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="vOG-ww-dEI"/>
+                    <tabBarItem key="tabBarItem" title="My Info" image="info" selectedImage="info-selected" id="vOG-ww-dEI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LeH-vH-4Jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,25 +46,27 @@
         <!--Root Tab Bar Controller-->
         <scene sceneID="2fn-bj-erT">
             <objects>
-                <tabBarController id="R1a-BI-J7F" customClass="PRVRootTabBarController" customModule="Privy" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="mRy-Ua-Ifr">
+                <tabBarController id="R1a-BI-J7F" customClass="RootTabBarController" customModule="Privy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="centered" id="mRy-Ua-Ifr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.13725490200000001" green="0.37254901959999998" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="hnn-5D-GMw" kind="relationship" relationship="viewControllers" id="7nT-EP-8Md"/>
+                        <segue destination="MXp-jm-OZE" kind="relationship" relationship="viewControllers" id="pKc-Cs-vel"/>
                         <segue destination="71N-37-J5K" kind="relationship" relationship="viewControllers" id="zyd-Tw-tDV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YsO-Bb-Mg9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-477" y="-1045"/>
+            <point key="canvasLocation" x="-477" y="-1051"/>
         </scene>
-        <!--Exchange View Controller-->
+        <!--Swap-->
         <scene sceneID="eNO-bP-aNF">
             <objects>
-                <viewController id="MXp-jm-OZE" customClass="PRVExchangeViewController" customModule="Privy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MXp-jm-OZE" customClass="ExchangeViewController" customModule="Privy" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2bz-Qf-aHb"/>
                         <viewControllerLayoutGuide type="bottom" id="kQx-yd-agF"/>
@@ -97,10 +99,11 @@
                             <constraint firstItem="xxP-uW-O8q" firstAttribute="top" secondItem="2bz-Qf-aHb" secondAttribute="bottom" constant="20" id="zrd-AI-2si"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Swap" image="swap" selectedImage="swap-selected" id="08k-3K-m1d"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="closeButton" destination="xxP-uW-O8q" id="wXv-hi-uTa"/>
-                        <outlet property="loadingIndicator" destination="gub-qi-hDM" id="ItV-O8-ThH"/>
+                        <outlet property="closeButton" destination="xxP-uW-O8q" id="1mT-YB-zsT"/>
+                        <outlet property="loadingIndicator" destination="gub-qi-hDM" id="VAB-vT-y8u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJW-9F-ljr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,5 +342,13 @@
             <point key="canvasLocation" x="1291" y="1511"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="history" width="25" height="25"/>
+        <image name="history-selected" width="25" height="25"/>
+        <image name="info" width="25" height="25"/>
+        <image name="info-selected" width="25" height="25"/>
+        <image name="swap" width="19" height="24"/>
+        <image name="swap-selected" width="19" height="24"/>
+    </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
