@@ -8,17 +8,30 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.privyLightBlueColor], forState: .Selected)
-        UITabBar.appearance().tintColor = UIColor.privyLightBlueColor
+        
+        let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
+        UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
+        UITabBar.appearance().tintColor = .privyLightBlueColor
 
+        do {
+            try AVAudioSession.sharedInstance().setCategory(
+                AVAudioSessionCategoryRecord,
+                withOptions: .MixWithOthers
+            )
+            
+            try AVAudioSession.sharedInstance().setActive(false, withOptions: [])
+        } catch {
+            // don't care
+        }
+        
         // Override point for customization after application launch.
         return true
     }
