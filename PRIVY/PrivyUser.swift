@@ -18,4 +18,8 @@ final class PrivyUser {
     var qrString: String {
         return "{name:\"Michael MacCallum\",phone:2392335730,uid:1234567890,key:" + NSUUID().UUIDString + "}"
     }
+    
+    var isLoggedIn: Bool {
+        return false
+    }
 }
