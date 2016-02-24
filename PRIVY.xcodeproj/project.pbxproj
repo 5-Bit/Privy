@@ -41,10 +41,13 @@
 		00A7B9511C7D30C900E94C68 /* ProfileImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */; };
 		00A7B9521C7D30C900E94C68 /* ProfileFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */; };
 		00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */; };
-		00A7B9551C7D315600E94C68 /* String+FormerDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9541C7D315600E94C68 /* String+FormerDemo.swift */; };
+		00A7B9551C7D315600E94C68 /* String Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9541C7D315600E94C68 /* String Extensions.swift */; };
 		00A7B9591C7D31F400E94C68 /* ProfileFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */; };
 		00A7B95A1C7D31F400E94C68 /* ProfileImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */; };
 		00A7B95B1C7D31F400E94C68 /* ProfileLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */; };
+		00A7B95E1C7D553500E94C68 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B95D1C7D553500E94C68 /* LoginViewController.swift */; };
+		00A7B9601C7D598800E94C68 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B95F1C7D598800E94C68 /* RoundedTextField.swift */; };
+		00A7B9621C7D5A5400E94C68 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */; };
 		00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */; };
 		00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */; };
 		00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF8881C7A55810027BFFE /* PrivyUser.swift */; };
@@ -112,10 +115,13 @@
 		00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageCell.swift; sourceTree = "<group>"; };
 		00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFieldCell.swift; sourceTree = "<group>"; };
 		00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileLabelCell.swift; sourceTree = "<group>"; };
-		00A7B9541C7D315600E94C68 /* String+FormerDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+FormerDemo.swift"; sourceTree = "<group>"; };
+		00A7B9541C7D315600E94C68 /* String Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String Extensions.swift"; sourceTree = "<group>"; };
 		00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileFieldCell.xib; sourceTree = "<group>"; };
 		00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImageCell.xib; sourceTree = "<group>"; };
 		00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileLabelCell.xib; sourceTree = "<group>"; };
+		00A7B95D1C7D553500E94C68 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		00A7B95F1C7D598800E94C68 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupEntryViewController.swift; sourceTree = "<group>"; };
 		00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupQRReaderViewController.swift; sourceTree = "<group>"; };
 		00BFF8881C7A55810027BFFE /* PrivyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivyUser.swift; sourceTree = "<group>"; };
@@ -187,6 +193,7 @@
 				0040F1841C4C772E0076F176 /* General */,
 				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
 				0040F1811C4C64240076F176 /* RootTabBarController.swift */,
+				00A7B95C1C7D552400E94C68 /* Login & Registration */,
 				00A7B9431C7D23EF00E94C68 /* Info */,
 				0040F1831C4C771D0076F176 /* Exchange */,
 				00A7B9441C7D23FA00E94C68 /* History */,
@@ -251,7 +258,7 @@
 				0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */,
 				0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */,
 				0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */,
-				00A7B9541C7D315600E94C68 /* String+FormerDemo.swift */,
+				00A7B9541C7D315600E94C68 /* String Extensions.swift */,
 				0040F1851C4C773A0076F176 /* Views */,
 			);
 			name = General;
@@ -307,6 +314,16 @@
 			children = (
 			);
 			name = History;
+			sourceTree = "<group>";
+		};
+		00A7B95C1C7D552400E94C68 /* Login & Registration */ = {
+			isa = PBXGroup;
+			children = (
+				00A7B95D1C7D553500E94C68 /* LoginViewController.swift */,
+				00A7B95F1C7D598800E94C68 /* RoundedTextField.swift */,
+				00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */,
+			);
+			name = "Login & Registration";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,11 +488,14 @@
 				0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */,
 				00A7B9511C7D30C900E94C68 /* ProfileImageCell.swift in Sources */,
 				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
+				00A7B9601C7D598800E94C68 /* RoundedTextField.swift in Sources */,
 				00A7B94D1C7D308800E94C68 /* FormerInputAccessoryView.swift in Sources */,
-				00A7B9551C7D315600E94C68 /* String+FormerDemo.swift in Sources */,
+				00A7B9551C7D315600E94C68 /* String Extensions.swift in Sources */,
 				00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */,
+				00A7B9621C7D5A5400E94C68 /* RoundedButton.swift in Sources */,
 				0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */,
 				0040F1801C4C62E70076F176 /* ExchangeViewController.swift in Sources */,
+				00A7B95E1C7D553500E94C68 /* LoginViewController.swift in Sources */,
 				00A7B9421C7CB4C400E94C68 /* ServerResponses.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				00A7B94B1C7D300F00E94C68 /* BasicInfoViewController.swift in Sources */,
