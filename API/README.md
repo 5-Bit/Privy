@@ -1,1 +1,16 @@
 ## Privy Web Service Documentation
+
+This api is hosted at [privyapp.com](https://privyapp.com).
+
+## Users
+
+To create a user, call the `/users/new` route with a form that has a `username`, `email`, and `password`
+Any errors will be reported in the `Privy-api-error` response header 
+You will get back a JSON object with the following layout if no errors occur:
+
+```JSON
+{
+  "UserId": 1,
+  "Session": "df43wdsff132423d"
+}
+```
