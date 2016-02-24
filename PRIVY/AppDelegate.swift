@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+
         let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
         UITabBar.appearance().tintColor = .privyLightBlueColor
-
+        
         do {
             try AVAudioSession.sharedInstance().setCategory(
                 AVAudioSessionCategoryRecord,
@@ -30,6 +30,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try AVAudioSession.sharedInstance().setActive(false, withOptions: [])
         } catch {
             // don't care
+        }
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+
+        guard let window = window else {
+            return false
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        
+        let rootNavigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+
+        window.rootViewController = rootNavigationController
+        
+        if !PrivyUser.currentUser.isLoggedIn {
+            let loginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController")
+            
+            rootNavigationController.pushViewController(loginViewController, animated: false)
         }
         
         // Override point for customization after application launch.
