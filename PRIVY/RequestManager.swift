@@ -11,6 +11,7 @@ import Foundation
 private enum PrivyHttpHeaderField: String {
     case Email = "privy-email"
     case Password = "privy-password"
+    case Error = ""
 }
 
 private extension NSMutableURLRequest {
@@ -19,7 +20,7 @@ private extension NSMutableURLRequest {
     }
 }
 
-typealias LoginCompletion = (success: Bool, error: NSError?, sessionKey: String?) -> Void
+typealias LoginCompletion = (response: LoginResponse) -> Void
 
 struct LoginCredential {
     let email: String
@@ -54,22 +55,53 @@ final class RequestManager {
         
         let loginTask = session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
-                completion(success: false, error: error, sessionKey: nil)
-                return
+//                completion(response: <#T##LoginResponse#>)
             }
             
             if let httpResponse = response as? NSHTTPURLResponse, data = data {
                 if 200..<300 ~= httpResponse.statusCode {
                     let key = String(data: data, encoding: NSUTF8StringEncoding)
-                    completion(success: true, error: nil, sessionKey: key)
+//                    completion(success: true, error: nil, sessionKey: key)
                 } else {
-                    completion(success: false, error: error, sessionKey: nil)
+//                    completion(success: false, error: error, sessionKey: nil)
                 }
             } else {
-                completion(success: false, error: nil, sessionKey: nil)
+//                completion(success: false, error: nil, sessionKey: nil)
             }
         }
         
         loginTask.resume()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
