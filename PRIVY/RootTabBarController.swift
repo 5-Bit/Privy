@@ -12,8 +12,6 @@ class RootTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,20 +30,4 @@ class RootTabBarController: UITabBarController {
     }
     */
 
-}
-
-extension RootTabBarController: UITabBarControllerDelegate {
-//    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-//        
-//        guard let controllers = tabBarController.viewControllers else {
-//            return false
-//        }
-//        
-//        if controllers.indexOf(viewController) == 0 {
-//            presentViewController(viewController, animated: true, completion: nil)
-//            return false
-//        }
-//        
-//        return true
-//    }
 }
