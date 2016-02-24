@@ -8,6 +8,15 @@
 
 import UIKit
 
+protocol StringType { var get: String { get } }
+extension String: StringType { var get: String { return self } }
+
+extension Optional where Wrapped: StringType {
+    var isNilOrEmpty: Bool {
+        return self == nil || self!.get.isEmpty
+    }
+}
+
 extension String {
     
     static func mediumDateShortTime(date: NSDate) -> String {
