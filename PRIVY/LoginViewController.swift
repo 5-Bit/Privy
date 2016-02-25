@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum ViewState {
+private enum ViewState: String {
     case Login, Registration
 }
 
@@ -92,11 +92,17 @@ class LoginViewController: UIViewController {
             confirmationButton.setTitle("Log In", forState: .Normal)
             confirmPasswordTextField.hidden = true
             passwordTextField.returnKeyType = .Done
+            let enabled = !emailTextField.text.isNilOrEmpty && !passwordTextField.text.isNilOrEmpty
+            confirmationButton.enabled = enabled
+            confirmationButton.alpha = enabled ? 1.0 : 0.8
         case .Registration:
             stateSwitcherButton.setTitle("Log In", forState: .Normal)
             confirmationButton.setTitle("Create an Account", forState: .Normal)
             confirmPasswordTextField.hidden = false
             passwordTextField.returnKeyType = .Next
+            let enabled = !emailTextField.text.isNilOrEmpty && !passwordTextField.text.isNilOrEmpty && !confirmPasswordTextField.text.isNilOrEmpty && confirmPasswordTextField.text == passwordTextField.text
+            confirmationButton.enabled = enabled
+            confirmationButton.alpha = enabled ? 1.0 : 0.8            
         }
 
         if confirmPasswordTextField.isFirstResponder() {
@@ -113,12 +119,51 @@ class LoginViewController: UIViewController {
             return
         }
         
+        let credential = LoginCredential(email: emailTextField.text!, password: passwordTextField.text!)
         
+        let function: (LoginCredential, LoginCompletion) -> Void
+        if viewState == .Login {
+            function = RequestManager.sharedManager.attemptLoginWithCredentials
+        } else {
+            function = RequestManager.sharedManager.attemptRegistrationWithCredentials
+        }
+
+        function(credential) { response, error in
+            switch error {
+            case .Ok:
+                PrivyUser.currentUser.info = response
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            case .ServerError(let message):
+                self.showErrorAlert(message)
+            case .NoResponse:
+                self.showErrorAlert("No response from server.")
+            case .UnknownError:
+                self.showErrorAlert("An unknown error occurred.")
+            }
+        }
+    }
+    
+    private func showErrorAlert(error: String) {
+        let alertController = UIAlertController(
+            title: viewState.rawValue + " Error",
+            message: error,
+            preferredStyle: .Alert
+        )
+
+        let dismissAction = UIAlertAction(
+            title: "Dismiss",
+            style: .Cancel,
+            handler: nil
+        )
+        
+        alertController.addAction(dismissAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction private func switchingButtonTapped(button: UIButton!) {
         viewState = viewState == .Login ? .Registration : .Login
     }
+    
     /*
     // MARK: - Navigation
 
@@ -138,23 +183,25 @@ extension LoginViewController: UITextFieldDelegate {
     @IBAction private func textFieldDidChangeEditing(textField: UITextField) {
         
         if viewState == .Login {
-            confirmationButton.enabled = !emailTextField.text.isNilOrEmpty
+            let enabled = !emailTextField.text.isNilOrEmpty
                 && !passwordTextField.text.isNilOrEmpty
+            confirmationButton.enabled = enabled
+            confirmationButton.alpha = enabled ? 1.0 : 0.8
 
             passwordTextField.layer.borderColor = UIColor.clearColor().CGColor
             confirmPasswordTextField.layer.borderColor = UIColor.clearColor().CGColor
         } else {
-            confirmationButton.enabled = !emailTextField.text.isNilOrEmpty
-                && !passwordTextField.text.isNilOrEmpty
-                && !confirmPasswordTextField.text.isNilOrEmpty
-
             if passwordTextField.text.isNilOrEmpty != confirmPasswordTextField.text.isNilOrEmpty {
                 passwordTextField.layer.borderColor = UIColor.clearColor().CGColor
-                confirmPasswordTextField.layer.borderColor = UIColor.clearColor().CGColor                
+                confirmPasswordTextField.layer.borderColor = UIColor.clearColor().CGColor
+                confirmationButton.enabled = false
+                confirmationButton.alpha = 0.8
             } else {
-                let borderColor = passwordTextField.text == confirmPasswordTextField.text
-                    ? UIColor.clearColor().CGColor : UIColor.redColor().CGColor
+                let enabled = passwordTextField.text == confirmPasswordTextField.text
+                let borderColor = enabled ? UIColor.clearColor().CGColor : UIColor.redColor().CGColor
                 
+                confirmationButton.enabled = enabled
+                confirmationButton.alpha = enabled ? 1.0 : 0.8
                 passwordTextField.layer.borderColor = borderColor
                 confirmPasswordTextField.layer.borderColor = borderColor
             }
