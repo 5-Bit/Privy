@@ -40,51 +40,46 @@ final class BasicInfoViewController: FormViewController {
         
         // Create RowFomers
         
-        let nameRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
-            $0.titleLabel.text = "Name"
+        let firstNameRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
+            $0.titleLabel.text = "First Name"
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
-            }.configure {
-                $0.placeholder = "Add your name"
-//                $0.text = Profile.sharedInstance.name
-            }.onTextChanged { _ in
-//                Profile.sharedInstance.name = $0
+        }.configure {
+            $0.placeholder = "Add your first name"
+            $0.text = PrivyUser.currentUser.userInfo.basic.firstName
+        }.onTextChanged {
+            PrivyUser.currentUser.userInfo.basic.firstName = $0
         }
-        let genderRow = InlinePickerRowFormer<ProfileLabelCell, String>(instantiateType: .Nib(nibName: "ProfileLabelCell")) {
-            $0.titleLabel.text = "Gender"
-            }.configure {
-                let genders = ["Male", "Female"]
-                $0.pickerItems = genders.map {
-                    InlinePickerItem(title: $0)
-                }
-//                if let gender = Profile.sharedInstance.gender {
-//                    $0.selectedRow = genders.indexOf(gender) ?? 0
-//                }
-            }.onValueChanged { _ in
-//                Profile.sharedInstance.gender = $0.title
+
+        let lastNameRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
+            $0.titleLabel.text = "Last Name"
+            $0.textField.inputAccessoryView = self?.formerInputAccessoryView
+        }.configure {
+            $0.placeholder = "Add your last name"
+            $0.text = PrivyUser.currentUser.userInfo.basic.lastName
+        }.onTextChanged {
+            PrivyUser.currentUser.userInfo.basic.lastName = $0
         }
-        
-        let birthdayRow = InlineDatePickerRowFormer<ProfileLabelCell>(instantiateType: .Nib(nibName: "ProfileLabelCell")) {
-            $0.titleLabel.text = "Birthday"
-            }.configure { _ in
-//                $0.date = Profile.sharedInstance.birthDay ?? NSDate()
-            }.inlineCellSetup {
-                $0.datePicker.datePickerMode = .Date
-            }.displayTextFromDate {
-                return String.mediumDateNoTime($0)
-            }.onDateChanged { _ in
-//                Profile.sharedInstance.birthDay = $0
+
+        let emailAddressRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
+            $0.titleLabel.text = "Email"
+            $0.textField.inputAccessoryView = self?.formerInputAccessoryView
+        }.configure {
+            $0.placeholder = "Add your email address"
+            $0.text = PrivyUser.currentUser.userInfo.basic.emailAddress
+        }.onTextChanged {
+            PrivyUser.currentUser.userInfo.basic.emailAddress = $0
         }
-        let introductionRow = TextViewRowFormer<FormTextViewCell>() { [weak self] in
-            $0.textView.textColor = UIColor.privyDarkBlueColor
-            $0.textView.font = .systemFontOfSize(15)
-            $0.textView.inputAccessoryView = self?.formerInputAccessoryView
-            }.configure {
-                $0.placeholder = "Add your self-introduction"
-//                $0.text = Profile.sharedInstance.introduction
-            }.onTextChanged { _ in
-//                Profile.sharedInstance.introduction = $0
+
+        let phoneNumberRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
+            $0.titleLabel.text = "Phone"
+            $0.textField.inputAccessoryView = self?.formerInputAccessoryView
+        }.configure {
+            $0.placeholder = "Add your phone number"
+            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+        }.onTextChanged {
+            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
         }
-        
+
         // Create Headers
         
         let createHeader: (String -> ViewFormer) = { text in
@@ -99,12 +94,11 @@ final class BasicInfoViewController: FormViewController {
         
         let imageSection = SectionFormer(rowFormer: imageRow)
             .set(headerViewFormer: createHeader("Profile Image"))
-        let introductionSection = SectionFormer(rowFormer: introductionRow)
-            .set(headerViewFormer: createHeader("Introduction"))
-        let aboutSection = SectionFormer(rowFormer: nameRow, genderRow, birthdayRow)
-            .set(headerViewFormer: createHeader("About"))
         
-        former.append(sectionFormer: imageSection, introductionSection, aboutSection)
+        let infoSection = SectionFormer(rowFormer: firstNameRow, lastNameRow, emailAddressRow, phoneNumberRow)
+            .set(headerViewFormer: createHeader("Introduction"))
+        
+        former.append(sectionFormer: imageSection, infoSection)
             .onCellSelected { [weak self] _ in
                 self?.formerInputAccessoryView.update()
         }
@@ -116,6 +110,12 @@ final class BasicInfoViewController: FormViewController {
         picker.sourceType = .PhotoLibrary
         picker.allowsEditing = false
         presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        PrivyUser.currentUser.saveChangesToUserInfo()
     }
 }
 
