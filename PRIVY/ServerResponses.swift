@@ -7,9 +7,41 @@
 //
 
 import Foundation
+import ObjectMapper
 
-struct LoginResponse {
-    let error: String?
-    let userId: Int?
-    let sessionKey: String?
+struct LoginRegistrationResponse: Mappable {
+    var sessionid: String?
+    var basic: String?
+    var social: String?
+    var business: String?
+    var developer: String?
+    var media: String?
+    var blogging: String?
+    
+    init?(_ map: Map) {
+        sessionid   <-  map["sessionid"]
+        basic       <-  map["basic"]
+        social      <-  map["social"]
+        business    <-  map["business"]
+        developer   <-  map["developer"]
+        media       <-  map["media"]
+        blogging    <-  map["blogging"]
+    }
+    
+    mutating func mapping(map: Map) {
+        sessionid   <-  map["sessionid"]
+        basic       <-  map["basic"]
+        social      <-  map["social"]
+        business    <-  map["business"]
+        developer   <-  map["developer"]
+        media       <-  map["media"]
+        blogging    <-  map["blogging"]
+    }
+    
+    var valid: Bool {
+        return sessionid != nil && basic != nil && social != nil
+            && business != nil && developer != nil && media != nil
+            && blogging != nil
+    }
+    
 }
