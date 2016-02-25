@@ -7,3 +7,18 @@
 //
 
 import Foundation
+
+private extension NSMutableURLRequest {
+    func addValue(value: String, forHTTPHeaderField field: PrivyHttpHeaderField) {
+        addValue(value, forHTTPHeaderField: field.rawValue)
+    }
+}
+
+extension NSURL {
+    func urlByAppendingQueryItems(queryItems: [NSURLQueryItem]) -> NSURL {
+        let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)
+        components?.queryItems = queryItems
+        
+        return components!.URL!
+    }
+}
