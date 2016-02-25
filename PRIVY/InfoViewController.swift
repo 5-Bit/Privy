@@ -38,7 +38,7 @@ extension DynamicTypeCapable where Self: FormViewController {
     }
 }
 
-final class InfoViewContoller: FormViewController {
+final class InfoViewContoller: FormViewController, DynamicTypeCapable {
     
     // MARK: Public
     override func viewDidLoad() {
@@ -49,6 +49,13 @@ final class InfoViewContoller: FormViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         former.deselect(true)
+        register()
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        unregister()
     }
     
     // MARK: Private
@@ -71,10 +78,26 @@ final class InfoViewContoller: FormViewController {
             }
         }
         
-        let editProfileRow = createMenu("Profile Information") { [weak self] in
-            let viewController = BasicInfoViewController()
-            viewController.title = "Profile Information"
-            self?.navigationController?.pushViewController(viewController, animated: true)
+        let sectionTitles: [String: FormViewController.Type] = [
+            "Basic": BasicInfoViewController.self,
+            "Social": SocialViewController.self,
+            "Business": BusinessViewController.self,
+            "Developer": DeveloperViewController.self,
+            "Media": MediaViewController.self,
+            "Blogging": BloggingViewController.self
+        ]
+        
+        var sections = [RowFormer]()
+        sections.reserveCapacity(sectionTitles.count)
+        
+        for (sectionTitle, vcType) in sectionTitles {
+            let row = createMenu(sectionTitle) { [weak self] in
+                let viewController = vcType.init()
+                viewController.title = sectionTitle
+                self?.navigationController?.pushViewController(viewController, animated: true)
+            }
+            
+            sections.append(row)
         }
         
         // Create Headers and Footers
@@ -87,24 +110,9 @@ final class InfoViewContoller: FormViewController {
         }
         
         // Create SectionFormers
-        let basicSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Profile Information"))
+        let userInfoSection = SectionFormer(rowFormers: sections)
+            .set(headerViewFormer: createHeader("Your Information"))
 
-        let socialSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Social Information"))
-
-        let businessSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Business Information"))
-
-        let developerSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Developer Information"))
-
-        let mediaSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Media Information"))
-
-        let bloggingSection = SectionFormer(rowFormer: editProfileRow)
-            .set(headerViewFormer: createHeader("Blogging Information"))
-
-        former.append(sectionFormer: basicSection, socialSection, businessSection, developerSection, mediaSection, bloggingSection)
+        former.append(sectionFormer: userInfoSection)
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import DynamicButton
 import NVActivityIndicatorView
 import AVFoundation
+import ObjectMapper
 
 class ExchangeViewController: UIViewController {
     private let captureSession = AVCaptureSession()
@@ -27,6 +28,7 @@ class ExchangeViewController: UIViewController {
             correctionLevel: .Medium) { (image) in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
                     self?.qrCodeImage = image
+                    print(PrivyUser.currentUser.qrString)
                 }
         }
     }
@@ -43,9 +45,15 @@ class ExchangeViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var emailAddressLabel: UILabel!
+    @IBOutlet private weak var phoneNumberLabel: UILabel!
+    
     @IBOutlet private weak var captureOutputView: CaptureLayerView!
     @IBOutlet private weak var captureOutlineView: OutlinedTransformableView!
     @IBOutlet private weak var toggleCameraButton: UIButton!
+    
+    private var shouldContinueScanning = true
     
     private weak var capturePreviewLayer: AVCaptureVideoPreviewLayer! {
         return captureOutputView.layer as! AVCaptureVideoPreviewLayer
@@ -84,10 +92,9 @@ class ExchangeViewController: UIViewController {
     }
     
     private func commonInit() {
-        infoSwappingQueue.addOperation(qrGenOperation)
         
         #if os(iOS) && !(arch(i386) || arch(x86_64))
-        guard let captureDevice = AVCaptureDevice.frontCamera() ?? AVCaptureDevice.defaultDeviceWithMediaType(.Video) else {
+        guard let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(.Video) else {
             return
         }
         
@@ -131,6 +138,28 @@ class ExchangeViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        infoSwappingQueue.addOperation(qrGenOperation)
+
+        let basicInfo = PrivyUser.currentUser.userInfo.basic
+        
+        if let first = basicInfo.firstName, last = basicInfo.lastName {
+            nameLabel.text = "\(first) \(last)"
+        } else {
+            nameLabel.text = nil
+        }
+
+        if let email = basicInfo.emailAddress {
+            emailAddressLabel.text = email
+        } else {
+            emailAddressLabel.text = nil
+        }
+        
+        if let phone = basicInfo.phoneNumber {
+            phoneNumberLabel.text = phone
+        } else {
+            phoneNumberLabel.text = nil
+        }
         
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         captureSession.startRunning()
@@ -146,6 +175,7 @@ class ExchangeViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        shouldContinueScanning = true
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -242,6 +272,10 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
     
     private func detectedReadableObject(object: AVMetadataMachineReadableCodeObject) {
+        guard shouldContinueScanning else {
+            return
+        }
+        
         trackingMetadataObject = object
         
         guard let transformed = capturePreviewLayer.transformedMetadataObjectForMetadataObject(object) as? AVMetadataMachineReadableCodeObject else {
@@ -258,6 +292,19 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
         
         qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: "qrTimerFired:", userInfo: nil, repeats: false)
+        
+        if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
+            print("+++++++++++++++++++++++parsed successfully")
+            shouldContinueScanning = false
+            RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, completion: { (user, errorStatus) in
+                if let user = user, history = self.tabBarController?.viewControllers?.last as? HistoryTableViewController {
+                    history.datasource.append(user)
+                    print("adding to history")
+                }
+                
+                print(user?.basic.firstName)
+            })
+        }
     }
     
     private func translatePoints(points: [NSDictionary]) -> [CGPoint] {
