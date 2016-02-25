@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+        
         let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
         UITabBar.appearance().tintColor = .privyLightBlueColor
@@ -52,6 +52,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         return true
+    }
+    
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+        print(shortcutItem)
+        completionHandler(true)
     }
 
     func applicationWillResignActive(application: UIApplication) {
