@@ -48,6 +48,14 @@
 		00A7B95E1C7D553500E94C68 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B95D1C7D553500E94C68 /* LoginViewController.swift */; };
 		00A7B9601C7D598800E94C68 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B95F1C7D598800E94C68 /* RoundedTextField.swift */; };
 		00A7B9621C7D5A5400E94C68 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */; };
+		00A7B9661C7E06D900E94C68 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A7B9651C7E06D900E94C68 /* ObjectMapper.framework */; };
+		00A7B9691C7E099000E94C68 /* Misc Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9681C7E099000E94C68 /* Misc Extensions.swift */; };
+		00A7B96C1C7E247D00E94C68 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B96B1C7E247D00E94C68 /* SocialViewController.swift */; };
+		00A7B96E1C7E24B900E94C68 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B96D1C7E24B900E94C68 /* BusinessViewController.swift */; };
+		00A7B9701C7E24CE00E94C68 /* DeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B96F1C7E24CE00E94C68 /* DeveloperViewController.swift */; };
+		00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9711C7E24E300E94C68 /* MediaViewController.swift */; };
+		00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */; };
+		00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */; };
 		00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */; };
 		00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */; };
 		00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF8881C7A55810027BFFE /* PrivyUser.swift */; };
@@ -122,6 +130,14 @@
 		00A7B95D1C7D553500E94C68 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		00A7B95F1C7D598800E94C68 /* RoundedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		00A7B9651C7E06D900E94C68 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		00A7B9681C7E099000E94C68 /* Misc Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Misc Extensions.swift"; sourceTree = "<group>"; };
+		00A7B96B1C7E247D00E94C68 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
+		00A7B96D1C7E24B900E94C68 /* BusinessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessViewController.swift; sourceTree = "<group>"; };
+		00A7B96F1C7E24CE00E94C68 /* DeveloperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperViewController.swift; sourceTree = "<group>"; };
+		00A7B9711C7E24E300E94C68 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
+		00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BloggingViewController.swift; sourceTree = "<group>"; };
+		00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupEntryViewController.swift; sourceTree = "<group>"; };
 		00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupQRReaderViewController.swift; sourceTree = "<group>"; };
 		00BFF8881C7A55810027BFFE /* PrivyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivyUser.swift; sourceTree = "<group>"; };
@@ -135,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00A7B9661C7E06D900E94C68 /* ObjectMapper.framework in Frameworks */,
 				00A7B9481C7D28EF00E94C68 /* Former.framework in Frameworks */,
 				00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */,
 				008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */,
@@ -162,8 +179,7 @@
 		0040F13D1C4C5FF30076F176 = {
 			isa = PBXGroup;
 			children = (
-				00317EF81C6D2F6500882EFC /* AVFoundation.framework */,
-				0040F18B1C4C833A0076F176 /* Carthage */,
+				00A7B9671C7E06E600E94C68 /* Frameworks */,
 				0040F1481C4C5FF30076F176 /* Privy */,
 				0040F1601C4C5FF30076F176 /* PrivyTests */,
 				0040F16B1C4C5FF30076F176 /* PrivyUITests */,
@@ -232,7 +248,10 @@
 		0040F17C1C4C61070076F176 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				00A7B9541C7D315600E94C68 /* String Extensions.swift */,
+				00A7B9681C7E099000E94C68 /* Misc Extensions.swift */,
 				0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */,
+				0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -250,7 +269,6 @@
 		0040F1841C4C772E0076F176 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */,
 				00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */,
 				0040F1931C4CB7490076F176 /* CameraPermissionOperation.swift */,
 				0040F1941C4CB7490076F176 /* ObservableOperation.swift */,
@@ -258,7 +276,6 @@
 				0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */,
 				0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */,
 				0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */,
-				00A7B9541C7D315600E94C68 /* String Extensions.swift */,
 				0040F1851C4C773A0076F176 /* Views */,
 			);
 			name = General;
@@ -275,6 +292,7 @@
 		0040F18B1C4C833A0076F176 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				00A7B9651C7E06D900E94C68 /* ObjectMapper.framework */,
 				00A7B9471C7D28EF00E94C68 /* Former.framework */,
 				0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */,
 				0040F1861C4C7E820076F176 /* DynamicButton.framework */,
@@ -298,13 +316,12 @@
 			children = (
 				00A7B9451C7D245400E94C68 /* InfoViewController.swift */,
 				00A7B94A1C7D300F00E94C68 /* BasicInfoViewController.swift */,
-				00A7B94C1C7D308800E94C68 /* FormerInputAccessoryView.swift */,
-				00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */,
-				00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */,
-				00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */,
-				00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */,
-				00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */,
-				00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */,
+				00A7B96B1C7E247D00E94C68 /* SocialViewController.swift */,
+				00A7B96D1C7E24B900E94C68 /* BusinessViewController.swift */,
+				00A7B96F1C7E24CE00E94C68 /* DeveloperViewController.swift */,
+				00A7B9711C7E24E300E94C68 /* MediaViewController.swift */,
+				00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */,
+				00A7B96A1C7E1D0C00E94C68 /* Former Support */,
 			);
 			name = Info;
 			sourceTree = "<group>";
@@ -312,6 +329,7 @@
 		00A7B9441C7D23FA00E94C68 /* History */ = {
 			isa = PBXGroup;
 			children = (
+				00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -324,6 +342,29 @@
 				00A7B9611C7D5A5400E94C68 /* RoundedButton.swift */,
 			);
 			name = "Login & Registration";
+			sourceTree = "<group>";
+		};
+		00A7B9671C7E06E600E94C68 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00317EF81C6D2F6500882EFC /* AVFoundation.framework */,
+				0040F18B1C4C833A0076F176 /* Carthage */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		00A7B96A1C7E1D0C00E94C68 /* Former Support */ = {
+			isa = PBXGroup;
+			children = (
+				00A7B94C1C7D308800E94C68 /* FormerInputAccessoryView.swift */,
+				00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */,
+				00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */,
+				00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */,
+				00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */,
+				00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */,
+				00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */,
+			);
+			name = "Former Support";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,6 +508,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/DynamicButton.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Former.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 			);
 			outputPaths = (
 			);
@@ -485,6 +527,7 @@
 				00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */,
 				0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */,
 				00A7B9401C7C05FD00E94C68 /* RequestManager.swift in Sources */,
+				00A7B9691C7E099000E94C68 /* Misc Extensions.swift in Sources */,
 				0040F1981C4CB7490076F176 /* ObservableOperation.swift in Sources */,
 				00A7B9511C7D30C900E94C68 /* ProfileImageCell.swift in Sources */,
 				0040F17E1C4C612A0076F176 /* UIColor+AppColors.swift in Sources */,
@@ -495,19 +538,25 @@
 				00A7B9621C7D5A5400E94C68 /* RoundedButton.swift in Sources */,
 				0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */,
 				0040F1801C4C62E70076F176 /* ExchangeViewController.swift in Sources */,
+				00A7B96C1C7E247D00E94C68 /* SocialViewController.swift in Sources */,
 				00A7B95E1C7D553500E94C68 /* LoginViewController.swift in Sources */,
 				00A7B9421C7CB4C400E94C68 /* ServerResponses.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
+				00A7B9701C7E24CE00E94C68 /* DeveloperViewController.swift in Sources */,
 				00A7B94B1C7D300F00E94C68 /* BasicInfoViewController.swift in Sources */,
+				00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */,
 				00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */,
+				00A7B96E1C7E24B900E94C68 /* BusinessViewController.swift in Sources */,
 				00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
 				00A7B9461C7D245400E94C68 /* InfoViewController.swift in Sources */,
 				00A7B9521C7D30C900E94C68 /* ProfileFieldCell.swift in Sources */,
 				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
 				00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */,
+				00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */,
+				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
 				0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,

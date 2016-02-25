@@ -4,3 +4,5 @@ github "yannickl/DynamicButton" >= 1.2.0
 github "ninjaprox/NVActivityIndicatorView"
 #
 github "ra1028/Former"
+#
+github "Hearst-DD/ObjectMapper" ~> 1.1
