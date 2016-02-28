@@ -13,43 +13,49 @@ class RoundedGradientButton: UIButton {
         return layer as! CAGradientLayer
     }
     
-    override var bounds: CGRect {
-        didSet {
-            layer.masksToBounds = true
-            layer.cornerRadius = bounds.height / 2.0
-
-            let leftColor = UIColor(
-                red: 117.0 / 255.0,
-                green: 219.0 / 255.0,
-                blue: 156.0 / 255.0,
-                alpha: 1.0
-            )
-
-            let rightColor = UIColor(
-                red: 92.0 / 255.0,
-                green: 199.0 / 255.0,
-                blue: 238.0 / 255.0,
-                alpha: 1.0
-            )
-            
-            let colors = [leftColor.CGColor, rightColor.CGColor]
-            let stops = [0.0, 1.0]
-            
-            gradientLayer.colors = colors
-            gradientLayer.locations = stops
-            
-            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-            gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
     
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
     }
-    */
+    
+    private func commonInit() {
+        layer.masksToBounds = true
+    }
+    
+    override var bounds: CGRect {
+        didSet {
+            applyRounding()
+            applyGradient()
+        }
+    }
+
+    override var frame: CGRect {
+        didSet {
+            applyRounding()
+            applyGradient()
+        }
+    }
+
+    private func applyRounding() {
+        layer.cornerRadius = bounds.height / 2.0
+    }
+    
+    private func applyGradient() {
+        let colors = [UIColor.privyGradLeftColor.CGColor, UIColor.privyGradRightColor.CGColor]
+        let stops = [0.0, 1.0]
+        
+        gradientLayer.colors = colors
+        gradientLayer.locations = stops
+        
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+    }
+    
     override class func layerClass() -> AnyClass {
         return CAGradientLayer.self
     }
