@@ -45,7 +45,7 @@ final class DeveloperViewController: FormViewController {
         }
         
         let stackOverflowRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
-            $0.titleLabel.text = "Email"
+            $0.titleLabel.text = "Stack Overflow"
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Add your Stack Overflow username"
@@ -55,7 +55,7 @@ final class DeveloperViewController: FormViewController {
         }
         
         let bitBucketRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
-            $0.titleLabel.text = "Phone"
+            $0.titleLabel.text = "BitBucket"
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Add your Bitbucket username"

@@ -22,4 +22,18 @@ extension UIColor {
         blue: 85.0 / 255.0,
         alpha: 1.0
     )
+    
+    @nonobjc static let privyGradLeftColor = UIColor(
+        red: 117.0 / 255.0,
+        green: 219.0 / 255.0,
+        blue: 156.0 / 255.0,
+        alpha: 1.0
+    )
+    
+    @nonobjc static let privyGradRightColor = UIColor(
+        red: 92.0 / 255.0,
+        green: 199.0 / 255.0,
+        blue: 238.0 / 255.0,
+        alpha: 1.0
+    )
 }

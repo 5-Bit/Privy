@@ -8,14 +8,10 @@
 
 import Foundation
 
-// MARK: - <#Description#>
+// MARK: - Adds shims to NSQuality of service to allow easy conversion between it and GCD's QOS_CLASS.
 extension NSQualityOfService {
     /**
-     <#Description#>
-     
-     - parameter qosClass: <#qosClass description#>
-     
-     - returns: <#return value description#>
+     Creates an NSQualityOfService instance from a qos_class_t from GCD.
      */
     init?(qosClass: qos_class_t) {
         switch qosClass {
@@ -35,9 +31,7 @@ extension NSQualityOfService {
     }
     
     /**
-     <#Description#>
-     
-     - returns: <#return value description#>
+     Converts the receiver into its equivalent qos_class_t. 
      */
     func toQosClass() -> qos_class_t {
         switch self {

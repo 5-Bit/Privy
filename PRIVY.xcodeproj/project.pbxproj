@@ -27,8 +27,6 @@
 		0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1951C4CB7490076F176 /* QRScanOperation.swift */; };
 		0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */; };
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
-		0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */; };
-		0063646D1C6AB49D009990F2 /* MockupBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */; };
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */; };
@@ -56,8 +54,7 @@
 		00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9711C7E24E300E94C68 /* MediaViewController.swift */; };
 		00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */; };
 		00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */; };
-		00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */; };
-		00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */; };
+		00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */; };
 		00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF8881C7A55810027BFFE /* PrivyUser.swift */; };
 		00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */; };
 		00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */; };
@@ -111,8 +108,6 @@
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
-		0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupScanViewController.swift; sourceTree = "<group>"; };
-		0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupBaseNavigationController.swift; sourceTree = "<group>"; };
 		00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Cameras.swift"; sourceTree = "<group>"; };
 		00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerResponses.swift; sourceTree = "<group>"; };
@@ -138,8 +133,7 @@
 		00A7B9711C7E24E300E94C68 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BloggingViewController.swift; sourceTree = "<group>"; };
 		00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
-		00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupEntryViewController.swift; sourceTree = "<group>"; };
-		00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockupQRReaderViewController.swift; sourceTree = "<group>"; };
+		00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButtonTests.swift; sourceTree = "<group>"; };
 		00BFF8881C7A55810027BFFE /* PrivyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivyUser.swift; sourceTree = "<group>"; };
 		00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureLayerView.swift; sourceTree = "<group>"; };
 		00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlinedTransformableView.swift; sourceTree = "<group>"; };
@@ -200,7 +194,6 @@
 		0040F1481C4C5FF30076F176 /* Privy */ = {
 			isa = PBXGroup;
 			children = (
-				006364691C6AB3FF009990F2 /* Mockup */,
 				0040F1491C4C5FF30076F176 /* AppDelegate.swift */,
 				00BFF8881C7A55810027BFFE /* PrivyUser.swift */,
 				00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */,
@@ -228,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				0040F1611C4C5FF30076F176 /* PrivyTests.swift */,
+				00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */,
 				00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */,
 				0040F1631C4C5FF30076F176 /* Info.plist */,
 			);
@@ -298,17 +292,6 @@
 				0040F1861C4C7E820076F176 /* DynamicButton.framework */,
 			);
 			name = Carthage;
-			sourceTree = "<group>";
-		};
-		006364691C6AB3FF009990F2 /* Mockup */ = {
-			isa = PBXGroup;
-			children = (
-				00BBDEE41C6D1EA0005F1C1F /* MockupEntryViewController.swift */,
-				0063646A1C6AB41A009990F2 /* MockupScanViewController.swift */,
-				0063646C1C6AB49D009990F2 /* MockupBaseNavigationController.swift */,
-				00BBDEE61C6D2BFD005F1C1F /* MockupQRReaderViewController.swift */,
-			);
-			name = Mockup;
 			sourceTree = "<group>";
 		};
 		00A7B9431C7D23EF00E94C68 /* Info */ = {
@@ -524,7 +507,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */,
-				00BBDEE71C6D2BFD005F1C1F /* MockupQRReaderViewController.swift in Sources */,
 				0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */,
 				00A7B9401C7C05FD00E94C68 /* RequestManager.swift in Sources */,
 				00A7B9691C7E099000E94C68 /* Misc Extensions.swift in Sources */,
@@ -547,7 +529,6 @@
 				00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */,
 				00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
-				00BBDEE51C6D1EA0005F1C1F /* MockupEntryViewController.swift in Sources */,
 				00A7B96E1C7E24B900E94C68 /* BusinessViewController.swift in Sources */,
 				00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
@@ -558,9 +539,7 @@
 				00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */,
 				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
-				0063646B1C6AB41A009990F2 /* MockupScanViewController.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,
-				0063646D1C6AB49D009990F2 /* MockupBaseNavigationController.swift in Sources */,
 				0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */,
 				00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */,
 				0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */,
@@ -572,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */,
+				00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */,
 				0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

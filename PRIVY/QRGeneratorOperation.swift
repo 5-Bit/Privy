@@ -20,7 +20,7 @@ class QRGeneratorOperation: ObservableOperation {
     private let queue = dispatch_queue_create("com.Privy.QRGeneratorOperation.queue", DISPATCH_QUEUE_SERIAL)
 
     /// Used exclusively by `waitUntilFinished`
-    private var semaphore = dispatch_semaphore_create(0)
+    private let semaphore = dispatch_semaphore_create(0)
     
     override var asynchronous: Bool {
         return true
