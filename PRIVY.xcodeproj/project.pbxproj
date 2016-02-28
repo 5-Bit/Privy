@@ -54,6 +54,7 @@
 		00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9711C7E24E300E94C68 /* MediaViewController.swift */; };
 		00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */; };
 		00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */; };
+		00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */; };
 		00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF8881C7A55810027BFFE /* PrivyUser.swift */; };
 		00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */; };
 		00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */; };
@@ -132,6 +133,7 @@
 		00A7B9711C7E24E300E94C68 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		00A7B9731C7E24F100E94C68 /* BloggingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BloggingViewController.swift; sourceTree = "<group>"; };
 		00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButtonTests.swift; sourceTree = "<group>"; };
 		00BFF8881C7A55810027BFFE /* PrivyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivyUser.swift; sourceTree = "<group>"; };
 		00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureLayerView.swift; sourceTree = "<group>"; };
 		00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlinedTransformableView.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				0040F1611C4C5FF30076F176 /* PrivyTests.swift */,
+				00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */,
 				00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */,
 				0040F1631C4C5FF30076F176 /* Info.plist */,
 			);
@@ -548,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */,
+				00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */,
 				0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
