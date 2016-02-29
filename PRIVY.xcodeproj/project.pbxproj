@@ -59,6 +59,7 @@
 		00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */; };
 		00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */; };
 		00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */; };
+		00F2B7311C83953300249975 /* RequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2B7301C83953300249975 /* RequestManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureLayerView.swift; sourceTree = "<group>"; };
 		00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlinedTransformableView.swift; sourceTree = "<group>"; };
 		00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperationTests.swift; sourceTree = "<group>"; };
+		00F2B7301C83953300249975 /* RequestManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				0040F1611C4C5FF30076F176 /* PrivyTests.swift */,
+				00F2B7301C83953300249975 /* RequestManagerTests.swift */,
 				00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */,
 				00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */,
 				0040F1631C4C5FF30076F176 /* Info.plist */,
@@ -553,6 +556,7 @@
 				00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */,
 				00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */,
 				0040F1621C4C5FF30076F176 /* PrivyTests.swift in Sources */,
+				00F2B7311C83953300249975 /* RequestManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
