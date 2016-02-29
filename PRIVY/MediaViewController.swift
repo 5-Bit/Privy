@@ -21,7 +21,7 @@ final class MediaViewController: FormViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        PrivyUser.currentUser.saveChangesToUserInfo()
+        PrivyUser.currentUser.saveChangesToUserInfo(true)
     }
 
     // MARK: Private
