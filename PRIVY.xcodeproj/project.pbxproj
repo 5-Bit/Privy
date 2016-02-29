@@ -29,6 +29,7 @@
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
+		00A09FC61C849BFF00A47B2E /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A09FC51C849BFF00A47B2E /* RNCryptor.framework */; };
 		00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */; };
 		00A7B9401C7C05FD00E94C68 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */; };
 		00A7B9421C7CB4C400E94C68 /* ServerResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */; };
@@ -109,6 +110,7 @@
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
+		00A09FC51C849BFF00A47B2E /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 		00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Cameras.swift"; sourceTree = "<group>"; };
 		00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerResponses.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				00A7B9661C7E06D900E94C68 /* ObjectMapper.framework in Frameworks */,
 				00A7B9481C7D28EF00E94C68 /* Former.framework in Frameworks */,
 				00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */,
+				00A09FC61C849BFF00A47B2E /* RNCryptor.framework in Frameworks */,
 				008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */,
 				0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */,
 			);
@@ -289,6 +292,7 @@
 		0040F18B1C4C833A0076F176 /* Carthage */ = {
 			isa = PBXGroup;
 			children = (
+				00A09FC51C849BFF00A47B2E /* RNCryptor.framework */,
 				00A7B9651C7E06D900E94C68 /* ObjectMapper.framework */,
 				00A7B9471C7D28EF00E94C68 /* Former.framework */,
 				0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */,
@@ -495,6 +499,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Former.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RNCryptor.framework",
 			);
 			outputPaths = (
 			);
