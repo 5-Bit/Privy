@@ -131,7 +131,7 @@ class LoginViewController: UIViewController {
         function(credential) { response, error in
             switch error {
             case .Ok:
-                PrivyUser.currentUser.info = response
+                PrivyUser.currentUser.registrationInformation = response
                 self.navigationController?.popToRootViewControllerAnimated(true)
             case .ServerError(let message):
                 self.showErrorAlert(message)

@@ -40,9 +40,8 @@ final class RequestManager {
         session = NSURLSession(configuration: configuration)
     }
 
-    
     func attemptLookupByUUIDs(uuids: [String], completion: (user: PrivyUser.InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
-        guard let sessionId = PrivyUser.currentUser.info?.sessionid else {
+        guard let sessionId = PrivyUser.currentUser.registrationInformation?.sessionid else {
             return
         }
         
@@ -89,7 +88,7 @@ final class RequestManager {
     }
     
     func attemptUserInfoSave() {
-        PrivyUser.currentUser.userInfo.sessionid = PrivyUser.currentUser.info?.sessionid
+        PrivyUser.currentUser.userInfo.sessionid = PrivyUser.currentUser.registrationInformation?.sessionid
         
         guard PrivyUser.currentUser.userInfo.sessionid != nil else {
             return

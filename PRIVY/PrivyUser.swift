@@ -42,16 +42,24 @@ struct QRMapObject: Mappable {
 }
 
 /// <#Description#>
-final class PrivyUser {
+final class PrivyUser: Mappable {
     static let currentUser = PrivyUser()
     
-    var info: LoginRegistrationResponse?
+    var registrationInformation: LoginRegistrationResponse?
     
     private init() {
 
     }
-    
-    /// <#Description#>
+
+    init?(_ map: Map) {
+        mapping(map)
+    }
+
+    func mapping(map: Map) {
+        registrationInformation <- map["registrationInformation"]
+        userInfo                <- map["userInfo"]
+    }
+
     var qrString: String {
         var data = QRMapObject()
         data.firstName = userInfo.basic.firstName
@@ -59,7 +67,7 @@ final class PrivyUser {
         data.emailAddress = userInfo.basic.emailAddress
         data.phoneNumber = userInfo.basic.phoneNumber
         
-        if let info = info {
+        if let info = registrationInformation {
             data.uuids.append(info.basic!)
             data.uuids.append(info.social!)
             data.uuids.append(info.business!)
@@ -72,7 +80,7 @@ final class PrivyUser {
     }
     
     var isLoggedIn: Bool {
-        return info != nil
+        return registrationInformation != nil
     }
     
     /**
@@ -130,7 +138,7 @@ final class PrivyUser {
                 snapchat       <-  map["snapchat"]
             }
         }
-        
+
         struct Business: Mappable {
             var linkedin: String?
             var emailAddress: String?
