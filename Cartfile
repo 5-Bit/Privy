@@ -1,8 +1,14 @@
 #
 github "yannickl/DynamicButton" >= 1.2.0
+
 #
 github "ninjaprox/NVActivityIndicatorView"
-#
+
+# User data entry form generation
 github "ra1028/Former"
-#
+
+# JSON de/serialization
 github "Hearst-DD/ObjectMapper" ~> 1.1
+
+# Local data encryption
+github "RNCryptor/RNCryptor" "RNCryptor-4.0.0"
