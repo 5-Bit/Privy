@@ -21,6 +21,9 @@ class PRVGradientView: UIView {
         applyDefaultGradient()
     }
     
+    /**
+     <#Description#>
+     */
     private func applyDefaultGradient() {
         guard let gradientLayer = layer as? CAGradientLayer else {
             return
