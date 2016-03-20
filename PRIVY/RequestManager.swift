@@ -136,8 +136,8 @@ final class RequestManager {
         request.HTTPBody = query?.dataUsingEncoding(NSUTF8StringEncoding)
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
+
             guard let response = response as? NSHTTPURLResponse else {
-                completion(response: nil, errorStatus: .NoResponse)
                 self.completionOnMainThread(nil, errorStatus: .NoResponse, completion: completion)
                 return
             }

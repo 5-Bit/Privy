@@ -2,7 +2,7 @@
 An information sharing application. This repository houses the iOS client for Privy.
 
 ##### Build Instructions (OS X only)
-0. Download Xcode 7.3 beta 5 (7D152p) or later.
+0. Download Xcode 7.3 beta 5 (7D162j) or later.
 1. Clone this repository to your computer
 2. If you don't have [Homebrew](http://brew.sh) installed, run this command to install it `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 3. Install [Carthage](https://github.com/Carthage/Carthage) with `brew install carthage`
@@ -10,4 +10,5 @@ An information sharing application. This repository houses the iOS client for Pr
 5. Run `carthage update`
 6. Open the Xcode project file (Privy.xcodeproj)
 7. If you're having trouble building this project after updating to Xcode 7.3 (with linker errors), simply run `carthage update` again.
+  - You may need to run `sudo xcode-select --switch PATH_TO_XCODE_BETA` for Carthage to use the correct compiler version for its build.
 8. Build, run, enjoy.

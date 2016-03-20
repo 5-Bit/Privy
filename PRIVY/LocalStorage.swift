@@ -28,22 +28,23 @@ final class LocalStorage {
 
     private let saveQueue = dispatch_queue_create("com.privy.localstorage.save", DISPATCH_QUEUE_CONCURRENT)
 
-//    var user: PrivyUser? {
-//        get {
-//            dispatch_sync(saveQueue) {
-//
-//            }
-//        }
-//
-//        set {
-//            dispatch_barrier_async(saveQueue) {
-//
-//            }
-//        }
-//    }
-
     private init() {
 
+    }
+
+    func retrieveUser() throws -> PrivyUser? {
+        var user: PrivyUser?
+        dispatch_sync(saveQueue) {
+
+        }
+
+        return user
+    }
+
+    func saveUser(user: PrivyUser, completion: (success: Bool) throws -> Void) {
+        dispatch_barrier_async(saveQueue) {
+
+        }
     }
 
     /**

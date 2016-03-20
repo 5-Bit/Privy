@@ -296,7 +296,7 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
             qrTimer?.invalidate()
         }
         
-        qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: "qrTimerFired:", userInfo: nil, repeats: false)
+        qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(ExchangeViewController.qrTimerFired(_:)), userInfo: nil, repeats: false)
         
         if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
             print("+++++++++++++++++++++++parsed successfully")
