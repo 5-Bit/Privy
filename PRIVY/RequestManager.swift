@@ -28,7 +28,7 @@ struct LoginCredential {
 
 final class RequestManager {
     struct Static {
-        static let host = NSURL(string: "http://privyapp.com")!
+        static let host = NSURL(string: "https://privyapp.com")!
         static let defaultTimeout = 15.0
     }
     
