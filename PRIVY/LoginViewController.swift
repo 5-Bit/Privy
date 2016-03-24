@@ -44,6 +44,18 @@ class LoginViewController: UIViewController {
             queue: NSOperationQueue.mainQueue(),
             usingBlock: keyboardFrameWillChange
         )
+
+        guard !view.isFirstResponder() else {
+            return
+        }
+        
+        if emailTextField.text.isNilOrEmpty {
+            emailTextField.becomeFirstResponder()
+        } else if passwordTextField.text.isNilOrEmpty {
+            passwordTextField.becomeFirstResponder()
+        } else if confirmPasswordTextField.text.isNilOrEmpty && viewState == .Registration {
+            confirmPasswordTextField.becomeFirstResponder()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -176,7 +188,38 @@ class LoginViewController: UIViewController {
     */
 
     @IBAction private func forgotPasswordButtonTapped(button: UIButton!) {
+        let alertController = UIAlertController(
+            title: "Forgot Password?",
+            message: "A password reset will be emailed to the address given below.",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+
+        let confirmAction = UIAlertAction(
+            title: "Confirm",
+            style: .Destructive) { action in
+
+        }
         
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel,
+            handler: nil
+        )
+        
+        alertController.addTextFieldWithConfigurationHandler { [unowned self] textField in
+            textField.keyboardType = .EmailAddress
+            textField.text = self.emailTextField.text
+            textField.clearButtonMode = .Always
+
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                confirmAction.enabled = textField.text != ""
+            }
+        }
+
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+
+        presentViewController(alertController, animated: true, completion: nil)
     }
 
     func authenticateUser() {
