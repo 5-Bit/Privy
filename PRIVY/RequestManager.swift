@@ -130,7 +130,11 @@ final class RequestManager {
         let url = RequestManager.Static.host.URLByAppendingPathComponent(pathComponent)
         let query = url.urlByAppendingQueryItems(queryItems).query
         
-        let request = NSMutableURLRequest(URL: url, cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData, timeoutInterval: RequestManager.Static.defaultTimeout)
+        let request = NSMutableURLRequest(
+            URL: url,
+            cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
+            timeoutInterval: RequestManager.Static.defaultTimeout
+        )
         
         request.HTTPMethod = "POST"
         request.HTTPBody = query?.dataUsingEncoding(NSUTF8StringEncoding)
@@ -166,7 +170,42 @@ final class RequestManager {
         
         task.resume()
     }
-    
+
+    func logout() {
+        
+    }
+
+    func requestPasswordReset(email: String, completion: (success: Bool) -> Void) {
+        let url = RequestManager.Static.host.URLByAppendingPathComponent("users/resetpassword")
+        let request = NSMutableURLRequest(
+            URL: url,
+            cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
+            timeoutInterval: RequestManager.Static.defaultTimeout
+        )
+
+        request.HTTPMethod = "POST"
+        request.HTTPBody = ("email=" + email).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            var success = false
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
+
+            guard let response = response as? NSHTTPURLResponse else {
+                return
+            }
+
+            switch response.statusCode {
+            case 200:
+                success = true
+            default:
+                break
+            }
+        }
+
+        task.resume()
+    }
 
     private func completionOnMainThread(user: PrivyUser.InfoTypes?, errorStatus: PrivyErrorStatus, completion: (user: PrivyUser.InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
         dispatch_async(dispatch_get_main_queue()) {
@@ -177,6 +216,12 @@ final class RequestManager {
     private func completionOnMainThread(response: LoginRegistrationResponse?, errorStatus: PrivyErrorStatus, completion: LoginCompletion) {
         dispatch_async(dispatch_get_main_queue()) {
             completion(response: response, errorStatus: errorStatus)
+        }
+    }
+
+    private func completionOnMainThread(success: Bool, completion: (success: Bool) -> Void) {
+        dispatch_async(dispatch_get_main_queue()) {
+            completion(success: success)
         }
     }
 }
