@@ -12,3 +12,6 @@ github "Hearst-DD/ObjectMapper" ~> 1.1
 
 # Local data encryption
 github "RNCryptor/RNCryptor" "RNCryptor-4.0.0"
+
+# Keychain Access
+github "matthewpalmer/Locksmith"
