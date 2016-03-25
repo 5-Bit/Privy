@@ -48,7 +48,16 @@ final class PrivyUser: Mappable {
     var registrationInformation: LoginRegistrationResponse?
     
     private init() {
+        do {
+            guard let savedUser = try LocalStorage.defaultStorage.retrieveUser() else {
+                return
+            }
 
+            userInfo = savedUser.userInfo
+            registrationInformation = savedUser.registrationInformation
+        } catch {
+            fatalError()
+        }
     }
 
     init?(_ map: Map) {
@@ -256,10 +265,10 @@ final class PrivyUser: Mappable {
     var userInfo = InfoTypes()
     
     func saveChangesToUserInfo(remote: Bool) {
-        
-        
-        if remote {
-            RequestManager.sharedManager.attemptUserInfoSave()
+        LocalStorage.defaultStorage.saveUser(PrivyUser.currentUser) { error in
+            if remote && error == nil {
+                RequestManager.sharedManager.attemptUserInfoSave()
+            }
         }
     }
 }

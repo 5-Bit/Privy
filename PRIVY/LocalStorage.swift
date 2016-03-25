@@ -9,6 +9,11 @@
 import Foundation
 import RNCryptor
 import ObjectMapper
+import Locksmith
+
+enum LocalStorageError: ErrorType {
+    case Encrypt, SaveData, SaveKey
+}
 
 /**
    Facilitates the loading and saving of the current user's data to and from disk.
@@ -32,18 +37,92 @@ final class LocalStorage {
 
     }
 
+    // MARK: - Reading
+
+    /**
+     <#Description#>
+
+     - throws: <#throws value description#>
+
+     - returns: <#return value description#>
+     */
     func retrieveUser() throws -> PrivyUser? {
         var user: PrivyUser?
+        
         dispatch_sync(saveQueue) {
+            guard let password = self.retrieveEncryptionKey(),
+                userData = self.retrieveUserData() else {
+                    return
+            }
 
+            user = self.decryptUserData(userData, withPassword: password)
         }
 
         return user
     }
 
-    func saveUser(user: PrivyUser, completion: (success: Bool) throws -> Void) {
-        dispatch_barrier_async(saveQueue) {
+    /**
+     <#Description#>
 
+     - returns: <#return value description#>
+     */
+    private func retrieveEncryptionKey() -> String? {
+        return Locksmith.loadDataForUserAccount("user")?["password"] as? String
+    }
+
+    /**
+     <#Description#>
+
+     - returns: <#return value description#>
+     */
+    private func retrieveUserData() -> NSData? {
+        return NSData(contentsOfURL: userInfoPath())
+    }
+
+    /**
+     <#Description#>
+
+     - parameter data:     <#data description#>
+     - parameter password: <#password description#>
+
+     - returns: <#return value description#>
+     */
+    private func decryptUserData(data: NSData, withPassword password: String) -> PrivyUser? {
+        guard let decrypted = try? RNCryptor.decryptData(data, password: password) else {
+            return nil
+        }
+
+        guard let userJsonString = String(data: decrypted, encoding: NSUTF8StringEncoding) else {
+            return nil
+        }
+
+        return Mapper<PrivyUser>().map(userJsonString)
+    }
+
+    // MARK: - Saving
+
+    /**
+     <#Description#>
+
+     - parameter user:       <#user description#>
+     - parameter completion: <#completion description#>
+     */
+    func saveUser(user: PrivyUser, completion: (error: ErrorType?) -> Void) {
+        dispatch_barrier_async(saveQueue) {
+            var saveUserError: ErrorType?
+            let password = NSUUID().UUIDString
+
+            defer {
+                completion(error: saveUserError)
+            }
+
+            do {
+                let encryptedData = try self.encrypUser(user, withPassword: password)
+                try self.saveEncryptedData(encryptedData)
+                try self.saveUserEncryptionKey(password)
+            } catch {
+                saveUserError = error
+            }
         }
     }
 
@@ -55,10 +134,10 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-    private func encrypUser(user: PrivyUser, withPassword password: String) -> NSData? {
+    private func encrypUser(user: PrivyUser, withPassword password: String) throws -> NSData {
         guard let jsonString = Mapper<PrivyUser>().toJSONString(user),
             jsonData = jsonString.dataUsingEncoding(NSUTF8StringEncoding) else {
-                return nil
+                throw LocalStorageError.Encrypt
         }
 
         return RNCryptor.encryptData(jsonData, password: password)
@@ -72,13 +151,19 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-    private func saveEncryptedData(data: NSData, toPath path: NSURL) -> Bool {
-        do {
-            try data.writeToURL(path, options: .AtomicWrite)
-            return true
-        } catch {
-            return false
-        }
+    private func saveEncryptedData(data: NSData) throws {
+        try data.writeToURL(userInfoPath(), options: .AtomicWrite)
+    }
+
+    /**
+     <#Description#>
+
+     - parameter key: <#key description#>
+
+     - throws: <#throws value description#>
+     */
+    private func saveUserEncryptionKey(key: String) throws {
+        try Locksmith.updateData(["password": key], forUserAccount: "user")
     }
 
     /**
@@ -107,16 +192,3 @@ final class LocalStorage {
         return paths[0]
     }
 }
-
-//// Encryption
-//let data: NSData = ...
-//let password = "Secret password"
-//let ciphertext = RNCryptor.encryptData(data, password: password)
-//
-//// Decryption
-//do {
-//    let originalData = try RNCryptor.decryptData(ciphertext, password: password)
-//    // ...
-//} catch {
-//    print(error)
-//}
