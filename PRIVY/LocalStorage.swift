@@ -24,10 +24,6 @@ enum LocalStorageError: ErrorType {
    - since: 1.0
  */
 final class LocalStorage {
-    enum Static: String {
-        case UserInfo
-    }
-
     static let defaultStorage = LocalStorage()
     private let fileManager = NSFileManager.defaultManager()
 
@@ -46,37 +42,37 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-    func retrieveUser() throws -> PrivyUser? {
-        var user: PrivyUser?
-        
-        dispatch_sync(saveQueue) {
-            guard let password = self.retrieveEncryptionKey(),
-                userData = self.retrieveUserData() else {
-                    return
-            }
-
-            user = self.decryptUserData(userData, withPassword: password)
-        }
-
-        return user
-    }
+//    func retrieveUser() throws -> PrivyUser? {
+//        var user: PrivyUser?
+//        
+//        dispatch_sync(saveQueue) {
+//            guard let password = self.retrieveEncryptionKey(),
+//                userData = self.retrieveUserData() else {
+//                    return
+//            }
+//
+//            user = self.decryptUserData(userData, withPassword: password)
+//        }
+//
+//        return user
+//    }
 
     /**
-     <#Description#>
+     Attempts to load the encryption key for the user's data out of the Keychain.
 
-     - returns: <#return value description#>
+     - returns: The key found in the keychain, nil otherwise.
      */
     private func retrieveEncryptionKey() -> String? {
         return Locksmith.loadDataForUserAccount("user")?["password"] as? String
     }
 
     /**
-     <#Description#>
+     Attempts to load the data stored at `userInfoPath()`.
 
-     - returns: <#return value description#>
+     - returns: The data found at `userInfoPath()` if there is any, nil otherwise.
      */
-    private func retrieveUserData() -> NSData? {
-        return NSData(contentsOfURL: userInfoPath())
+    private func retrieveDataForUser(user: PrivyUser) -> NSData? {
+        return NSData(contentsOfURL: userInfoPathForUser(user))
     }
 
     /**
@@ -118,7 +114,7 @@ final class LocalStorage {
 
             do {
                 let encryptedData = try self.encrypUser(user, withPassword: password)
-                try self.saveEncryptedData(encryptedData)
+                try self.saveEncryptedData(encryptedData, forUser: user)
                 try self.saveUserEncryptionKey(password)
             } catch {
                 saveUserError = error
@@ -151,8 +147,8 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-    private func saveEncryptedData(data: NSData) throws {
-        try data.writeToURL(userInfoPath(), options: .AtomicWrite)
+    private func saveEncryptedData(data: NSData, forUser user: PrivyUser) throws {
+        try data.writeToURL(userInfoPathForUser(user), options: .AtomicWrite)
     }
 
     /**
@@ -171,9 +167,13 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-    private func userInfoPath() -> NSURL {
+    private func userInfoPathForUser(user: PrivyUser) -> NSURL {
+        guard let email = user.registrationInformation?.email else {
+            fatalError()
+        }
+
         return documentsDirectoryPath().URLByAppendingPathComponent(
-            Static.UserInfo.rawValue,
+            md5(string: email),
             isDirectory: false
         )
     }
@@ -190,5 +190,28 @@ final class LocalStorage {
         )
 
         return paths[0]
+    }
+
+    /**
+     <#Description#>
+
+     - parameter string: <#string description#>
+
+     - returns: <#return value description#>
+     */
+    func md5(string string: String) -> String {
+        var digest = [UInt8](
+            count: Int(CC_MD5_DIGEST_LENGTH),
+            repeatedValue: 0
+        )
+
+        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
+            CC_MD5(data.bytes, CC_LONG(data.length), &digest)
+        }
+
+        return (0 ..< Int(CC_MD5_DIGEST_LENGTH))
+            .reduce("") {
+                $0 + String(format: "%02x", $1)
+        }
     }
 }

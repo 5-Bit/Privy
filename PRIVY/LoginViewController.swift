@@ -144,6 +144,7 @@ class LoginViewController: UIViewController {
         function(credential) { response, error in
             switch error {
             case .Ok:
+                response
                 PrivyUser.currentUser.registrationInformation = response
                 self.navigationController?.popToRootViewControllerAnimated(true)
             case .ServerError(let message):
@@ -197,7 +198,9 @@ class LoginViewController: UIViewController {
         let confirmAction = UIAlertAction(
             title: "Confirm",
             style: .Destructive) { action in
-
+                RequestManager.sharedManager.requestPasswordReset(alertController.textFields!.first!.text!, completion: { (success) in
+                    print(success)
+                })
         }
         
         let cancelAction = UIAlertAction(
