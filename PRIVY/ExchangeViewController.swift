@@ -11,9 +11,12 @@ import DynamicButton
 import NVActivityIndicatorView
 import AVFoundation
 import ObjectMapper
+import CoreLocation
 
 /// <#Description#>
 class ExchangeViewController: UIViewController {
+    private let locationManager = CLLocationManager()
+
     private let captureSession = AVCaptureSession()
     private let captureOutput = AVCaptureMetadataOutput()
     
@@ -171,6 +174,8 @@ class ExchangeViewController: UIViewController {
         #else
         toggleCameraButton.hidden = true
         #endif
+
+        locationManager.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -183,6 +188,7 @@ class ExchangeViewController: UIViewController {
 
         captureSession.stopRunning()
         qrTimer?.invalidate()
+        locationManager.delegate = nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -299,8 +305,8 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(ExchangeViewController.qrTimerFired(_:)), userInfo: nil, repeats: false)
         
         if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
-            print("+++++++++++++++++++++++parsed successfully")
             shouldContinueScanning = false
+
             RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, completion: { (user, errorStatus) in
                 if let user = user, history = self.tabBarController?.viewControllers?.last as? HistoryTableViewController {
                     history.datasource.append(user)
@@ -326,7 +332,35 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
+extension ExchangeViewController: CLLocationManagerDelegate {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        switch status {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            break
+        case .Denied:
+            showLocationErrorDialogWithMessage("Location unavailable. Please enable the location capability for this app in your settings.")
+        case .NotDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .Restricted:
+            showLocationErrorDialogWithMessage("Location unavailable. If you want to use this feature, ask your parent to disable this restriction.")
+        }
+    }
 
+    private func showLocationErrorDialogWithMessage(message: String) {
+        let alertController = UIAlertController(
+            title: "",
+            message: message,
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
 
+        let dismissAction = UIAlertAction(
+            title: "Dismiss",
+            style: .Default) { action in
 
+        }
 
+        alertController.addAction(dismissAction)
+
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+}
