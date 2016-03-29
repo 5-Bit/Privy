@@ -138,7 +138,7 @@ final class RequestManager {
         
         request.HTTPMethod = "POST"
         request.HTTPBody = query?.dataUsingEncoding(NSUTF8StringEncoding)
-        
+
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
             guard let response = response as? NSHTTPURLResponse else {
@@ -183,8 +183,14 @@ final class RequestManager {
             timeoutInterval: RequestManager.Static.defaultTimeout
         )
 
+        let queryItems = [
+            NSURLQueryItem(name: "email", value: email)
+        ]
+
+        let query = url.urlByAppendingQueryItems(queryItems).query
+
         request.HTTPMethod = "POST"
-        request.HTTPBody = ("email=" + email).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        request.HTTPBody = query?.dataUsingEncoding(NSUTF8StringEncoding)
 
         let task = session.dataTaskWithRequest(request) { data, response, error in
             var success = false
@@ -192,16 +198,11 @@ final class RequestManager {
                 self.completionOnMainThread(success, completion: completion)
             }
 
-            guard let response = response as? NSHTTPURLResponse else {
+            guard let response = response as? NSHTTPURLResponse where error == nil else {
                 return
             }
 
-            switch response.statusCode {
-            case 200:
-                success = true
-            default:
-                break
-            }
+            success = response.statusCode == 200
         }
 
         task.resume()
@@ -225,35 +226,3 @@ final class RequestManager {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
