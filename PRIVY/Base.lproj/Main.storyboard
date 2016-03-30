@@ -21,11 +21,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="thO-lC-Fqv"/>
+                    <navigationItem key="navigationItem" id="thO-lC-Fqv">
+                        <barButtonItem key="rightBarButtonItem" title="settings" id="NgK-W8-mPi">
+                            <connections>
+                                <segue destination="NcF-Df-KhP" kind="showDetail" id="ghy-Ji-rEQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LeH-vH-4Jf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1260" y="-1376.25"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="tjM-Bd-NQj">
+            <objects>
+                <viewController id="wnK-n4-dHf" customClass="SettingsViewController" customModule="Privy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TBg-hy-vsd"/>
+                        <viewControllerLayoutGuide type="bottom" id="EXd-I5-Pja"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vLg-g8-fvZ">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8x2-Tu-82Q">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="JLI-X9-uVE">
+                            <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="dismiss:" destination="wnK-n4-dHf" id="E44-RH-v0X"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uwe-Am-25L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2979" y="-1376.25"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="E4E-HF-mDN">
@@ -156,7 +187,7 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhU-zl-zpf" customClass="RoundedGradientButton" customModule="Privy" customModuleProvider="target">
+                                    <button clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhU-zl-zpf" customClass="RoundedGradientButton" customModule="Privy" customModuleProvider="target">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.80000001190000003" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -721,6 +752,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ix7-tf-6uN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="342" y="-1376.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fGB-BC-d3f">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NcF-Df-KhP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Heg-dM-myj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wnK-n4-dHf" kind="relationship" relationship="rootViewController" id="1hg-ha-zqd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ysg-Ip-Dtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2124" y="-1376.25"/>
         </scene>
     </scenes>
     <resources>

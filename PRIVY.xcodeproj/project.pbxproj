@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3E441CAC3B2F00456482 /* SettingsViewController.swift */; };
 		00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00317EF81C6D2F6500882EFC /* AVFoundation.framework */; };
 		0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1491C4C5FF30076F176 /* AppDelegate.swift */; };
 		0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F14B1C4C5FF30076F176 /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009381E51CA4F43C0045CCAE /* Locksmith.framework */; };
+		0096D41A1CABAA950099A4CD /* TokenWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096D4191CABAA950099A4CD /* TokenWrapper.swift */; };
 		00A09FC61C849BFF00A47B2E /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A09FC51C849BFF00A47B2E /* RNCryptor.framework */; };
 		00A09FC81C849D4800A47B2E /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A09FC71C849D4800A47B2E /* LocalStorage.swift */; };
 		00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */; };
@@ -83,6 +85,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002A3E441CAC3B2F00456482 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00317EF81C6D2F6500882EFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0040F1461C4C5FF30076F176 /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F1491C4C5FF30076F176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
 		009381E51CA4F43C0045CCAE /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
+		0096D4191CABAA950099A4CD /* TokenWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenWrapper.swift; sourceTree = "<group>"; };
 		00A09FC51C849BFF00A47B2E /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 		00A09FC71C849D4800A47B2E /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Cameras.swift"; sourceTree = "<group>"; };
@@ -180,6 +184,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002A3E431CAC3B1A00456482 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				002A3E441CAC3B2F00456482 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		0040F13D1C4C5FF30076F176 = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +221,7 @@
 				00A09FC71C849D4800A47B2E /* LocalStorage.swift */,
 				00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */,
 				00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */,
+				0096D4191CABAA950099A4CD /* TokenWrapper.swift */,
 				0040F17C1C4C61070076F176 /* Extensions */,
 				0040F1841C4C772E0076F176 /* General */,
 				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
@@ -311,6 +324,7 @@
 		00A7B9431C7D23EF00E94C68 /* Info */ = {
 			isa = PBXGroup;
 			children = (
+				002A3E431CAC3B1A00456482 /* Settings */,
 				00A7B9451C7D245400E94C68 /* InfoViewController.swift */,
 				00A7B94A1C7D300F00E94C68 /* BasicInfoViewController.swift */,
 				00A7B96B1C7E247D00E94C68 /* SocialViewController.swift */,
@@ -547,9 +561,11 @@
 				00A7B9421C7CB4C400E94C68 /* ServerResponses.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				00A7B9701C7E24CE00E94C68 /* DeveloperViewController.swift in Sources */,
+				0096D41A1CABAA950099A4CD /* TokenWrapper.swift in Sources */,
 				00A7B94B1C7D300F00E94C68 /* BasicInfoViewController.swift in Sources */,
 				00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */,
 				00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */,
+				002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				00A7B96E1C7E24B900E94C68 /* BusinessViewController.swift in Sources */,
 				00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */,
@@ -722,9 +738,9 @@
 				INFOPLIST_FILE = PRIVY/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -744,9 +760,9 @@
 				INFOPLIST_FILE = PRIVY/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.Privy";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
