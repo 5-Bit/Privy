@@ -48,16 +48,7 @@ final class PrivyUser: Mappable {
     var registrationInformation: LoginRegistrationResponse?
     
     private init() {
-        do {
-//            guard let savedUser = try LocalStorage.defaultStorage.retrieveUser() else {
-//                return
-//            }
-//
-//            userInfo = savedUser.userInfo
-//            registrationInformation = savedUser.registrationInformation
-        } catch {
-            fatalError()
-        }
+
     }
 
     init?(_ map: Map) {
