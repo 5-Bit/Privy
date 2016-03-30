@@ -173,7 +173,7 @@ final class LocalStorage {
         }
 
         return documentsDirectoryPath().URLByAppendingPathComponent(
-            md5(string: email),
+            email.md5(),
             isDirectory: false
         )
     }
@@ -190,28 +190,5 @@ final class LocalStorage {
         )
 
         return paths[0]
-    }
-
-    /**
-     <#Description#>
-
-     - parameter string: <#string description#>
-
-     - returns: <#return value description#>
-     */
-    func md5(string string: String) -> String {
-        var digest = [UInt8](
-            count: Int(CC_MD5_DIGEST_LENGTH),
-            repeatedValue: 0
-        )
-
-        if let data = string.dataUsingEncoding(NSUTF8StringEncoding) {
-            CC_MD5(data.bytes, CC_LONG(data.length), &digest)
-        }
-
-        return (0 ..< Int(CC_MD5_DIGEST_LENGTH))
-            .reduce("") {
-                $0 + String(format: "%02x", $1)
-        }
     }
 }
