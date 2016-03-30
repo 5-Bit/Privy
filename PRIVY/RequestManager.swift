@@ -57,6 +57,39 @@ final class RequestManager {
         session = NSURLSession(configuration: configuration)
     }
 
+    private func refreshUUIDs() {
+        // comma separated uuids in body uuids=comma,comma    GET
+        // returns object containing PrivyUser.InfoTypes
+    }
+
+    func addApnsToken(token: NSData, completion: (success: Bool) -> Void) {
+        let url = Static.host.URLByAppendingPathComponent("users/registerapnsclient")
+
+        let queryItems = [
+            NSURLQueryItem(name: "apnsid", value: token.hexString())
+        ]
+
+        let body = url.urlByAppendingQueryItems(queryItems).query?.dataUsingEncoding(NSUTF8StringEncoding)
+        handleRequest(url, method: .POST, body: body) { _, response, error in
+            var success = false
+
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
+
+            guard let response = response as? NSHTTPURLResponse
+                where error == nil else {
+                    return
+            }
+
+            guard response.statusCode == 200 else {
+                return
+            }
+
+            success = true
+        }
+    }
+
     func attemptLookupByUUIDs(uuids: [String], completion: (user: PrivyUser.InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
         guard let sessionId = PrivyUser.currentUser.registrationInformation?.sessionid else {
             return
