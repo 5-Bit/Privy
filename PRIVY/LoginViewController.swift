@@ -198,9 +198,9 @@ class LoginViewController: UIViewController {
         let confirmAction = UIAlertAction(
             title: "Confirm",
             style: .Destructive) { action in
-                RequestManager.sharedManager.requestPasswordReset(alertController.textFields!.first!.text!, completion: { (success) in
+                RequestManager.sharedManager.requestPasswordReset(alertController.textFields!.first!.text!) { (success) in
                     print(success)
-                })
+                }
         }
         
         let cancelAction = UIAlertAction(
