@@ -44,16 +44,8 @@ final class LocalStorage {
      */
 
     func attemptLoginWithCredential(credential: LoginCredential) -> PrivyUser? {
-        do {
-            return try retrieveUser(withCredential: credential)
-        } catch {
-            return nil
-        }
-    }
-
-    private func retrieveUser(withCredential credential: LoginCredential) throws -> PrivyUser? {
         var user: PrivyUser?
-        
+
         dispatch_sync(saveQueue) {
             guard let password = self.retrieveEncryptionKey(forUsername: credential.email) else {
                 return
@@ -80,7 +72,7 @@ final class LocalStorage {
      - returns: The key found in the keychain, nil otherwise.
      */
     private func retrieveEncryptionKey(forUsername username: String) -> String? {
-        return Locksmith.loadDataForUserAccount(username.md5())?["password"] as? String
+        return Locksmith.loadDataForUserAccount(username)?["password"] as? String
     }
 
     /**
@@ -126,13 +118,15 @@ final class LocalStorage {
             let password = NSUUID().UUIDString
 
             defer {
-                completion(error: saveUserError)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completion(error: saveUserError)
+                }
             }
 
             do {
                 let encryptedData = try self.encrypUser(user, withPassword: password)
                 try self.saveEncryptedData(encryptedData, forUser: user)
-                try self.saveUserEncryptionKey(password)
+                try self.saveUserEncryptionKey(password, forUser: user)
             } catch {
                 saveUserError = error
             }
@@ -178,8 +172,8 @@ final class LocalStorage {
 
      - throws: <#throws value description#>
      */
-    private func saveUserEncryptionKey(key: String) throws {
-        try Locksmith.updateData(["password": key], forUserAccount: "user")
+    private func saveUserEncryptionKey(key: String, forUser user: PrivyUser) throws {
+        try Locksmith.updateData(["password": key], forUserAccount: user.registrationInformation!.email!)
     }
 
     /**
@@ -189,7 +183,7 @@ final class LocalStorage {
      */
     private func userInfoPathForUserWithCredential(credential: LoginCredential) -> NSURL {
         return documentsDirectoryPath().URLByAppendingPathComponent(
-            credential.email.md5(),
+            credential.email,
             isDirectory: false
         )
     }
@@ -204,7 +198,7 @@ final class LocalStorage {
 
     private func userInfoPathForUserName(username: String) -> NSURL {
         return documentsDirectoryPath().URLByAppendingPathComponent(
-            username.md5(),
+            username,
             isDirectory: false
         )
     }
@@ -223,5 +217,13 @@ final class LocalStorage {
         print(paths.first)
 
         return paths[0]
+    }
+
+//    func saveHistory(history: [HistoryUser]) -> <#return type#> {
+//        <#function body#>
+//    }
+
+    func loadHistory() -> [HistoryUser] {
+        return [HistoryUser]()
     }
 }
