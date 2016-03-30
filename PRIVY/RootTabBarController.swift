@@ -18,7 +18,23 @@ class RootTabBarController: UITabBarController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if animated {
+            registerPushNotifications()
+        }
+    }
+
+    private func registerPushNotifications() {
+        let notificationSettings = UIUserNotificationSettings(
+            forTypes: [.Alert, .Badge, .Sound],
+            categories: nil
+        )
+
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+    }
 
     /*
     // MARK: - Navigation
