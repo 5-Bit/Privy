@@ -16,15 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let notificationTypes: UIUserNotificationType = [.Alert, .Badge, .Sound]
-        let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
-
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         
         let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
         UITabBar.appearance().tintColor = .privyLightBlueColor
-        
+
+        // Prevent camera feed from interfering with any music that may be playing.
         do {
             try AVAudioSession.sharedInstance().setCategory(
                 AVAudioSessionCategoryRecord,
@@ -58,14 +55,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings)
     {
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let defaults = NSUserDefaults.standardUserDefaults()
 
-        print(String(data: deviceToken, encoding: NSUTF8StringEncoding))
+        RequestManager.sharedManager.addApnsToken(deviceToken) { success in
+            if !success && defaults.objectForKey("failedTokens") == nil {
+                defaults.setObject([deviceToken], forKey: "failedTokens")
+                defaults.synchronize()
+            }
+        }
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -73,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-
+        print(userInfo)
     }
 
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
@@ -169,4 +173,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
