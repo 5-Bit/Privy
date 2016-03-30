@@ -42,28 +42,45 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
-//    func retrieveUser() throws -> PrivyUser? {
-//        var user: PrivyUser?
-//        
-//        dispatch_sync(saveQueue) {
-//            guard let password = self.retrieveEncryptionKey(),
-//                userData = self.retrieveUserData() else {
-//                    return
-//            }
-//
-//            user = self.decryptUserData(userData, withPassword: password)
-//        }
-//
-//        return user
-//    }
+
+    func attemptLoginWithCredential(credential: LoginCredential) -> PrivyUser? {
+        do {
+            return try retrieveUser(withCredential: credential)
+        } catch {
+            return nil
+        }
+    }
+
+    private func retrieveUser(withCredential credential: LoginCredential) throws -> PrivyUser? {
+        var user: PrivyUser?
+        
+        dispatch_sync(saveQueue) {
+            guard let password = self.retrieveEncryptionKey(forUsername: credential.email) else {
+                return
+            }
+
+            let encryptionCredential = LoginCredential(
+                email: credential.email,
+                password: password
+            )
+
+            guard let userData = self.retrieveDataForUserWithCredential(encryptionCredential) else {
+                return
+            }
+
+            user = self.decryptUserData(userData, withPassword: encryptionCredential.password)
+        }
+
+        return user
+    }
 
     /**
      Attempts to load the encryption key for the user's data out of the Keychain.
 
      - returns: The key found in the keychain, nil otherwise.
      */
-    private func retrieveEncryptionKey() -> String? {
-        return Locksmith.loadDataForUserAccount("user")?["password"] as? String
+    private func retrieveEncryptionKey(forUsername username: String) -> String? {
+        return Locksmith.loadDataForUserAccount(username.md5())?["password"] as? String
     }
 
     /**
@@ -71,8 +88,8 @@ final class LocalStorage {
 
      - returns: The data found at `userInfoPath()` if there is any, nil otherwise.
      */
-    private func retrieveDataForUser(user: PrivyUser) -> NSData? {
-        return NSData(contentsOfURL: userInfoPathForUser(user))
+    private func retrieveDataForUserWithCredential(credential: LoginCredential) -> NSData? {
+        return NSData(contentsOfURL: userInfoPathForUserWithCredential(credential))
     }
 
     /**
@@ -148,7 +165,10 @@ final class LocalStorage {
      - returns: <#return value description#>
      */
     private func saveEncryptedData(data: NSData, forUser user: PrivyUser) throws {
-        try data.writeToURL(userInfoPathForUser(user), options: .AtomicWrite)
+        try data.writeToURL(
+            userInfoPathForUser(user),
+            options: .AtomicWrite
+        )
     }
 
     /**
@@ -167,13 +187,24 @@ final class LocalStorage {
 
      - returns: <#return value description#>
      */
+    private func userInfoPathForUserWithCredential(credential: LoginCredential) -> NSURL {
+        return documentsDirectoryPath().URLByAppendingPathComponent(
+            credential.email.md5(),
+            isDirectory: false
+        )
+    }
+
     private func userInfoPathForUser(user: PrivyUser) -> NSURL {
         guard let email = user.registrationInformation?.email else {
             fatalError()
         }
 
+        return userInfoPathForUserName(email)
+    }
+
+    private func userInfoPathForUserName(username: String) -> NSURL {
         return documentsDirectoryPath().URLByAppendingPathComponent(
-            email.md5(),
+            username.md5(),
             isDirectory: false
         )
     }
@@ -185,9 +216,11 @@ final class LocalStorage {
      */
     private func documentsDirectoryPath() -> NSURL {
         let paths = fileManager.URLsForDirectory(
-            .ApplicationSupportDirectory,
+            .DocumentDirectory,
             inDomains: .UserDomainMask
         )
+
+        print(paths.first)
 
         return paths[0]
     }
