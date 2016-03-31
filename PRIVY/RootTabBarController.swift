@@ -22,9 +22,7 @@ class RootTabBarController: UITabBarController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if animated {
-            registerPushNotifications()
-        }
+        registerPushNotifications()
     }
 
     private func registerPushNotifications() {
