@@ -44,24 +44,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootNavigationController = storyboard.instantiateInitialViewController() as! UINavigationController
 
         window.rootViewController = rootNavigationController
-        
-        if !PrivyUser.currentUser.isLoggedIn {
+
+        func presentLogin() {
             let loginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController")
-            
+
             rootNavigationController.pushViewController(loginViewController, animated: false)
         }
-        
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+
+        guard let name = defaults.stringForKey("current") else {
+            presentLogin()
+            return true
+        }
+
+        let credential = LoginCredential(email: name, password: "")
+
+        guard let currentUser = LocalStorage.defaultStorage.attemptLoginWithCredential(credential) else {
+            presentLogin()
+            return true
+        }
+
+        PrivyUser.currentUser.userInfo = currentUser.userInfo
+        PrivyUser.currentUser.registrationInformation = currentUser.registrationInformation
+
         // Override point for customization after application launch.
         return true
     }
 
-    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings)
     {
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        print(deviceToken.hexString())
+        
         let defaults = NSUserDefaults.standardUserDefaults()
 
         RequestManager.sharedManager.addApnsToken(deviceToken) { success in
