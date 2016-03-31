@@ -1,17 +1,20 @@
 //
-//  PRVRootTabBarController.swift
-//  PRIVY
+//  SettingsViewController.swift
+//  Privy
 //
-//  Created by Michael MacCallum on 1/17/16.
+//  Created by Michael MacCallum on 3/30/16.
 //  Copyright © 2016 Michael MacCallum. All rights reserved.
 //
 
 import UIKit
 
-class RootTabBarController: UITabBarController {
+class SettingsViewController: UIViewController {
+    lazy var fonts: [UIFont] = self.generateFonts()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -19,19 +22,12 @@ class RootTabBarController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        registerPushNotifications()
-    }
-
-    private func registerPushNotifications() {
-        let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Alert, .Badge, .Sound],
-            categories: nil
-        )
-
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
+    func generateFonts() -> [UIFont] {
+        return UIFont.familyNames().flatMap {
+            UIFont.fontNamesForFamilyName($0).flatMap {
+                UIFont(name: $0, size: UIFont.systemFontSize())
+            }
+        }
     }
 
     /*
@@ -44,4 +40,7 @@ class RootTabBarController: UITabBarController {
     }
     */
 
+    @IBAction private func dismiss(button: UIBarButtonItem) {
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

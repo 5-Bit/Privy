@@ -1,38 +1,26 @@
 //
-//  PRVRootTabBarController.swift
-//  PRIVY
+//  HistoryUserViewController.swift
+//  Privy
 //
-//  Created by Michael MacCallum on 1/17/16.
+//  Created by Michael MacCallum on 3/30/16.
 //  Copyright © 2016 Michael MacCallum. All rights reserved.
 //
 
 import UIKit
 
-class RootTabBarController: UITabBarController {
+class HistoryUserViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        registerPushNotifications()
-    }
-
-    private func registerPushNotifications() {
-        let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Alert, .Badge, .Sound],
-            categories: nil
-        )
-
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-    }
+    
 
     /*
     // MARK: - Navigation

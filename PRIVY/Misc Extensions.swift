@@ -6,7 +6,7 @@
 //  Copyright © 2016 Michael MacCallum. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 private extension NSMutableURLRequest {
     func addValue(value: String, forHTTPHeaderField field: PrivyHttpHeaderField) {
@@ -54,3 +54,42 @@ extension NSData {
         return String.fromCString(UnsafePointer(output))!
     }
 }
+
+extension UIImage {
+    func tintedImageWithColor(color: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+        let rect = CGRect(origin: CGPointZero, size: size)
+
+        drawInRect(rect)
+        color.set()
+        UIRectFillUsingBlendMode(rect, CGBlendMode.Screen)
+        drawInRect(rect, blendMode: CGBlendMode.DestinationIn, alpha: 1.0)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+}
+
+//- (UIImage *)imageTintedWithColor:(UIColor *)color
+//{
+//    UIImage *image;
+//    if (color) {
+//        // Construct new image the same size as this one.
+//        UIGraphicsBeginImageContextWithOptions([self size], NO, 0.0); // 0.0 for scale means "scale for device's main screen".
+//        CGRect rect = CGRectZero;
+//        rect.size = [self size];
+//
+//        // tint the image
+//        [self drawInRect:rect];
+//        [color set];
+//        UIRectFillUsingBlendMode(rect, kCGBlendModeScreen);
+//
+//        // restore alpha channel
+//        [self drawInRect:rect blendMode:kCGBlendModeDestinationIn alpha:1.0f];
+//
+//        image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//    }
+//    return image;
+//}

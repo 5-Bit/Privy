@@ -22,7 +22,9 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var confirmPasswordTextField: UITextField!
 
     @IBOutlet private weak var bottomSpacingPin: NSLayoutConstraint!
-    
+
+    private var activityIndicator: UIActivityIndicatorView!
+
     private var viewState = ViewState.Login {
         didSet {
             configForViewState()
@@ -31,13 +33,40 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        confirmationButton.translatesAutoresizingMaskIntoConstraints = false
 
-        // Do any additional setup after loading the view.
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.frame = CGRect(
+            x: confirmationButton.bounds.width - confirmationButton.bounds.height,
+            y: 0.0,
+            width: confirmationButton.bounds.height,
+            height: confirmationButton.bounds.height
+        )
+
+        confirmationButton.addSubview(activityIndicator)
+
+        let vertical = NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-[activityIndicator]-|",
+            options: [],
+            metrics: nil,
+            views: ["activityIndicator": activityIndicator]
+        )
+
+        let horizontal = NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|-[activityIndicator(40)]|",
+            options: [],
+            metrics: nil,
+            views: ["activityIndicator": activityIndicator]
+        )
+
+        confirmationButton.addConstraints(vertical + horizontal)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         NSNotificationCenter.defaultCenter().addObserverForName(
             UIKeyboardWillChangeFrameNotification,
             object: nil,
@@ -141,22 +170,50 @@ class LoginViewController: UIViewController {
             function = RequestManager.sharedManager.attemptRegistrationWithCredentials
         }
 
+        confirmationButton.enabled = false
+        activityIndicator.startAnimating()
+        view.endEditing(true)
+        passwordTextField.enabled = false
+        confirmPasswordTextField.enabled = false
+
         function(credential) { response, error in
             switch error {
             case .Ok:
-                response
                 PrivyUser.currentUser.registrationInformation = response
-                self.navigationController?.popToRootViewControllerAnimated(true)
+                let defaults = NSUserDefaults.standardUserDefaults()
+
+                if let currentUser = LocalStorage.defaultStorage.attemptLoginWithCredential(credential) {
+                    PrivyUser.currentUser.userInfo = currentUser.userInfo
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    defaults.setObject(currentUser.registrationInformation!.email!, forKey: "current")
+                    defaults.synchronize()
+                } else {
+                    LocalStorage.defaultStorage.saveUser(PrivyUser.currentUser) { _ in
+                        defaults.setObject(PrivyUser.currentUser.registrationInformation!.email!, forKey: "current")
+                        defaults.synchronize()
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                    }
+                }
             case .ServerError(let message):
                 self.showErrorAlert(message)
+                self.resetLoadingUI()
             case .NoResponse:
                 self.showErrorAlert("No response from server.")
+                self.resetLoadingUI()
             case .UnknownError:
                 self.showErrorAlert("An unknown error occurred.")
+                self.resetLoadingUI()
             }
         }
     }
     
+    private func resetLoadingUI() {
+        confirmationButton.enabled = true
+        activityIndicator.stopAnimating()
+        passwordTextField.enabled = true
+        confirmPasswordTextField.enabled = true
+    }
+
     private func showErrorAlert(error: String) {
         let alertController = UIAlertController(
             title: viewState.rawValue + " Error",
@@ -297,6 +354,8 @@ extension LoginViewController: UITextFieldDelegate {
         if viewState == .Login {
             let enabled = !emailTextField.text.isNilOrEmpty
                 && !passwordTextField.text.isNilOrEmpty
+                && passwordTextField.text!.characters.count >= 8
+
             confirmationButton.enabled = enabled
             confirmationButton.alpha = enabled ? 1.0 : 0.8
 
@@ -310,6 +369,7 @@ extension LoginViewController: UITextFieldDelegate {
                 confirmationButton.alpha = 0.8
             } else {
                 let enabled = passwordTextField.text == confirmPasswordTextField.text
+                    && passwordTextField.text!.characters.count >= 8
                 let borderColor = enabled ? UIColor.clearColor().CGColor : UIColor.redColor().CGColor
                 
                 confirmationButton.enabled = enabled

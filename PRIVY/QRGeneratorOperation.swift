@@ -53,6 +53,7 @@ class QRGeneratorOperation: ObservableOperation {
 
         if let image = QRGeneratorOperation.imageFromQrString(self.qrString, size: self.size, scale: self.scale, correctionLevel: self.correctionLevel) {
             self.finished = true
+
             self.completionHandler(image)
             return
         } else {
@@ -92,11 +93,35 @@ class QRGeneratorOperation: ObservableOperation {
         guard let outputImage = filter.outputImage else {
             return nil
         }
-        
-        return upscaledImageFromCIImage(outputImage,
+
+        let inverted = QRGeneratorOperation.invertImage(outputImage)
+
+        let background = UIColor(
+            red: 30.0 / 255.0,
+            green: 179.0 / 255.0,
+            blue: 225.0 / 255.0,
+            alpha: 1.0
+        )
+
+        let uiInverted = UIImage(CIImage: inverted)
+        let colored = uiInverted.tintedImageWithColor(UIColor.privyDarkBlueColor)
+
+        return upscaledImageFromCIImage(
+            CIImage(CGImage: colored.CGImage!),
             size: size,
             scale: scale
         )
+    }
+
+    private static func invertImage(image: CIImage) -> CIImage {
+//        filter = [CIFilter filterWithName:@"CIAdditionCompositing" keysAndValues:kCIInputImageKey, imageOne, kCIInputBackgroundImageKey, imageTwo, nil];
+
+        let filter = CIFilter(
+            name: "CIColorInvert",
+            withInputParameters: [kCIInputImageKey: image]
+        )!
+
+        return filter.outputImage!
     }
     
     /**
