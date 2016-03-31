@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
+    lazy var fonts: [UIFont] = self.generateFonts()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,14 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    func generateFonts() -> [UIFont] {
+        return UIFont.familyNames().flatMap {
+            UIFont.fontNamesForFamilyName($0).flatMap {
+                UIFont(name: $0, size: UIFont.systemFontSize())
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
