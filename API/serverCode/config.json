@@ -1,0 +1,7 @@
+{
+    "staticRoot": "/home/yumaikas/www/",
+    "cert": "/etc/letsencrypt/live/privyapp.com/fullchain.pem",
+    "key": "/etc/letsencrypt/live/privyapp.com/privkey.pem",
+    "dbUserName": "appuser",
+    "dbPass": "foobarbaz"
+}

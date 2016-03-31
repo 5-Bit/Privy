@@ -1,0 +1,33 @@
+
+Login
+
+    Change username to email
+    Add First, Last name
+    add APNS_ID column
+
+Devices
+    Rename to Account
+Phone #
+
+Routes:
+    * Register
+        Return UUIDs for each type of contact
+            Basic (First_name, last_name, email, phone#)
+            Social (facebook, twitter, g+, instagram, snapchat)
+            Business (linkedin, email, phone#)
+            Developer (github, stackoverflow, bitbucket)
+            Media (flickr, soundcloud, youtube, vine, vimeo, pintrest)
+            Blogging (website, wordpress, tumblr, medium)
+
+    /users/
+    map from uuid -> user/type
+            
+    * TODO:  Login (Get session)
+    Auth-Check (is Session valid)
+    Logout (logout on all devices)
+    update_info
+        Phone #
+        First Name
+        Last Name
+        
+
