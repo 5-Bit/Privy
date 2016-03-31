@@ -30,12 +30,13 @@ class OutlinedTransformableView: UIView {
     }
     
     private func commonInit() {
-        shapeLayer.strokeColor = UIColor.greenColor().CGColor
+        shapeLayer.strokeColor = UIColor.greenColor().colorWithAlphaComponent(0.5).CGColor
         shapeLayer.lineWidth = 2.0
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
-        
-        clipsToBounds = true
-        opaque = false
+        shapeLayer.fillColor = UIColor.greenColor().colorWithAlphaComponent(0.5).CGColor
+        shapeLayer.shouldRasterize = false
+        shapeLayer.masksToBounds = true
+        shapeLayer.opaque = false
+
         userInteractionEnabled = false
     }
     
@@ -62,7 +63,7 @@ class OutlinedTransformableView: UIView {
         pathAnimation.duration = 0.05
         pathAnimation.fillMode = kCAFillModeForwards
         pathAnimation.removedOnCompletion = false
-        
+
         shapeLayer.path = path.CGPath
         
         shapeLayer.addAnimation(pathAnimation, forKey: nil)
