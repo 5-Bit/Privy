@@ -219,11 +219,23 @@ final class LocalStorage {
         return paths[0]
     }
 
-//    func saveHistory(history: [HistoryUser]) -> <#return type#> {
-//        <#function body#>
-//    }
-
     func loadHistory() -> [HistoryUser] {
-        return [HistoryUser]()
+        let read = try? String(
+            contentsOfURL: documentsDirectoryPath().URLByAppendingPathComponent("history.dat"),
+            encoding: NSUTF8StringEncoding
+        )
+
+        return Mapper<HistoryUser>().mapArray(read) ?? [HistoryUser]()
+    }
+
+
+    func saveHistory(history: [HistoryUser]) {
+        let jsonString = Mapper<HistoryUser>().toJSONString(history, prettyPrint: false)!
+        let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+
+        try! data.writeToURL(
+            documentsDirectoryPath().URLByAppendingPathComponent("history.dat"),
+            options: NSDataWritingOptions.AtomicWrite
+        )
     }
 }
