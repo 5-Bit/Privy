@@ -10,13 +10,15 @@ import UIKit
 import CoreData
 import AVFoundation
 
+let PrivyAPNSNotification = "PrivyAPNSNotification"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+
         let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
         UITabBar.appearance().tintColor = .privyLightBlueColor
@@ -28,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 withOptions: .MixWithOthers
             )
             
-            try AVAudioSession.sharedInstance().setActive(false, withOptions: [])
+            try AVAudioSession.sharedInstance().setActive(true, withOptions: [])
         } catch {
             // don't care
         }
@@ -68,6 +70,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PrivyUser.currentUser.userInfo = currentUser.userInfo
         PrivyUser.currentUser.registrationInformation = currentUser.registrationInformation
 
+        if let i = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] {
+            print(i)
+//            let notification = NSNotification(name: PrivyAPNSNotification, object: nil)
+//            NSNotificationCenter.defaultCenter().postNotification(notification)
+//            (rootNavigationController.viewControllers.first as? RootTabBarController)?.showHistory()
+        }
+
         // Override point for customization after application launch.
         return true
     }
@@ -95,7 +104,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print(userInfo)
+        let rootNav = window!.rootViewController as! UINavigationController
+        let rootTab = rootNav.viewControllers.first! as! RootTabBarController
+
+        let selectedIndex = rootTab.selectedIndex
+
+        if selectedIndex != rootTab.viewControllers!.count - 1 {
+            rootTab.tabBar.items?.last?.badgeValue = "new"
+        }
+
+        let historyNav = rootTab.viewControllers!.last! as! UINavigationController
+        let history = historyNav.viewControllers.first! as! HistoryTableViewController
+        
+        history.fetchHistory { _ in }
     }
 
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
