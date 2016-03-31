@@ -8,14 +8,26 @@
 
 import UIKit
 
-typealias HistoryUser = PrivyUser.InfoTypes
+typealias HistoryUser = InfoTypes
 
 class HistoryTableViewController: UITableViewController {
-    var datasource = [HistoryUser]() {
+    var datasource = LocalStorage.defaultStorage.loadHistory() {
         didSet {
-            if self.tabBarController?.tabBar.selectedItem == self.tabBarItem {
-                tableView.reloadData()
+            if tabBarController?.tabBar.selectedItem === navigationController?.tabBarItem {
+                if oldValue.count == datasource.count {
+                    tableView.reloadSections(
+                        NSIndexSet(index: 0),
+                        withRowAnimation: .None
+                    )
+                } else {
+                    tableView.reloadSections(
+                        NSIndexSet(index: 0),
+                        withRowAnimation: .Top
+                    )
+                }
             }
+
+            LocalStorage.defaultStorage.saveHistory(datasource)
         }
     }
 
@@ -23,10 +35,20 @@ class HistoryTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         clearsSelectionOnViewWillAppear = true
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .privyDarkBlueColor
+        refreshControl.addTarget(
+            self,
+            action: #selector(HistoryTableViewController.refreshControlTriggered(_:)),
+            forControlEvents: UIControlEvents.ValueChanged
+        )
+        tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -35,9 +57,49 @@ class HistoryTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        navigationController?.tabBarItem.badgeValue = nil
+    }
+
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @objc private func refreshControlTriggered(refreshControl: UIRefreshControl) {
+        refreshControl.beginRefreshing()
+        print("refreshing")
+
+        fetchHistory { _ in
+            refreshControl.endRefreshing()
+        }
+    }
+
+    func fetchHistory(completion: (success: Bool) -> Void) {
+        RequestManager.sharedManager.refreshHistory { (history, errorStatus) in
+            if let history = history {
+                self.datasource = history
+            }
+
+            completion(success: errorStatus == .Ok)
+        }
+    }
+
+    private func countInfo(user: HistoryUser) -> Int {
+        let types = [
+            user.basic.emailAddress, user.basic.phoneNumber, user.blogging.medium,
+            user.blogging.tumblr, user.blogging.website, user.blogging.wordpress,
+            user.business.emailAddress, user.business.linkedin, user.business.phoneNumber,
+            user.developer.bitbucket, user.developer.github, user.developer.stackoverflow,
+            user.media.flickr, user.media.pintrest, user.media.soundcloud, user.media.vimeo,
+            user.media.vine, user.media.youtube, user.social.facebook, user.social.googlePlus,
+            user.social.instagram, user.social.snapchat, user.social.twitter
+        ]
+
+        return types.flatMap({ $0 }).count
     }
 
     // MARK: - Table view data source
@@ -53,9 +115,15 @@ class HistoryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("historyCell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = datasource[indexPath.row].basic.firstName
-        cell.detailTextLabel?.text = datasource[indexPath.row].basic.lastName
-        
+        let user = datasource[indexPath.row]
+
+        cell.textLabel?.text = (user.basic.firstName ?? "") + " " + (user.basic.lastName ?? "")
+
+        let count = countInfo(user)
+        let countPhrase = count == 1 ? "method" : "methods"
+
+        cell.detailTextLabel?.text = "\(count) contact \(countPhrase)"
+
         return cell
     }
 
@@ -94,14 +162,16 @@ class HistoryTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        guard let userViewController = segue.destinationViewController as? HistoryUserViewController,
+            indexPath = tableView.indexPathForCell(sender as! UITableViewCell) else {
 
+            return
+        }
+
+        userViewController.user = datasource[indexPath.row]
+    }
 }
