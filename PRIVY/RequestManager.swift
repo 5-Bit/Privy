@@ -57,16 +57,44 @@ final class RequestManager {
         session = NSURLSession(configuration: configuration)
     }
 
-    private func refreshUUIDs() {
+    private func refreshUUIDs(uuids: [String], completion: (success: Bool) -> Void) {
         // comma separated uuids in body uuids=comma,comma    GET
         // returns object containing PrivyUser.InfoTypes
+        let url = Static.host.URLByAppendingPathComponent("users/refreshinfo")
+
+        let queryItems = [
+            NSURLQueryItem(name: "uuids", value: uuids.joinWithSeparator(",")),
+            NSURLQueryItem(name: "sessionid", value: PrivyUser.currentUser.userInfo.sessionid)
+        ]
+
+        let body = url.urlByAppendingQueryItems(queryItems).query?.dataUsingEncoding(NSUTF8StringEncoding)
+
+        handleRequest(url, method: .POST, body: body) { _, response, error in
+            var success = false
+
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
+
+            guard let response = response as? NSHTTPURLResponse
+                where error == nil else {
+                    return
+            }
+
+            guard response.statusCode == 200 else {
+                return
+            }
+
+            success = true
+        }
     }
 
     func addApnsToken(token: NSData, completion: (success: Bool) -> Void) {
         let url = Static.host.URLByAppendingPathComponent("users/registerapnsclient")
 
         let queryItems = [
-            NSURLQueryItem(name: "apnsid", value: token.hexString())
+            NSURLQueryItem(name: "apnsid", value: token.hexString()),
+            NSURLQueryItem(name: "sessionid", value: PrivyUser.currentUser.userInfo.sessionid)
         ]
 
         let body = url.urlByAppendingQueryItems(queryItems).query?.dataUsingEncoding(NSUTF8StringEncoding)
