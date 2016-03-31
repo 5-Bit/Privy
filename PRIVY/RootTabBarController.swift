@@ -22,16 +22,6 @@ class RootTabBarController: UITabBarController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        registerPushNotifications()
-    }
-
-    private func registerPushNotifications() {
-        let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Alert, .Badge, .Sound],
-            categories: nil
-        )
-
-        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
     }
 
     /*

@@ -33,7 +33,6 @@
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009381E51CA4F43C0045CCAE /* Locksmith.framework */; };
-		0096D41A1CABAA950099A4CD /* TokenWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0096D4191CABAA950099A4CD /* TokenWrapper.swift */; };
 		00A09FC61C849BFF00A47B2E /* RNCryptor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A09FC51C849BFF00A47B2E /* RNCryptor.framework */; };
 		00A09FC81C849D4800A47B2E /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A09FC71C849D4800A47B2E /* LocalStorage.swift */; };
 		00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */; };
@@ -63,7 +62,6 @@
 		00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */; };
 		00A908241CACC8ED00A957C6 /* failure.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00A908231CACC8ED00A957C6 /* failure.mp3 */; };
 		00A908261CACC8F300A957C6 /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 00A908251CACC8F300A957C6 /* success.mp3 */; };
-		00A908281CACD0B000A957C6 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A908271CACD0B000A957C6 /* HistoryTableViewCell.swift */; };
 		00A9082A1CACD0BD00A957C6 /* HistoryUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A908291CACD0BD00A957C6 /* HistoryUserViewController.swift */; };
 		00B4C8141C7FBBDD00112F8A /* RoundedButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */; };
 		00BFF8891C7A55810027BFFE /* PrivyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF8881C7A55810027BFFE /* PrivyUser.swift */; };
@@ -124,7 +122,6 @@
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
 		009381E51CA4F43C0045CCAE /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
-		0096D4191CABAA950099A4CD /* TokenWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenWrapper.swift; sourceTree = "<group>"; };
 		00A09FC51C849BFF00A47B2E /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 		00A09FC71C849D4800A47B2E /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		00A7B93D1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Cameras.swift"; sourceTree = "<group>"; };
@@ -154,7 +151,6 @@
 		00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		00A908231CACC8ED00A957C6 /* failure.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = failure.mp3; sourceTree = "<group>"; };
 		00A908251CACC8F300A957C6 /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
-		00A908271CACD0B000A957C6 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
 		00A908291CACD0BD00A957C6 /* HistoryUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryUserViewController.swift; sourceTree = "<group>"; };
 		00B4C8131C7FBBDD00112F8A /* RoundedButtonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButtonTests.swift; sourceTree = "<group>"; };
 		00BFF8881C7A55810027BFFE /* PrivyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivyUser.swift; sourceTree = "<group>"; };
@@ -233,7 +229,6 @@
 				00A09FC71C849D4800A47B2E /* LocalStorage.swift */,
 				00A7B93F1C7C05FD00E94C68 /* RequestManager.swift */,
 				00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */,
-				0096D4191CABAA950099A4CD /* TokenWrapper.swift */,
 				0040F17C1C4C61070076F176 /* Extensions */,
 				0040F1841C4C772E0076F176 /* General */,
 				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
@@ -357,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */,
-				00A908271CACD0B000A957C6 /* HistoryTableViewCell.swift */,
 				00A908291CACD0BD00A957C6 /* HistoryUserViewController.swift */,
 			);
 			name = History;
@@ -583,7 +577,6 @@
 				00A7B9421C7CB4C400E94C68 /* ServerResponses.swift in Sources */,
 				0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */,
 				00A7B9701C7E24CE00E94C68 /* DeveloperViewController.swift in Sources */,
-				0096D41A1CABAA950099A4CD /* TokenWrapper.swift in Sources */,
 				00A7B94B1C7D300F00E94C68 /* BasicInfoViewController.swift in Sources */,
 				00A7B9761C7E3D6600E94C68 /* HistoryTableViewController.swift in Sources */,
 				00A9082A1CACD0BD00A957C6 /* HistoryUserViewController.swift in Sources */,
@@ -594,7 +587,6 @@
 				00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
 				00A7B9461C7D245400E94C68 /* InfoViewController.swift in Sources */,
-				00A908281CACD0B000A957C6 /* HistoryTableViewCell.swift in Sources */,
 				00A7B9521C7D30C900E94C68 /* ProfileFieldCell.swift in Sources */,
 				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
 				00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */,
