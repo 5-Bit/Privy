@@ -12,3 +12,22 @@ An information sharing application. This repository houses the iOS client for Pr
 7. If you're having trouble building this project after updating to Xcode 7.3 (with linker errors), simply run `carthage update` again.
   - You may need to run `sudo xcode-select --switch PATH_TO_XCODE_BETA` for Carthage to use the correct compiler version for its build.
 8. Build, run, enjoy.
+
+
+##### TODO
+
+- Finish force touch launch options
+- Peek and pop transitions
+- Linking from profile to various social networks
+- Ability to select what information to share
+- Finish profile page
+- Add ability to delete contact
+- Saving contact to native contacts app.
+
+##### Considerations
+
+- Split all data into business and personal sections
+- Auto-follow
+- Animate scanned QR code to history
+- Themes for business cards
+- Theming profile info based on social network colors
