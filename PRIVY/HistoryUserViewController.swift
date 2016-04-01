@@ -15,25 +15,36 @@ struct Row {
 }
 
 struct Section {
+    let title: String
     let rows: [Row]
 }
 
 class HistoryUserViewController: UIViewController {
+    @IBOutlet private weak var profileImageView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var detailLabel: UILabel!
+
     @IBOutlet private weak var tableView: UITableView!
 
-    var user: HistoryUser! {
+    var user: HistoryUser? {
         didSet {
             generateDataSource()
         }
     }
 
-    var accounts = [Section]() {
+    private var accounts = [Section]() {
         didSet {
             if let tableView = tableView {
                 tableView.reloadData()
             }
+
+            numberOfAccounts = accounts.reduce(0) {
+                $0 + $1.rows.count
+            }
         }
     }
+
+    internal private(set) var numberOfAccounts = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,25 +57,32 @@ class HistoryUserViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    /**
+     <#Description#>
+     */
     private func generateDataSource() {
         guard let user = user else {
+            accounts = [Section]()
             return
         }
 
         let json = Mapper<HistoryUser>().toJSON(user)
 
         var sections = [Section]()
-        for (key, value) in json {
-            if key == "basic" {
-                continue
-            }
+        for (key, value) in json as! [String: [String: String]] {
             var rows = [Row]()
 
-            for (subKey, subValue) in value as! [String: String] {
-                rows.append(Row(title: subKey, description: subValue))
+            for (subKey, subValue) in value {
+                if key == "basic" {
+                    if subKey == "" || subKey ==  {
+                        <#code#>
+                    }
+                } else {
+                    rows.append(Row(title: subKey, description: subValue))
+                }
             }
 
-            sections.append(Section(rows: rows))
+            sections.append(Section(title: key.capitalizedString, rows: rows))
         }
 
         accounts = sections
@@ -82,6 +100,10 @@ extension HistoryUserViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return accounts[section].rows.count
+    }
+
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return accounts[section].title
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
