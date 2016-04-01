@@ -68,6 +68,7 @@
 		00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */; };
 		00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */; };
 		00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */; };
+		00D4B7E01CAED6B8004FD84B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */; };
 		00F2B7311C83953300249975 /* RequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2B7301C83953300249975 /* RequestManagerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +158,7 @@
 		00BFF88A1C7A72D20027BFFE /* CaptureLayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureLayerView.swift; sourceTree = "<group>"; };
 		00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlinedTransformableView.swift; sourceTree = "<group>"; };
 		00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperationTests.swift; sourceTree = "<group>"; };
+		00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		00F2B7301C83953300249975 /* RequestManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +236,7 @@
 				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
 				0040F1811C4C64240076F176 /* RootTabBarController.swift */,
 				000B24BC1CAC7DB9001C6886 /* GradientView.swift */,
+				00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */,
 				00A7B95C1C7D552400E94C68 /* Login & Registration */,
 				00A7B9431C7D23EF00E94C68 /* Info */,
 				0040F1831C4C771D0076F176 /* Exchange */,
@@ -594,6 +597,7 @@
 				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,
+				00D4B7E01CAED6B8004FD84B /* CircularImageView.swift in Sources */,
 				0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */,
 				00A7B93E1C7BBB3100E94C68 /* AVCaptureDevice+Cameras.swift in Sources */,
 				0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */,
