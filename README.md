@@ -13,44 +13,6 @@ An information sharing application. This repository houses the iOS client for Pr
   - You may need to run `sudo xcode-select --switch PATH_TO_XCODE_BETA` for Carthage to use the correct compiler version for its build.
 8. Build, run, enjoy.
 
-### Features
-----------------------------------------------------------------------------
-
-##### TODO
-
-- Application Wide
-  - Finish force touch launch options
-  - Peek and pop transitions
-  - App icon
-  - Launch screen
-  - Launch to history via APNS
-- My Info Page
-  - Split all data into business and personal sections
-  - Ability to select what information to share
-  - Save profile picture
-  - Birthday/address/etc
-  - Upload profile picture to server
-- History Page
-  - List
-    - Add ability to delete contact
-    - Linking from profile to various social networks  
-    - Retrieve user's profile pictures from server
-  - Profiles
-    - Auto-follow
-    - Finish profile page
-    - Saving contact to native contacts app
-    - Theming profile info based on social network colors
-- Swap Page
-  - Toggle torch
-  - Better representation of contact being saved
-    - Animate scanned QR code to history
-- Settings Page
-  - Log out button
-  - Revoke subscriptions for individual users (maybe give this its own tab)
-  - Business card customization
-    - Select font
-    - Select color scheme (needs to be predefined for QR code contrast)
-
 
 ### API
 --------------------------------------------------------------------------------
