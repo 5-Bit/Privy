@@ -46,7 +46,7 @@ An information sharing application. This repository houses the iOS client for Pr
     - Animate scanned QR code to history
 - Settings Page
   - Log out button
-  - Revoke subscriptions for individual users
+  - Revoke subscriptions for individual users (maybe give this its own tab)
   - Business card customization
     - Select font
     - Select color scheme (needs to be predefined for QR code contrast)
