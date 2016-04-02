@@ -11,6 +11,8 @@
 		000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */; };
 		002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3E441CAC3B2F00456482 /* SettingsViewController.swift */; };
 		00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00317EF81C6D2F6500882EFC /* AVFoundation.framework */; };
+		003381D51CB03209002B3B99 /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */; };
+		003381D71CB0324C002B3B99 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */; };
 		0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1491C4C5FF30076F176 /* AppDelegate.swift */; };
 		0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F14B1C4C5FF30076F176 /* ViewController.swift */; };
 		0040F14F1C4C5FF30076F176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0040F14D1C4C5FF30076F176 /* Main.storyboard */; };
@@ -95,6 +97,8 @@
 		000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		002A3E441CAC3B2F00456482 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		00317EF81C6D2F6500882EFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
+		003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		0040F1461C4C5FF30076F176 /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F1491C4C5FF30076F176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0040F14B1C4C5FF30076F176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -247,6 +251,7 @@
 				0040F14D1C4C5FF30076F176 /* Main.storyboard */,
 				0040F1531C4C5FF30076F176 /* Assets.xcassets */,
 				0040F1551C4C5FF30076F176 /* LaunchScreen.storyboard */,
+				003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */,
 				00657BFD1CAF2AF1000645BD /* social.png */,
 				000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */,
 				00A908251CACC8F300A957C6 /* success.mp3 */,
@@ -286,6 +291,7 @@
 			children = (
 				00A7B9541C7D315600E94C68 /* String Extensions.swift */,
 				00A7B9681C7E099000E94C68 /* Misc Extensions.swift */,
+				003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */,
 				0040F17D1C4C612A0076F176 /* UIColor+AppColors.swift */,
 				0040F1921C4CB7490076F176 /* AVMediaType+Shim.swift */,
 			);
@@ -512,6 +518,7 @@
 				0040F1571C4C5FF30076F176 /* LaunchScreen.storyboard in Resources */,
 				00A908241CACC8ED00A957C6 /* failure.mp3 in Resources */,
 				0040F1541C4C5FF30076F176 /* Assets.xcassets in Resources */,
+				003381D71CB0324C002B3B99 /* NSDateTimeAgo.bundle in Resources */,
 				00A7B9591C7D31F400E94C68 /* ProfileFieldCell.xib in Resources */,
 				000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */,
 				00657BFE1CAF2AF1000645BD /* social.png in Resources */,
@@ -599,6 +606,7 @@
 				00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */,
 				00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */,
 				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,
+				003381D51CB03209002B3B99 /* NSDate+TimeAgo.swift in Sources */,
 				0040F1961C4CB7490076F176 /* AVMediaType+Shim.swift in Sources */,
 				0040F1911C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift in Sources */,
 				00D4B7E01CAED6B8004FD84B /* CircularImageView.swift in Sources */,

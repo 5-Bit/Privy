@@ -6,6 +6,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Pacifico.ttf">
@@ -453,12 +454,18 @@
                                                         <fontDescription key="fontDescription" name="Pacifico-Regular" family="Pacifico" pointSize="23"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="0.0" y="0.0" width="204" height="41"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mij-tO-iD8">
                                                         <rect key="frame" x="0.0" y="31" width="57" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="0.0" y="45" width="204" height="21"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6iu-tI-vj4">
                                                         <rect key="frame" x="0.0" y="56" width="57" height="21"/>
@@ -751,7 +758,10 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6nj-fI-vG9" kind="show" id="Jzg-lA-avg"/>
+                                    <segue destination="6nj-fI-vG9" kind="show" id="Jzg-lA-avg">
+                                        <segue key="commit" inheritsFrom="parent" id="74i-vg-dRX"/>
+                                        <segue key="preview" inheritsFrom="commit" id="40l-Yu-Pg5"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1012,6 +1022,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bbp-sI-lDH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.01176470588" green="0.12941176469999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.01176470588" green="0.12941176469999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -1035,5 +1046,8 @@
         <image name="swap" width="19" height="24"/>
         <image name="swap-selected" width="19" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Jzg-lA-avg"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -236,7 +236,7 @@ class ExchangeViewController: UIViewController {
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Fade
+        return .Slide
     }
 
 
