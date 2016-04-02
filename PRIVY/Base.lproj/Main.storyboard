@@ -732,7 +732,7 @@
                                             <rect key="frame" x="15" y="2" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -742,7 +742,7 @@
                                             <rect key="frame" x="15" y="22.5" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -781,32 +781,42 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yed-AV-2Bf">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNz-ds-LiD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNz-ds-LiD">
                                         <rect key="frame" x="20" y="49" width="42" height="21"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-nI-Kdi">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="social.png" translatesAutoresizingMaskIntoConstraints="NO" id="hpI-nI-Kdi">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="115.5" id="AH7-6T-fdO">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="120"/>
+                                            </constraint>
                                             <constraint firstAttribute="width" secondItem="hpI-nI-Kdi" secondAttribute="height" multiplier="1:1" id="mWM-yb-8pM"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="115.5" id="vxY-HN-Vwf">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="120"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="AH7-6T-fdO"/>
                                                 <exclude reference="mWM-yb-8pM"/>
+                                                <exclude reference="vxY-HN-Vwf"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
+                                                <include reference="AH7-6T-fdO"/>
                                                 <include reference="mWM-yb-8pM"/>
+                                                <include reference="vxY-HN-Vwf"/>
                                             </mask>
                                         </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAo-1J-D2b">
                                         <rect key="frame" x="20" y="20" width="42" height="21"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -831,8 +841,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="lLo-eA-dAo"/>
-                                        <exclude reference="G5j-xX-23S"/>
-                                        <exclude reference="QBb-gN-qwy"/>
                                         <exclude reference="1WO-Ni-k9G"/>
                                         <exclude reference="A5i-0o-dqe"/>
                                         <exclude reference="O9E-U0-juM"/>
@@ -840,6 +848,8 @@
                                         <exclude reference="SnJ-V4-LBU"/>
                                         <exclude reference="Uxf-46-fkY"/>
                                         <exclude reference="V8q-NJ-lHb"/>
+                                        <exclude reference="G5j-xX-23S"/>
+                                        <exclude reference="QBb-gN-qwy"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -850,8 +860,6 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="lLo-eA-dAo"/>
-                                        <include reference="G5j-xX-23S"/>
-                                        <include reference="QBb-gN-qwy"/>
                                         <include reference="1WO-Ni-k9G"/>
                                         <include reference="A5i-0o-dqe"/>
                                         <include reference="O9E-U0-juM"/>
@@ -859,12 +867,14 @@
                                         <include reference="SnJ-V4-LBU"/>
                                         <include reference="Uxf-46-fkY"/>
                                         <include reference="V8q-NJ-lHb"/>
+                                        <include reference="G5j-xX-23S"/>
+                                        <include reference="QBb-gN-qwy"/>
                                     </mask>
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="E4J-bw-aZj">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userInfoCell" textLabel="1dD-WD-sgN" detailTextLabel="dlS-sD-AJ6" style="IBUITableViewCellStyleValue1" id="0fX-1G-52e">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -877,7 +887,7 @@
                                                     <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -1021,6 +1031,7 @@
         <image name="history" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
         <image name="info-selected" width="25" height="25"/>
+        <image name="social.png" width="256" height="256"/>
         <image name="swap" width="19" height="24"/>
         <image name="swap-selected" width="19" height="24"/>
     </resources>
