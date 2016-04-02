@@ -147,5 +147,3 @@ extension HistoryUserViewController: UITableViewDataSource {
         return cell
     }
 }
-
-
