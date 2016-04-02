@@ -18,21 +18,39 @@ An information sharing application. This repository houses the iOS client for Pr
 
 ##### TODO
 
-- Finish force touch launch options
-- Peek and pop transitions
-- Linking from profile to various social networks
-- Ability to select what information to share
-- Finish profile page
-- Add ability to delete contact
-- Saving contact to native contacts app.
+- Application Wide
+  - Finish force touch launch options
+  - Peek and pop transitions
+  - App icon
+  - Launch screen
+  - Launch to history via APNS
+- My Info Page
+  - Split all data into business and personal sections
+  - Ability to select what information to share
+  - Save profile picture
+  - Birthday/address/etc
+  - Upload profile picture to server
+- History Page
+  - List
+    - Add ability to delete contact
+    - Linking from profile to various social networks  
+    - Retrieve user's profile pictures from server
+  - Profiles
+    - Auto-follow
+    - Finish profile page
+    - Saving contact to native contacts app
+    - Theming profile info based on social network colors
+- Swap Page
+  - Toggle torch
+  - Better representation of contact being saved
+    - Animate scanned QR code to history
+- Settings Page
+  - Log out button
+  - Revoke subscriptions for individual users
+  - Business card customization
+    - Select font
+    - Select color scheme (needs to be predefined for QR code contrast)
 
-##### Considerations
-
-- Split all data into business and personal sections
-- Auto-follow
-- Animate scanned QR code to history
-- Themes for business cards
-- Theming profile info based on social network colors
 
 ### API
 --------------------------------------------------------------------------------
