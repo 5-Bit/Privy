@@ -285,7 +285,7 @@ final class RequestManager {
         }
     }
 
-    func logout() {
+    func logout(completion: (success: Bool) -> Void) {
         
     }
 

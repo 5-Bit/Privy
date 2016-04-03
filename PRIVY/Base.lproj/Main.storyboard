@@ -28,7 +28,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="thO-lC-Fqv">
-                        <barButtonItem key="rightBarButtonItem" title="settings" id="NgK-W8-mPi">
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="NgK-W8-mPi">
                             <connections>
                                 <segue destination="NcF-Df-KhP" kind="showDetail" id="ghy-Ji-rEQ"/>
                             </connections>
@@ -57,6 +57,12 @@
                             <color key="tintColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="dismiss:" destination="wnK-n4-dHf" id="E44-RH-v0X"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="logout" id="86l-1Z-Zvm">
+                            <color key="tintColor" red="0.01176470588" green="0.12941176469999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="logout:" destination="wnK-n4-dHf" id="XSN-fj-Onk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1036,6 +1042,8 @@
         <image name="history" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
         <image name="info-selected" width="25" height="25"/>
+        <image name="logout" width="64" height="64"/>
+        <image name="settings" width="21" height="21"/>
         <image name="social.png" width="256" height="256"/>
         <image name="swap" width="19" height="24"/>
         <image name="swap-selected" width="19" height="24"/>
