@@ -19,11 +19,12 @@ import (
 var (
 	db     *sql.DB
 	config = struct {
-		StaticRoot string `json:"staticRoot"`
-		Cert       string `json:"cert"`
-		Key        string `json:"key"`
-		DbUserName string `json:"dbUserName`
-		DbPass     string `json:"dbPass"`
+		StaticRoot  string `json:"staticRoot"`
+		Cert        string `json:"cert"`
+		Key         string `json:"key"`
+		DbUserName  string `json:"dbUserName`
+		DbPass      string `json:"dbPass"`
+		UploadsRoot string `json:"uploadsRoot"`
 	}{}
 )
 
@@ -66,11 +67,15 @@ func main() {
 	//router.GET("/users/auth", checkAuth)     // TODO: Build method here.
 	router.GET("/users/info", lookupAndSubUUIDS)
 	router.GET("/users/refresh", refreshUUIDList)
+	router.DELETE("/users/subscription", deleteUUIDs)
 	router.POST("/users/registerapnsclient", registerPushNotificationClient)
 	router.POST("/users/info", saveUserJSON)
 	router.POST("/users/resetpassword", sendResetEmail)
+	router.POST("/users/image", saveUserImage)
+	router.GET("/users/image", getImageForUUID)
 	router.GET("/resetpassword/:changetoken", showResetPage)
 	router.POST("/resetpassword/:changetoken", processPasswordReset)
+	router.POST("/users/logout", invalidateSession)
 
 	server := handlers.CombinedLoggingHandler(os.Stdout, router)
 

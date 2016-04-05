@@ -9,6 +9,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	// "strconv"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 	"strings"
 
 	// FIXME: This import path will currently only work on this server.
@@ -631,4 +634,99 @@ func registerPushNotificationClient(w http.ResponseWriter, r *http.Request, p ht
 		return
 	}
 	w.WriteHeader(200)
+}
+
+func getImageForUUID(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	if err := r.ParseForm(); err != nil {
+		writeError(w, 400, "Bad form encoding")
+		return
+	}
+	uuidToCheck := r.FormValue("uuid")
+	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
+	if !ok || err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Invalid auth token")
+		return
+	}
+	var idToGrab int
+	err = db.QueryRow(
+		`Select user_id from privy_uuids 
+		inner join subscription on subscription.uuid = privy_uuids.id
+		where privy_uuids.id = $1::uuid
+		and subscription.user_id = $2
+		`,
+		uuidToCheck, userID).Scan(idToGrab)
+	if err == sql.ErrNoRows {
+		fmt.Println("Search attempted without subscription")
+		writeError(w, 404, "Image not found")
+		return
+	}
+	if err != nil {
+		fmt.Println("Database error: ", err.Error())
+		writeError(w, 500, "Server error!")
+		return
+	}
+	path := filepath.Join(config.UploadsRoot, fmt.Sprint(userID))
+	if _, err := os.Stat(path + ".png"); err == nil {
+		http.ServeFile(w, r, path+".png")
+		return
+	}
+	if _, err := os.Stat(path + ".jpg"); err == nil {
+		http.ServeFile(w, r, path+".jpg")
+	}
+	w.WriteHeader(400)
+}
+
+func saveUserImage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	if err := r.ParseMultipartForm(1048567); err != nil {
+		writeError(w, 400, "Bad form encoding")
+		return
+	}
+	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
+	if !ok || err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Invalid auth token")
+		return
+	}
+	file, fileHeader, err := r.FormFile("picture")
+	if err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Problem uploading image")
+		return
+	}
+	data, err := ioutil.ReadAll(file)
+	if err != nil {
+		fmt.Println(err.Error())
+		writeError(w, 500, "Server error!")
+		return
+	}
+	ext := filepath.Ext(fileHeader.Filename)
+	err = ioutil.WriteFile(filepath.Join(config.UploadsRoot, fmt.Sprint(userID, ".", ext)), data, os.ModePerm|0755)
+	if err != nil {
+		fmt.Println(err.Error())
+		writeError(w, 500, "Server error!")
+		return
+	}
+	w.WriteHeader(200)
+}
+
+func deleteUUIDs(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	if err := r.ParseForm(); err != nil {
+		writeError(w, 400, "Bad form encoding")
+		return
+	}
+	uuidsToCheck := r.FormValue("uuids")
+	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
+	if !ok || err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Invalid auth token")
+		return
+	}
+	_, err = db.Exec(`Delete from subscription 
+	where uuid::text = ANY(string_to_array($2, ',')) and user_id = $1`, userID, uuidsToCheck)
+	if err != nil {
+		writeError(w, 500, "Server error")
+		return
+	}
+
 }
