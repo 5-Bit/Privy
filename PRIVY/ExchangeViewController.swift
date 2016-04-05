@@ -178,10 +178,15 @@ class ExchangeViewController: UIViewController {
 
         var flattened = candidates.flatMap { $0 }
 
-        primaryDetailLabel.text = flattened.removeFirst()
-        secondaryDetailLabel.text = flattened.removeFirst()
-        ternaryDetailLabel.text = flattened.removeFirst()
+        let fields = [primaryDetailLabel, secondaryDetailLabel, ternaryDetailLabel]
 
+        for field in fields {
+            if flattened.count > 0 {
+                field.text = flattened.removeFirst()
+            } else {
+                field.text = nil
+            }
+        }
 
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         captureSession.startRunning()
@@ -231,7 +236,7 @@ class ExchangeViewController: UIViewController {
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Fade
+        return .Slide
     }
 
 

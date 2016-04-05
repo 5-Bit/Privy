@@ -43,4 +43,10 @@ class SettingsViewController: UIViewController {
     @IBAction private func dismiss(button: UIBarButtonItem) {
         presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
+
+    @IBAction private func logout(button: UIBarButtonItem) {
+        RequestManager.sharedManager.logout { success in
+
+        }
+    }
 }

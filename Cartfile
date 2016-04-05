@@ -8,7 +8,7 @@ github "ninjaprox/NVActivityIndicatorView"
 github "ra1028/Former"
 
 # JSON de/serialization
-github "Hearst-DD/ObjectMapper" ~> 1.1
+github "Hearst-DD/ObjectMapper" ~> 1.2
 
 # Local data encryption
 github "RNCryptor/RNCryptor" "RNCryptor-4.0.0"
