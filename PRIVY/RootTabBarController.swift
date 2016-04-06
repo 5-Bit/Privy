@@ -14,14 +14,18 @@ class RootTabBarController: UITabBarController {
         super.viewDidLoad()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        if !PrivyUser.currentUser.isLoggedIn {
+            let loginViewController = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController")
+            self.navigationController?.pushViewController(loginViewController, animated: true)
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     /*

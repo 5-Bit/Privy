@@ -46,7 +46,18 @@ class SettingsViewController: UIViewController {
 
     @IBAction private func logout(button: UIBarButtonItem) {
         RequestManager.sharedManager.logout { success in
+            LocalStorage.defaultStorage.saveHistory([HistoryUser]())
+            dispatch_async(dispatch_get_main_queue()) {
+                LocalStorage.defaultStorage.saveUser(nil, completion: { (error) in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        PrivyUser.currentUser.registrationInformation = nil
 
+                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: {
+
+                        })
+                    }
+                })
+            }
         }
     }
 }
