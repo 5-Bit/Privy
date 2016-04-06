@@ -110,6 +110,13 @@ struct InfoTypes: Mappable {
         var emailAddress: String?
         var phoneNumber: String?
         var profilePictureUrl: String?
+        var birthDay: NSDate?
+        var addressLine1: String?
+        var addressLine2: String?
+        var city: String?
+        var state: String?
+        var country: String?
+        var postalCode: String?
 
         init() {
 
@@ -120,11 +127,18 @@ struct InfoTypes: Mappable {
         }
 
         mutating func mapping(map: Map) {
-            firstName               <-  map["firstName"]
-            lastName                <-  map["lastName"]
-            emailAddress            <-  map["emailAddress"]
-            phoneNumber             <-  map["phoneNumber"]
-            profilePictureUrl       <-  map["profilePictureUrl"]
+            firstName               <-  map["First Name"]
+            lastName                <-  map["Last Name"]
+            emailAddress            <-  map["Email Address"]
+            phoneNumber             <-  map["Phone Number"]
+            profilePictureUrl       <-  map["Profile Picture URL"]
+            birthDay                <-  (map["Birthday"], DateTransform())
+            addressLine1            <-  map["Address Line 1"]
+            addressLine2            <-  map["Address Line 2"]
+            city                    <-  map["City"]
+            state                   <-  map["State"]
+            country                 <-  map["Country"]
+            postalCode              <-  map["Zip Code"]
         }
     }
 
