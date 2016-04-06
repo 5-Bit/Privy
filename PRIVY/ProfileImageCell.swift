@@ -15,6 +15,7 @@ final class ProfileImageCell: UITableViewCell, LabelFormableRow {
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
