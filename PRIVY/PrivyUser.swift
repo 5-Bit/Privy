@@ -109,6 +109,7 @@ struct InfoTypes: Mappable {
         var lastName: String?
         var emailAddress: String?
         var phoneNumber: String?
+        var profilePictureUrl: String?
 
         init() {
 
@@ -119,10 +120,11 @@ struct InfoTypes: Mappable {
         }
 
         mutating func mapping(map: Map) {
-            firstName       <-  map["firstName"]
-            lastName        <-  map["lastName"]
-            emailAddress    <-  map["emailAddress"]
-            phoneNumber     <-  map["phoneNumber"]
+            firstName               <-  map["firstName"]
+            lastName                <-  map["lastName"]
+            emailAddress            <-  map["emailAddress"]
+            phoneNumber             <-  map["phoneNumber"]
+            profilePictureUrl       <-  map["profilePictureUrl"]
         }
     }
 
