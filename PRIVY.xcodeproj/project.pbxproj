@@ -32,6 +32,8 @@
 		0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1951C4CB7490076F176 /* QRScanOperation.swift */; };
 		0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */; };
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
+		00737FA81CB2DDB900C4FECF /* FlashOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00737FA61CB2DDB900C4FECF /* FlashOn@3x.png */; };
+		00737FA91CB2DDB900C4FECF /* FlashOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00737FA71CB2DDB900C4FECF /* FlashOff@3x.png */; };
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009381E51CA4F43C0045CCAE /* Locksmith.framework */; };
@@ -126,6 +128,8 @@
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
+		00737FA61CB2DDB900C4FECF /* FlashOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlashOn@3x.png"; sourceTree = "<group>"; };
+		00737FA71CB2DDB900C4FECF /* FlashOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlashOff@3x.png"; sourceTree = "<group>"; };
 		009381E51CA4F43C0045CCAE /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		00A09FC51C849BFF00A47B2E /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 		00A09FC71C849D4800A47B2E /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -253,6 +257,8 @@
 				000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */,
 				00A908251CACC8F300A957C6 /* success.mp3 */,
 				00A908231CACC8ED00A957C6 /* failure.mp3 */,
+				00737FA61CB2DDB900C4FECF /* FlashOn@3x.png */,
+				00737FA71CB2DDB900C4FECF /* FlashOff@3x.png */,
 				0040F1581C4C5FF30076F176 /* Info.plist */,
 				0040F1501C4C5FF30076F176 /* PRIVY.xcdatamodeld */,
 			);
@@ -519,6 +525,8 @@
 				00A7B9591C7D31F400E94C68 /* ProfileFieldCell.xib in Resources */,
 				000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */,
 				00A908261CACC8F300A957C6 /* success.mp3 in Resources */,
+				00737FA91CB2DDB900C4FECF /* FlashOff@3x.png in Resources */,
+				00737FA81CB2DDB900C4FECF /* FlashOn@3x.png in Resources */,
 				0040F14F1C4C5FF30076F176 /* Main.storyboard in Resources */,
 				00A7B95A1C7D31F400E94C68 /* ProfileImageCell.xib in Resources */,
 			);
