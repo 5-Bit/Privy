@@ -41,6 +41,7 @@ class ExchangeViewController: UIViewController {
     private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate)]()
 
     private var player: AVAudioPlayer?
+    private var lastKnownLocation: CLLocation?
 
     /*
      Property observers on qrCodeImage and qrCodeImageView guarentee that the QR code image
@@ -198,8 +199,6 @@ class ExchangeViewController: UIViewController {
         #else
         toggleCameraButton.hidden = true
         #endif
-
-        locationManager.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -210,6 +209,11 @@ class ExchangeViewController: UIViewController {
         }
 
         qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(ExchangeViewController.qrTimerFired(_:)), userInfo: nil, repeats: true)
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -223,6 +227,7 @@ class ExchangeViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         captureSession.stopRunning()
+        locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
     }
 
@@ -368,18 +373,14 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         let color: CGColor
         if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
             if firstDetection {
-                for uuid in mapObject.uuids {
-                    print(uuid)
-                }
-
-                RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, completion: { (user, errorStatus) in
+                RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, inLocation: lastKnownLocation) { (user, errorStatus) in
                     if let user = user, history = self.tabBarController?.viewControllers?.last as? HistoryTableViewController {
                         history.datasource.append(user)
                         print("adding to history")
                     }
 
                     print(user?.basic.firstName)
-                })
+                }
             }
 
             color = UIColor.greenColor().colorWithAlphaComponent(0.5).CGColor
@@ -417,6 +418,10 @@ extension ExchangeViewController: CLLocationManagerDelegate {
         case .Restricted:
             showLocationErrorDialogWithMessage("Location unavailable. If you want to use this feature, ask your parent to disable this restriction.")
         }
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        lastKnownLocation = newLocation
     }
 
     private func showLocationErrorDialogWithMessage(message: String) {

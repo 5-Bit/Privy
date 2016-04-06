@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import CoreLocation
 
 enum HttpMethod: String {
     case POST, GET, PUT, PATCH, DELETE
@@ -150,17 +151,27 @@ final class RequestManager {
      <#Description#>
 
      - parameter uuids:      <#uuids description#>
+     - parameter location:   <#location description#>
      - parameter completion: <#completion description#>
      */
-    func attemptLookupByUUIDs(uuids: [String], completion: (user: InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
+    func attemptLookupByUUIDs(uuids: [String], inLocation location: CLLocation?, completion: (user: InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
         guard let sessionId = PrivyUser.currentUser.registrationInformation?.sessionid else {
             return
         }
         
-        let queryItems = [
+        var queryItems = [
             NSURLQueryItem(name: "uuids", value: uuids.joinWithSeparator(",")),
-            NSURLQueryItem(name: "sessionid", value: sessionId)
+            NSURLQueryItem(name: "sessionid", value: sessionId),
         ]
+
+        if let location = location {
+            let coordinates = [
+                NSURLQueryItem(name: "latitude", value: String(location.coordinate.latitude)),
+                NSURLQueryItem(name: "longitude", value: String(location.coordinate.longitude))
+            ]
+
+            queryItems.appendContentsOf(coordinates)
+        }
         
         let url = RequestManager.Static.host.URLByAppendingPathComponent("/users/info").urlByAppendingQueryItems(queryItems)
 
