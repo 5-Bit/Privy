@@ -84,5 +84,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Privy uses your location to keep track of where you met people</string>
 </dict>
 </plist>
