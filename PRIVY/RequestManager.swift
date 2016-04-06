@@ -6,7 +6,7 @@
 //  Copyright © 2016 Michael MacCallum. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import ObjectMapper
 
 enum HttpMethod: String {
@@ -293,7 +293,7 @@ final class RequestManager {
 
         let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/logout")
         let queryItems = [
-            NSURLQueryItem(name: "sessionid ", value: session)
+            NSURLQueryItem(name: "sessionid", value: session)
         ]
 
         let url = baseUrl.urlByAppendingQueryItems(queryItems)
@@ -311,6 +311,52 @@ final class RequestManager {
 
             success = response.statusCode == 200
         }
+    }
+
+    func uploadUserProfilePicture(image: UIImage?, completion: (success: Bool) -> Void) {
+        guard let sessionId = PrivyUser.currentUser.userInfo.sessionid else {
+//            completionOnMainThread(false, completion: completion)
+            return
+        }
+
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/image")
+        let queryItems = [
+            NSURLQueryItem(name: "sessionid", value: sessionId)
+        ]
+
+        let url = baseUrl.urlByAppendingQueryItems(queryItems)
+
+        let request = NSMutableURLRequest(
+            URL: url,
+            cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
+            timeoutInterval: Static.defaultTimeout
+        )
+
+        let imageData = image == nil ? nil : UIImagePNGRepresentation(image!)
+
+        let uploadTask = session.uploadTaskWithRequest(request, fromData: imageData) { data, response, error in
+
+            guard let response = response as? NSHTTPURLResponse else {
+                self.completionOnMainThread(false, completion: completion)
+                return
+            }
+
+            print(data)
+            print(error)
+
+            self.completionOnMainThread(true, completion: completion)
+        }
+
+        uploadTask.resume()
+    }
+
+    func fetchProfilePictureForUser(uuid: String, completion: (image: UIImage?) -> Void) {
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/image")
+        let queryItems = [
+            NSURLQueryItem(name: "uuid", value: uuid)
+        ]
+
+        let url = baseUrl.urlByAppendingQueryItems(queryItems)
     }
 
     func requestPasswordReset(email: String, completion: (success: Bool) -> Void) {
