@@ -24,13 +24,13 @@ final class BasicInfoViewController: FormViewController {
     
     private lazy var imageRow: LabelRowFormer<ProfileImageCell> = {
         LabelRowFormer<ProfileImageCell>(instantiateType: .Nib(nibName: "ProfileImageCell")) { _ in
-//            $0.iconView.image = Profile.sharedInstance.image
-            }.configure {
-                $0.text = "Choose profile image from library"
-                $0.rowHeight = 60
-            }.onSelected { [weak self] _ in
-                self?.former.deselect(true)
-                self?.presentImagePicker()
+//          $0.iconView.image = Profile.sharedInstance.image
+        }.configure {
+            $0.text = "Choose profile image from library"
+            $0.rowHeight = 60
+        }.onSelected { [weak self] _ in
+            self?.former.deselect(true)
+            self?.presentImagePicker()
         }
     }()
     
@@ -124,8 +124,13 @@ extension BasicInfoViewController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         picker.dismissViewControllerAnimated(true, completion: nil)
 //        Profile.sharedInstance.image = image
+        imageRow.cell.progressIndicator.startAnimating()
         imageRow.cellUpdate {
             $0.iconView.image = image
+        }
+
+        RequestManager.sharedManager.uploadUserProfilePicture(image) { success in
+            self.imageRow.cell.progressIndicator.stopAnimating()
         }
     }
 }
