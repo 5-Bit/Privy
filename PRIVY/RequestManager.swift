@@ -286,7 +286,31 @@ final class RequestManager {
     }
 
     func logout(completion: (success: Bool) -> Void) {
-        
+        guard let session = PrivyUser.currentUser.userInfo.sessionid else {
+            completionOnMainThread(false, completion: completion)
+            return
+        }
+
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/logout")
+        let queryItems = [
+            NSURLQueryItem(name: "sessionid ", value: session)
+        ]
+
+        let url = baseUrl.urlByAppendingQueryItems(queryItems)
+
+
+        handleRequest(url) { (data, response, error) in
+            var success = false
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
+
+            guard let response = response as? NSHTTPURLResponse where error == nil else {
+                return
+            }
+
+            success = response.statusCode == 200
+        }
     }
 
     func requestPasswordReset(email: String, completion: (success: Bool) -> Void) {

@@ -256,6 +256,12 @@ class ExchangeViewController: UIViewController {
         }
     }
 
+    @IBAction private func flashButtonTapped(button: UIButton) {
+        #if os(iOS) && !(arch(i386) || arch(x86_64))
+            
+        #endif
+    }
+
     /**
      <#Description#>
      

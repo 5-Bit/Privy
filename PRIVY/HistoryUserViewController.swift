@@ -8,6 +8,8 @@
 
 import UIKit
 import ObjectMapper
+import Contacts
+import ContactsUI
 
 struct Row {
     let title: String
@@ -52,11 +54,78 @@ class HistoryUserViewController: UIViewController {
 
         generateDataSource()
         tableView.tableHeaderView?.frame.size.height = 200
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .Save,
+            target: self,
+            action: #selector(HistoryUserViewController.addButtonTapped(_:))
+        )
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @objc private func addButtonTapped(barButton: UIBarButtonItem) {
+        let alertController = UIAlertController(
+            title: "",
+            message: "How would you like to save this contact",
+            preferredStyle: .ActionSheet
+        )
+
+        let addNewAction = UIAlertAction(
+            title: "Create New Contact",
+            style: UIAlertActionStyle.Default) { [unowned self] action in
+                self.showSavePicker()
+        }
+
+        let addToExistingAction = UIAlertAction(
+            title: "Add to Existing Contact",
+            style: .Default) { [unowned self] action in
+                self.showContactPicker()
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel,
+            handler: nil
+        )
+
+        alertController.addAction(addNewAction)
+        alertController.addAction(addToExistingAction)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    private func showSavePicker() {
+        guard let user = user else {
+            return
+        }
+
+        let contact = CNMutableContact()
+
+        contact.givenName = user.basic.firstName ?? ""
+        contact.familyName = user.basic.lastName ?? ""
+
+        contact.emailAddresses = extractEmails()
+
+
+        let picker = CNContactViewController(forNewContact: contact)
+        picker.delegate = self
+
+        let pickerNavigation = UINavigationController(rootViewController: picker)
+        pickerNavigation.view.tintColor = UIColor.privyDarkBlueColor
+        presentViewController(pickerNavigation, animated: true, completion: nil)
+    }
+
+    private func showContactPicker() {
+
+        let picker = CNContactViewController()
+        picker.delegate = self
+
+        presentViewController(picker, animated: true, completion: nil)
     }
 
     /**
@@ -103,6 +172,24 @@ class HistoryUserViewController: UIViewController {
             $0.title < $1.title
         }
     }
+
+    private func extractEmails() -> [CNLabeledValue] {
+        var emails = [CNLabeledValue]()
+
+        guard let user = user else {
+            return emails
+        }
+
+        if !user.basic.emailAddress.isNilOrEmpty {
+            emails.append(CNLabeledValue(label: CNLabelHome, value: user.basic.emailAddress!))
+        }
+
+        if !user.business.emailAddress.isNilOrEmpty {
+            emails.append(CNLabeledValue(label: CNLabelWork, value: user.business.emailAddress!))
+        }
+
+        return emails
+    }
 }
 
 extension HistoryUserViewController: UITableViewDelegate {
@@ -146,4 +233,23 @@ extension HistoryUserViewController: UITableViewDataSource {
 
         return cell
     }
+}
+
+extension HistoryUserViewController: CNContactViewControllerDelegate {
+    func contactViewController(viewController: CNContactViewController, didCompleteWithContact contact: CNContact?) {
+        viewController.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+
+        if let contact = contact as? CNMutableContact { // Selected done
+            saveContact(contact)
+        }
+    }
+
+    private func saveContact(contact: CNMutableContact) {
+        let saveRequest = CNSaveRequest()
+        saveRequest.addContact(contact, toContainerWithIdentifier: nil)
+    }
+
+//    func contactViewController(viewController: CNContactViewController, shouldPerformDefaultActionForContactProperty property: CNContactProperty) -> Bool {
+//        
+//    }
 }
