@@ -36,11 +36,12 @@ class HistoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-         clearsSelectionOnViewWillAppear = true
+        tableView.allowsSelectionDuringEditing = false
+        tableView.allowsMultipleSelection = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        clearsSelectionOnViewWillAppear = true
+
+        navigationItem.rightBarButtonItem = self.editButtonItem()
 
 
         let refreshControl = UIRefreshControl()
@@ -133,13 +134,17 @@ class HistoryTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+
+        }
+    }
 
     /*
     // Override to support editing the table view.
