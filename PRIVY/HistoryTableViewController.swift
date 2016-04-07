@@ -94,7 +94,9 @@ class HistoryTableViewController: UITableViewController {
 
     private func countInfo(user: HistoryUser) -> Int {
         let types = [
-            user.basic.emailAddress, user.basic.phoneNumber, user.blogging.medium,
+            user.basic.emailAddress, user.basic.phoneNumber, String(user.basic.birthDay),
+            user.basic.addressLine1, user.basic.addressLine2, user.basic.city, user.basic.country,
+            user.basic.postalCode, user.blogging.medium,
             user.blogging.tumblr, user.blogging.website, user.blogging.wordpress,
             user.business.emailAddress, user.business.linkedin, user.business.phoneNumber,
             user.developer.bitbucket, user.developer.github, user.developer.stackoverflow,

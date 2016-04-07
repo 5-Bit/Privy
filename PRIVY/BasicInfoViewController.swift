@@ -85,16 +85,14 @@ final class BasicInfoViewController: FormViewController {
         let birthdayRow = InlineDatePickerRowFormer<ProfileLabelCell>(instantiateType: .Nib(nibName: "ProfileLabelCell")) {
             $0.titleLabel.text = "Birthday"
         }.configure {
-            print($0.date)
-            $0.date = NSDate()
-//                $0.date = Profile.sharedInstance.birthDay ?? NSDate()
+            $0.date = PrivyUser.currentUser.userInfo.basic.birthDay ?? NSDate()
         }.inlineCellSetup {
                 $0.datePicker.datePickerMode = .Date
         }.displayTextFromDate {
                 return String.mediumDateNoTime($0)
         }.onDateChanged {
             print($0)
-//                Profile.sharedInstance.birthDay = $0
+            PrivyUser.currentUser.userInfo.basic.birthDay = $0
         }
 
         let addressLine1Row = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -102,9 +100,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Address Line 1"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.addressLine1
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.addressLine1 = $0
         }
 
         let addressLine2Row = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -112,9 +110,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Address Line 2"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.addressLine2
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.addressLine2 = $0
         }
 
         let cityRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -122,9 +120,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Add your city"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.city
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.city = $0
         }
 
         let stateRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -132,9 +130,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Add your state"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.state
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.state = $0
         }
 
         let countryRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -142,9 +140,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.inputAccessoryView = self?.formerInputAccessoryView
         }.configure {
             $0.placeholder = "Add your country"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.country
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.country = $0
         }
 
         let postalCodeRow = TextFieldRowFormer<ProfileFieldCell>(instantiateType: .Nib(nibName: "ProfileFieldCell")) { [weak self] in
@@ -153,9 +151,9 @@ final class BasicInfoViewController: FormViewController {
             $0.textField.keyboardType = .NumberPad
         }.configure {
             $0.placeholder = "Add your zip code"
-            $0.text = PrivyUser.currentUser.userInfo.basic.phoneNumber
+            $0.text = PrivyUser.currentUser.userInfo.basic.postalCode
         }.onTextChanged {
-            PrivyUser.currentUser.userInfo.basic.phoneNumber = $0
+            PrivyUser.currentUser.userInfo.basic.postalCode = $0
         }
 
         // Create Headers

@@ -140,31 +140,37 @@ class HistoryUserViewController: UIViewController {
         let json = Mapper<HistoryUser>().toJSON(user)
 
         var sections = [Section]()
-        for (key, value) in json as! [String: [String: String]] {
+        for (key, value) in json as! [String: [String: AnyObject]] {
             var rows = [Row]()
 
             if key == "basic" {
                 var names = [String]()
 
-                if let firstName = value["firstName"] {
-                    names.append(firstName)
-                }
-
-                if let lastName = value["lastName"] {
-                    names.append(lastName)
+                if let firstName = value["First Name"] as? String {
+                    if let lastName = value["Last Name"] as? String {
+                        names.append(firstName)
+                        names.append(lastName)
+                    } else {
+                        names.append(firstName)
+                    }
+                } else {
+                    if let lastName = value["Last Name"] as? String {
+                        names.append(lastName)
+                    }
                 }
 
                 nameLabel.text = names.joinWithSeparator(" ")
             }
 
-            for (subKey, subValue) in value {
-                if key != "basic" || (subKey != "firstName" && subKey != "lastName") {
-                    rows.append(Row(title: subKey.capitalizedString, description: subValue))
+            for (subKey, subValue) in value where subKey != "Birthday" {
+                if key != "basic" || (subKey != "First Name" && subKey != "Last Name") {
+                    let row = Row(title: subKey.capitalizedString, description: subValue as! String)
+                    rows.append(row)
                 }
             }
 
             if !rows.isEmpty {
-                sections.append(Section(title: key.capitalizedString, rows: rows))
+                sections.append(Section(title: key, rows: rows))
             }
         }
 
