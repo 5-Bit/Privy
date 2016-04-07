@@ -224,8 +224,6 @@ final class LocalStorage {
             inDomains: .UserDomainMask
         )
 
-        print(paths.first)
-
         return paths[0]
     }
 
