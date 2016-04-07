@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import CoreGraphics
 
 /**
  *  @author Michael MacCallum, 2016-02-28 15:02:49-0500
@@ -103,6 +104,22 @@ final class PrivyUser: Mappable {
  */
 struct InfoTypes: Mappable {
     var sessionid: String?
+
+    var location: Location?
+
+    struct Location: Mappable {
+        var latitude: CGFloat?
+        var longitude: CGFloat?
+
+        init?(_ map: Map) {
+            mapping(map)
+        }
+
+        mutating func mapping(map: Map) {
+            latitude     <- map["latitude"]
+            longitude    <- map["longitude"]
+        }
+    }
 
     struct Basic: Mappable {
         var firstName: String?
@@ -277,5 +294,6 @@ struct InfoTypes: Mappable {
         developer   <-  map["developer"]
         media       <-  map["media"]
         blogging    <-  map["blogging"]
+        location    <-  map["location"]
     }
 }
