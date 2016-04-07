@@ -13,21 +13,23 @@ typealias HistoryUser = InfoTypes
 class HistoryTableViewController: UITableViewController {
     var datasource = LocalStorage.defaultStorage.loadHistory() {
         didSet {
-            if tabBarController?.tabBar.selectedItem === navigationController?.tabBarItem {
-                if oldValue.count == datasource.count {
-                    tableView.reloadSections(
-                        NSIndexSet(index: 0),
-                        withRowAnimation: .None
-                    )
-                } else {
-                    tableView.reloadSections(
-                        NSIndexSet(index: 0),
-                        withRowAnimation: .Top
-                    )
+            dispatch_async(dispatch_get_main_queue()) {
+                if self.tabBarController?.tabBar.selectedItem === self.navigationController?.tabBarItem {
+                    if oldValue.count == self.datasource.count {
+                        self.tableView.reloadSections(
+                            NSIndexSet(index: 0),
+                            withRowAnimation: .None
+                        )
+                    } else {
+                        self.tableView.reloadSections(
+                            NSIndexSet(index: 0),
+                            withRowAnimation: .Top
+                        )
+                    }
                 }
-            }
 
-            LocalStorage.defaultStorage.saveHistory(datasource)
+                LocalStorage.defaultStorage.saveHistory(self.datasource)
+            }
         }
     }
 
@@ -53,7 +55,9 @@ class HistoryTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+
+        datasource = LocalStorage.defaultStorage.loadHistory()
+        print(datasource)
         tableView.reloadData()
     }
 
