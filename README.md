@@ -10,5 +10,5 @@ An information sharing application. This repository houses the iOS client for Pr
 5. Run `carthage update`
 6. Open the Xcode project file (Privy.xcodeproj)
 7. If you're having trouble building this project after updating to Xcode 7.3 (with linker errors), simply run `carthage update` again.
-  - You may need to run `sudo xcode-select --switch PATH_TO_XCODE_BETA` for Carthage to use the correct compiler version for its build.
+  - You may need to run `sudo xcode-select --switch PATH_TO_XCODE_7.3` for Carthage to use the correct compiler version for its build.
 8. Build, run, enjoy.

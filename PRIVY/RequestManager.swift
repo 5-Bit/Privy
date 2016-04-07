@@ -156,6 +156,7 @@ final class RequestManager {
      */
     func attemptLookupByUUIDs(uuids: [String], inLocation location: CLLocation?, completion: (user: InfoTypes?, errorStatus: PrivyErrorStatus) -> Void) {
         guard let sessionId = PrivyUser.currentUser.registrationInformation?.sessionid else {
+            completionOnMainThread(nil, errorStatus: PrivyErrorStatus.UnknownError, completion: completion)
             return
         }
         
