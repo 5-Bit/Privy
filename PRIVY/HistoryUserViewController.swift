@@ -55,11 +55,20 @@ class HistoryUserViewController: UIViewController {
         generateDataSource()
         tableView.tableHeaderView?.frame.size.height = 200
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        let locationButton = UIBarButtonItem(
+            image: UIImage(named: "LocationOn"),
+            style: UIBarButtonItemStyle.Plain,
+            target: self,
+            action: #selector(HistoryUserViewController.locationButtonTapped(_:))
+        )
+
+        let saveButton = UIBarButtonItem(
             barButtonSystemItem: .Save,
             target: self,
             action: #selector(HistoryUserViewController.addButtonTapped(_:))
         )
+
+        navigationItem.rightBarButtonItems = [saveButton, locationButton]
     }
 
     override func previewActionItems() -> [UIPreviewActionItem] {
@@ -85,6 +94,10 @@ class HistoryUserViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    @objc private func locationButtonTapped(barButton: UIBarButtonItem) {
+        performSegueWithIdentifier("showLocations", sender: self)
     }
 
     @objc private func addButtonTapped(barButton: UIBarButtonItem) {
