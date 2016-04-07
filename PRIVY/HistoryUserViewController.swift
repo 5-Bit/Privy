@@ -62,6 +62,26 @@ class HistoryUserViewController: UIViewController {
         )
     }
 
+    override func previewActionItems() -> [UIPreviewActionItem] {
+        var actions = [UIPreviewActionItem]()
+
+        actions.append(UIPreviewAction(
+            title: "Refresh",
+            style: UIPreviewActionStyle.Default,
+            handler: { (action, viewController) in
+                print("handled")
+        }))
+
+        actions.append(UIPreviewAction(
+            title: "Delete",
+            style: UIPreviewActionStyle.Destructive,
+            handler: { (action, viewController) in
+                print("handled")
+        }))
+
+        return actions
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
