@@ -1030,6 +1030,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rPq-Ka-ErC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Vuy-2v-Dc8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcV-zA-Z2N">
@@ -1051,10 +1052,10 @@
                                 <exclude reference="fcV-zA-Z2N"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="RWh-by-4Oz"/>
                                 <exclude reference="82c-p6-GAC"/>
                                 <exclude reference="OaW-ph-k5H"/>
                                 <exclude reference="d4I-tk-6FE"/>
-                                <exclude reference="RWh-by-4Oz"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1062,10 +1063,10 @@
                                 <include reference="fcV-zA-Z2N"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="RWh-by-4Oz"/>
                                 <include reference="82c-p6-GAC"/>
                                 <include reference="OaW-ph-k5H"/>
                                 <include reference="d4I-tk-6FE"/>
-                                <include reference="RWh-by-4Oz"/>
                             </mask>
                         </variation>
                     </view>
