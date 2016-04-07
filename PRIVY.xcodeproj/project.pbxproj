@@ -10,6 +10,8 @@
 		000B24BD1CAC7DB9001C6886 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B24BC1CAC7DB9001C6886 /* GradientView.swift */; };
 		000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */; };
 		002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3E441CAC3B2F00456482 /* SettingsViewController.swift */; };
+		002FF4241CB6CDD300DCBDA5 /* DynamicHeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002FF4231CB6CDD300DCBDA5 /* DynamicHeightCell.swift */; };
+		002FF4261CB6CDDC00DCBDA5 /* DynamicHeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002FF4251CB6CDDC00DCBDA5 /* DynamicHeightCell.xib */; };
 		00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00317EF81C6D2F6500882EFC /* AVFoundation.framework */; };
 		003381D51CB03209002B3B99 /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */; };
 		003381D71CB0324C002B3B99 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */; };
@@ -96,6 +98,8 @@
 		000B24BC1CAC7DB9001C6886 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		002A3E441CAC3B2F00456482 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		002FF4231CB6CDD300DCBDA5 /* DynamicHeightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicHeightCell.swift; sourceTree = "<group>"; };
+		002FF4251CB6CDDC00DCBDA5 /* DynamicHeightCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DynamicHeightCell.xib; sourceTree = "<group>"; };
 		00317EF81C6D2F6500882EFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
 		003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
@@ -395,9 +399,11 @@
 				00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */,
 				00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */,
 				00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */,
+				002FF4231CB6CDD300DCBDA5 /* DynamicHeightCell.swift */,
 				00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */,
 				00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */,
 				00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */,
+				002FF4251CB6CDDC00DCBDA5 /* DynamicHeightCell.xib */,
 			);
 			name = "Former Support";
 			sourceTree = "<group>";
@@ -515,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A7B95B1C7D31F400E94C68 /* ProfileLabelCell.xib in Resources */,
+				002FF4261CB6CDDC00DCBDA5 /* DynamicHeightCell.xib in Resources */,
 				0040F1571C4C5FF30076F176 /* LaunchScreen.storyboard in Resources */,
 				00A908241CACC8ED00A957C6 /* failure.mp3 in Resources */,
 				0040F1541C4C5FF30076F176 /* Assets.xcassets in Resources */,
@@ -603,6 +610,7 @@
 				00A7B9461C7D245400E94C68 /* InfoViewController.swift in Sources */,
 				00A7B9521C7D30C900E94C68 /* ProfileFieldCell.swift in Sources */,
 				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
+				002FF4241CB6CDD300DCBDA5 /* DynamicHeightCell.swift in Sources */,
 				00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */,
 				00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */,
 				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,

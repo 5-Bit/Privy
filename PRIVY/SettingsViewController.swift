@@ -7,14 +7,73 @@
 //
 
 import UIKit
+import Former
 
-class SettingsViewController: UIViewController {
+final class SettingsViewController: FormViewController {
     lazy var fonts: [UIFont] = self.generateFonts()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configure()
+    }
 
-        // Do any additional setup after loading the view.
+    // MARK: Private
+
+    private lazy var formerInputAccessoryView: FormerInputAccessoryView = FormerInputAccessoryView(former: self.former)
+
+
+    private func configure() {
+        tableView.contentInset.top = 40
+        tableView.contentInset.bottom = 40
+
+        // Create RowFomers
+
+        let fontPickingRow = InlinePickerRowFormer<FormInlinePickerCell, UIFont>(instantiateType: .Class) {
+            $0.titleLabel.text = "Font"
+            $0.titleLabel.textColor = UIColor.privyDarkBlueColor
+            $0.titleLabel.font = .boldSystemFontOfSize(16)
+//            $0.displayLabel.textColor = .formerSubColor()
+            $0.displayLabel.font = .boldSystemFontOfSize(14)
+        }.configure {
+            $0.pickerItems = fonts.map { font in
+                let attributes = [
+                    NSFontAttributeName: font
+                ]
+
+                let attributed = NSAttributedString(
+                    string: font.fontName,
+                    attributes: attributes
+                )
+
+                return InlinePickerItem(
+                    title: font.fontName,
+                    displayTitle: attributed,
+                    value: font
+                )
+            }
+
+            $0.displayEditingColor = UIColor.privyDarkBlueColor
+        }.onValueChanged { [weak self] in
+            NSUserDefaults.standardUserDefaults().setObject($0.value, forKey: "userFont")
+        }
+
+        // Create Headers
+        let createHeader: (String -> ViewFormer) = { text in
+            return LabelViewFormer<FormLabelHeaderView>()
+                .configure {
+                    $0.viewHeight = 40
+                    $0.text = text
+            }
+        }
+
+        let fontSection = SectionFormer(
+            rowFormer: fontPickingRow
+        ).set(headerViewFormer: createHeader("Customize Your Card"))
+
+        former.append(sectionFormer: fontSection)
+            .onCellSelected { [weak self] _ in
+                self?.formerInputAccessoryView.update()
+        }
     }
 
     override func didReceiveMemoryWarning() {
