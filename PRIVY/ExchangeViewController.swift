@@ -13,6 +13,10 @@ import AVFoundation
 import ObjectMapper
 import CoreLocation
 
+private enum DetectionStatus {
+    case Unknown, Failed, Succeeded, Pending, Processed
+}
+
 /// <#Description#>
 class ExchangeViewController: UIViewController {
     private let locationManager = CLLocationManager()
@@ -38,7 +42,7 @@ class ExchangeViewController: UIViewController {
         }
     }
 
-    private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate)]()
+    private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate, DetectionStatus)]()
 
     private var player: AVAudioPlayer?
     private var lastKnownLocation: CLLocation?
@@ -241,15 +245,12 @@ class ExchangeViewController: UIViewController {
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+        return .Fade
     }
 
-
     @objc private func qrTimerFired(timer: NSTimer) {
-        let keys = detectedStringsMapping.keys
 
-        for key in keys {
-            let (view, date) = detectedStringsMapping[key]!
+        for (view, date, status) in detectedStringsMapping.values {
 
             if date.timeIntervalSinceNow < -0.05 {
                 view.removeFromSuperview()
@@ -258,6 +259,27 @@ class ExchangeViewController: UIViewController {
                     captureOutputView.addSubview(view)
                 }
             }
+
+            let fillColor: UIColor
+            let borderColor: UIColor
+
+            switch status {
+            case .Unknown:
+                fillColor = UIColor.clearColor()
+                borderColor = UIColor.clearColor()
+            case .Failed:
+                fillColor = UIColor.redColor()
+                borderColor = UIColor.redColor()
+            case .Succeeded, .Pending:
+                fillColor = UIColor.clearColor()
+                borderColor = UIColor.greenColor()
+            case .Processed:
+                fillColor = UIColor.greenColor()
+                borderColor = UIColor.greenColor()
+            }
+
+            view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
+            view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
         }
     }
 
@@ -347,12 +369,10 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
 
         let outlineView: OutlinedTransformableView
-        var firstDetection = false
 
-        if let (view, _) = detectedStringsMapping[object.stringValue] {
+        if let (view, _, _) = detectedStringsMapping[object.stringValue] {
             outlineView = view
         } else {
-            firstDetection = true
 
             outlineView = OutlinedTransformableView(frame: captureOutputView.bounds)
             captureOutputView.addSubview(outlineView)
@@ -364,32 +384,47 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
 
         // reset view and date associate with this QR string.
-        detectedStringsMapping[object.stringValue] = (outlineView, NSDate())
+        let oldState = detectedStringsMapping[object.stringValue]?.2 ?? DetectionStatus.Unknown
+        detectedStringsMapping[object.stringValue] = (outlineView, NSDate(), oldState)
 
         outlineView.corners = translatePoints(
             transformed.corners as! [NSDictionary]
         )
 
-        let color: CGColor
-        if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
-            if firstDetection {
-                RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, inLocation: lastKnownLocation) { (user, errorStatus) in
-                    if let user = user, history = self.tabBarController?.viewControllers?.last as? HistoryTableViewController {
-                        history.datasource.append(user)
-                        print("adding to history")
-                    }
+        guard let mapObject = Mapper<QRMapObject>().map(object.stringValue) else {
+            var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+            state = .Failed
+            self.detectedStringsMapping[object.stringValue] = (view, date, state)
 
-                    print(user?.basic.firstName)
-                }
-            }
-
-            color = UIColor.greenColor().colorWithAlphaComponent(0.5).CGColor
-        } else {
-            color = UIColor.redColor().colorWithAlphaComponent(0.5).CGColor
+            return
         }
 
-        outlineView.shapeLayer.fillColor = color
-        outlineView.shapeLayer.strokeColor = color
+        var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+
+        guard state != .Processed && state != .Pending else {
+            return
+        }
+
+        state = .Pending
+        detectedStringsMapping[object.stringValue] = (view, date, state)
+
+        var history = LocalStorage.defaultStorage.loadHistory()
+
+        RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, inLocation: lastKnownLocation) { (user, errorStatus) in
+
+            var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+            if let user = user {
+                print("adding to history")
+                history.append(user)
+                LocalStorage.defaultStorage.saveHistory(history)
+
+                state = .Processed
+            } else {
+                state = .Succeeded
+            }
+
+            self.detectedStringsMapping[object.stringValue] = (view, date, state)
+        }
     }
 
     /**
