@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+        print(launchOptions)
         let attributes = [NSForegroundColorAttributeName: UIColor.privyLightBlueColor]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, forState: .Selected)
         UITabBar.appearance().tintColor = .privyLightBlueColor
@@ -120,8 +120,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
-        print(shortcutItem)
-        completionHandler(true)
+        var success = true
+
+        defer {
+            completionHandler(success)
+        }
+
+//        guard PrivyUser.currentUser.userInfo.sessionid != nil else {
+//            success = false
+//            return
+//        }
+
+        let rootNav = window!.rootViewController as! UINavigationController
+        let rootTab = rootNav.viewControllers.first! as! RootTabBarController
+
+        switch shortcutItem.localizedTitle {
+        case "View History":
+            rootTab.selectedIndex = 2
+        case "Swap":
+            rootTab.selectedIndex = 1
+        case "Edit Info":
+            rootTab.selectedIndex = 0
+        default:
+            success = false
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
