@@ -472,14 +472,23 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="0.0" y="69" width="204" height="21"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wgh-qN-DIl">
                                                         <rect key="frame" x="0.0" y="80" width="57" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="0.0" y="94" width="204" height="21"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="8" y="8" width="204" height="114"/>
+                                                </variation>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -899,8 +908,8 @@
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="lLo-eA-dAo"/>
-                                        <exclude reference="G5j-xX-23S"/>
-                                        <exclude reference="QBb-gN-qwy"/>
+                                        <exclude reference="6lK-hH-GxW"/>
+                                        <exclude reference="Dtz-dG-mTv"/>
                                         <exclude reference="1WO-Ni-k9G"/>
                                         <exclude reference="A5i-0o-dqe"/>
                                         <exclude reference="O9E-U0-juM"/>
@@ -910,8 +919,8 @@
                                         <exclude reference="Uxf-46-fkY"/>
                                         <exclude reference="V8q-NJ-lHb"/>
                                         <exclude reference="VHc-GZ-U0Q"/>
-                                        <exclude reference="6lK-hH-GxW"/>
-                                        <exclude reference="Dtz-dG-mTv"/>
+                                        <exclude reference="G5j-xX-23S"/>
+                                        <exclude reference="QBb-gN-qwy"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -923,8 +932,8 @@
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="lLo-eA-dAo"/>
-                                        <include reference="G5j-xX-23S"/>
-                                        <include reference="QBb-gN-qwy"/>
+                                        <include reference="6lK-hH-GxW"/>
+                                        <include reference="Dtz-dG-mTv"/>
                                         <include reference="1WO-Ni-k9G"/>
                                         <exclude reference="A5i-0o-dqe"/>
                                         <exclude reference="O9E-U0-juM"/>
@@ -934,8 +943,8 @@
                                         <exclude reference="Uxf-46-fkY"/>
                                         <exclude reference="V8q-NJ-lHb"/>
                                         <include reference="VHc-GZ-U0Q"/>
-                                        <include reference="6lK-hH-GxW"/>
-                                        <include reference="Dtz-dG-mTv"/>
+                                        <include reference="G5j-xX-23S"/>
+                                        <include reference="QBb-gN-qwy"/>
                                     </mask>
                                 </variation>
                             </view>
