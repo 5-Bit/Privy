@@ -52,9 +52,21 @@ final class SettingsViewController: FormViewController {
                 )
             }
 
+            let defaults = NSUserDefaults.standardUserDefaults()
+
+            if let fontName = defaults.objectForKey("userFontName") as? String,
+                font = UIFont(name: fontName, size: UIFont.systemFontSize()) {
+                $0.selectedRow = fonts.indexOf({ $0.fontName == font.fontName }) ?? 0
+                print($0.selectedRow)
+            } else {
+                $0.selectedRow = 0
+            }
+
             $0.displayEditingColor = UIColor.privyDarkBlueColor
-        }.onValueChanged { [weak self] in
-            NSUserDefaults.standardUserDefaults().setObject($0.value, forKey: "userFont")
+        }.onValueChanged {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject($0.value?.fontName, forKey: "userFontName")
+            defaults.synchronize()
         }
 
         // Create Headers
