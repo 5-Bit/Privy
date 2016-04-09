@@ -27,6 +27,14 @@ final class SettingsViewController: FormViewController {
         tableView.contentInset.bottom = 40
 
         // Create RowFomers
+        let previewRow = CustomRowFormer<PreviewCell>(instantiateType: .Nib(nibName: "PreviewCell")) {
+            print($0)
+//            $0.title = "Dynamic height"
+//            $0.body = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+////            $0.bodyColor = colors[0]
+            }.configure {
+                $0.rowHeight = UITableViewAutomaticDimension
+        }
 
         let fontPickingRow = InlinePickerRowFormer<FormInlinePickerCell, UIFont>(instantiateType: .Class) {
             $0.titleLabel.text = "Font"
@@ -52,9 +60,23 @@ final class SettingsViewController: FormViewController {
                 )
             }
 
+            let defaults = NSUserDefaults.standardUserDefaults()
+
+            if let fontName = defaults.objectForKey("userFontName") as? String,
+                font = UIFont(name: fontName, size: UIFont.systemFontSize()) {
+                $0.selectedRow = fonts.indexOf({ $0.fontName == font.fontName }) ?? 0
+                print($0.selectedRow)
+            } else {
+                $0.selectedRow = 0
+            }
+
             $0.displayEditingColor = UIColor.privyDarkBlueColor
-        }.onValueChanged { [weak self] in
-            NSUserDefaults.standardUserDefaults().setObject($0.value, forKey: "userFont")
+        }.onValueChanged {
+            previewRow.cell.fontName = $0.value?.fontName
+
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setObject($0.value?.fontName, forKey: "userFontName")
+            defaults.synchronize()
         }
 
         // Create Headers
@@ -66,11 +88,15 @@ final class SettingsViewController: FormViewController {
             }
         }
 
+        let previewSection = SectionFormer(
+            rowFormer: previewRow
+        ).set(headerViewFormer: createHeader("Preview"))
+
         let fontSection = SectionFormer(
             rowFormer: fontPickingRow
         ).set(headerViewFormer: createHeader("Customize Your Card"))
 
-        former.append(sectionFormer: fontSection)
+        former.append(sectionFormer: previewSection, fontSection)
             .onCellSelected { [weak self] _ in
                 self?.formerInputAccessoryView.update()
         }

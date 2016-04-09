@@ -67,6 +67,18 @@ final class RequestManager {
         session = NSURLSession(configuration: configuration)
     }
 
+    private static func updateNetworkOperationState(isNetworking networking: Bool) {
+        guard NSThread.isMainThread() else {
+            dispatch_async(dispatch_get_main_queue()) {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = networking
+            }
+
+            return
+        }
+
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = networking
+    }
+
     /**
      <#Description#>
 
@@ -394,6 +406,8 @@ final class RequestManager {
     }
 
     private func handleRequest(url: NSURL, method: HttpMethod = .GET, body: NSData? = nil, completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void) {
+        RequestManager.updateNetworkOperationState(isNetworking: true)
+
         let request = NSMutableURLRequest(
             URL: url,
             cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
@@ -405,7 +419,10 @@ final class RequestManager {
             request.HTTPBody = body
         }
 
-        session.dataTaskWithRequest(request, completionHandler: completion).resume()
+        session.dataTaskWithRequest(request) { data, response, error in
+            RequestManager.updateNetworkOperationState(isNetworking: false)
+            completion(data: data, response: response, error: error)
+        }
     }
 
     private func completionOnMainThread(history: [HistoryUser]?, errorStatus: PrivyErrorStatus, completion: (history: [HistoryUser]?, errorStatus: PrivyErrorStatus) -> Void) {

@@ -874,18 +874,29 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEM-CZ-5Nv">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" image="LocationOn"/>
+                                        <connections>
+                                            <action selector="locationButtonTapped:" destination="6nj-fI-vG9" eventType="touchUpInside" id="MMf-Je-LCB"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="vAo-1J-D2b" firstAttribute="top" secondItem="hpI-nI-Kdi" secondAttribute="bottom" constant="12" id="1WO-Ni-k9G"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="sEM-CZ-5Nv" secondAttribute="bottom" id="6lK-hH-GxW"/>
                                     <constraint firstItem="vAo-1J-D2b" firstAttribute="leading" secondItem="Yed-AV-2Bf" secondAttribute="leading" constant="8" id="A5i-0o-dqe"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="sEM-CZ-5Nv" secondAttribute="trailing" id="Dtz-dG-mTv"/>
                                     <constraint firstItem="hpI-nI-Kdi" firstAttribute="top" secondItem="Yed-AV-2Bf" secondAttribute="top" constant="16" id="G5j-xX-23S"/>
                                     <constraint firstAttribute="bottom" secondItem="oNz-ds-LiD" secondAttribute="bottom" constant="16" id="Go8-yt-3PV"/>
                                     <constraint firstAttribute="trailing" secondItem="vAo-1J-D2b" secondAttribute="trailing" constant="8" id="O9E-U0-juM"/>
                                     <constraint firstItem="hpI-nI-Kdi" firstAttribute="centerX" secondItem="Yed-AV-2Bf" secondAttribute="centerX" id="QBb-gN-qwy"/>
                                     <constraint firstItem="oNz-ds-LiD" firstAttribute="top" secondItem="vAo-1J-D2b" secondAttribute="bottom" constant="4" id="SnJ-V4-LBU"/>
+                                    <constraint firstItem="vAo-1J-D2b" firstAttribute="centerX" secondItem="Yed-AV-2Bf" secondAttribute="centerX" id="TBR-y4-RAm"/>
                                     <constraint firstAttribute="trailing" secondItem="oNz-ds-LiD" secondAttribute="trailing" constant="8" id="Uxf-46-fkY"/>
                                     <constraint firstItem="oNz-ds-LiD" firstAttribute="leading" secondItem="Yed-AV-2Bf" secondAttribute="leading" constant="8" id="V8q-NJ-lHb"/>
+                                    <constraint firstItem="oNz-ds-LiD" firstAttribute="centerX" secondItem="Yed-AV-2Bf" secondAttribute="centerX" id="VHc-GZ-U0Q"/>
                                     <constraint firstAttribute="height" constant="200" id="lLo-eA-dAo"/>
                                 </constraints>
                                 <variation key="default">
@@ -893,16 +904,21 @@
                                         <exclude reference="oNz-ds-LiD"/>
                                         <exclude reference="hpI-nI-Kdi"/>
                                         <exclude reference="vAo-1J-D2b"/>
+                                        <exclude reference="sEM-CZ-5Nv"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="lLo-eA-dAo"/>
+                                        <exclude reference="6lK-hH-GxW"/>
+                                        <exclude reference="Dtz-dG-mTv"/>
                                         <exclude reference="1WO-Ni-k9G"/>
                                         <exclude reference="A5i-0o-dqe"/>
                                         <exclude reference="O9E-U0-juM"/>
+                                        <exclude reference="TBR-y4-RAm"/>
                                         <exclude reference="Go8-yt-3PV"/>
                                         <exclude reference="SnJ-V4-LBU"/>
                                         <exclude reference="Uxf-46-fkY"/>
                                         <exclude reference="V8q-NJ-lHb"/>
+                                        <exclude reference="VHc-GZ-U0Q"/>
                                         <exclude reference="G5j-xX-23S"/>
                                         <exclude reference="QBb-gN-qwy"/>
                                     </mask>
@@ -912,16 +928,21 @@
                                         <include reference="oNz-ds-LiD"/>
                                         <include reference="hpI-nI-Kdi"/>
                                         <include reference="vAo-1J-D2b"/>
+                                        <include reference="sEM-CZ-5Nv"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="lLo-eA-dAo"/>
+                                        <include reference="6lK-hH-GxW"/>
+                                        <include reference="Dtz-dG-mTv"/>
                                         <include reference="1WO-Ni-k9G"/>
-                                        <include reference="A5i-0o-dqe"/>
-                                        <include reference="O9E-U0-juM"/>
+                                        <exclude reference="A5i-0o-dqe"/>
+                                        <exclude reference="O9E-U0-juM"/>
+                                        <include reference="TBR-y4-RAm"/>
                                         <include reference="Go8-yt-3PV"/>
                                         <include reference="SnJ-V4-LBU"/>
-                                        <include reference="Uxf-46-fkY"/>
-                                        <include reference="V8q-NJ-lHb"/>
+                                        <exclude reference="Uxf-46-fkY"/>
+                                        <exclude reference="V8q-NJ-lHb"/>
+                                        <include reference="VHc-GZ-U0Q"/>
                                         <include reference="G5j-xX-23S"/>
                                         <include reference="QBb-gN-qwy"/>
                                     </mask>
@@ -1142,6 +1163,7 @@
     </scenes>
     <resources>
         <image name="FlashOff.png" width="22" height="22"/>
+        <image name="LocationOn" width="23" height="23"/>
         <image name="camera-toggle" width="28" height="21"/>
         <image name="history" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
