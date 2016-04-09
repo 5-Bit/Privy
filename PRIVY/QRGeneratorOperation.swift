@@ -41,7 +41,7 @@ class QRGeneratorOperation: ObservableOperation {
                                     created a QR code, a UIImage will be given. Otherwise, the closure's
                                     parameter will be nil.
      */
-    required init(qrString: String, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = 1.0, correctionLevel: QrCorrectionLevel = .High, backgroundColor color: UIColor, completionHandler: UIImage? -> Void) {
+    required init(qrString: String, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = UIScreen.mainScreen().scale, correctionLevel: QrCorrectionLevel = .High, backgroundColor color: UIColor, completionHandler: UIImage? -> Void) {
         self.qrString = qrString
         self.size = size
         self.scale = scale
@@ -53,17 +53,17 @@ class QRGeneratorOperation: ObservableOperation {
     override func start() {
         super.start()
 
-        if let image = QRGeneratorOperation.imageFromQrString(self.qrString, size: self.size, scale: self.scale, correctionLevel: self.correctionLevel, backgroundColor: backgroundColor) {
-            self.finished = true
+        if let image = QRGeneratorOperation.imageFromQrString(qrString, size: size, scale: scale, correctionLevel: correctionLevel, backgroundColor: backgroundColor) {
+            finished = true
 
-            self.completionHandler(image)
+            completionHandler(image)
             return
         } else {
             self.cancel()
-            self.completionHandler(nil)
+            completionHandler(nil)
         }
         
-        dispatch_semaphore_signal(self.semaphore)
+        dispatch_semaphore_signal(semaphore)
     }
     
     override func waitUntilFinished() {
