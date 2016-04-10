@@ -86,7 +86,10 @@ final class RequestManager {
      */
     func refreshHistory(completion: (history: [HistoryUser]?, errorStatus: PrivyErrorStatus) -> Void) {
         let queryItems: [NSURLQueryItem] = [
-            NSURLQueryItem(name: "sessionid", value: PrivyUser.currentUser.userInfo.sessionid)
+            NSURLQueryItem(
+                name: "sessionid",
+                value: PrivyUser.currentUser.userInfo.sessionid ?? PrivyUser.currentUser.registrationInformation?.sessionid
+            )
         ]
 
         let url = Static.host
@@ -135,17 +138,19 @@ final class RequestManager {
 
         let queryItems = [
             NSURLQueryItem(name: "apnsid", value: token.hexString()),
-            NSURLQueryItem(name: "sessionid", value: PrivyUser.currentUser.userInfo.sessionid)
+            NSURLQueryItem(name: "sessionid", value: PrivyUser.currentUser.userInfo.sessionid ?? PrivyUser.currentUser.registrationInformation?.sessionid)
         ]
 
         let body = url.urlByAppendingQueryItems(queryItems).query?.dataUsingEncoding(NSUTF8StringEncoding)
-        handleRequest(url, method: .POST, body: body) { _, response, error in
+
+        handleRequest(url, method: .POST, body: body) { data, response, error in
             var success = false
 
             defer {
                 self.completionOnMainThread(success, completion: completion)
             }
 
+            print(response)
             guard let response = response as? NSHTTPURLResponse
                 where error == nil else {
                     return
@@ -422,7 +427,7 @@ final class RequestManager {
         session.dataTaskWithRequest(request) { data, response, error in
             RequestManager.updateNetworkOperationState(isNetworking: false)
             completion(data: data, response: response, error: error)
-        }
+        }.resume()
     }
 
     private func completionOnMainThread(history: [HistoryUser]?, errorStatus: PrivyErrorStatus, completion: (history: [HistoryUser]?, errorStatus: PrivyErrorStatus) -> Void) {

@@ -780,7 +780,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -802,7 +802,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};

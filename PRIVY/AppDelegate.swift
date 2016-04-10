@@ -70,15 +70,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PrivyUser.currentUser.userInfo = currentUser.userInfo
         PrivyUser.currentUser.registrationInformation = currentUser.registrationInformation
 
-        if let i = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] {
-            print(i)
-//            let notification = NSNotification(name: PrivyAPNSNotification, object: nil)
-//            NSNotificationCenter.defaultCenter().postNotification(notification)
-//            (rootNavigationController.viewControllers.first as? RootTabBarController)?.showHistory()
-        }
-
-        // Override point for customization after application launch.
+        registerForNotifications()
+        
         return true
+    }
+
+    func registerForNotifications() {
+        let settings = UIUserNotificationSettings(
+            forTypes: [.Badge, .Sound, .Alert],
+            categories: nil
+        )
+
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings)
@@ -104,13 +107,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("Recieved push notification: \(userInfo)")
         let rootNav = window!.rootViewController as! UINavigationController
         let rootTab = rootNav.viewControllers.first! as! RootTabBarController
 
         let selectedIndex = rootTab.selectedIndex
 
-        if selectedIndex != rootTab.viewControllers!.count - 1 {
-            rootTab.tabBar.items?.last?.badgeValue = "new"
+        if application.applicationState == .Active {
+            if selectedIndex != rootTab.viewControllers!.count.predecessor() {
+                rootTab.tabBar.items?.last?.badgeValue = "new"
+            }
+        } else {
+            rootTab.selectedIndex = rootTab.tabBar.items!.count.predecessor()
         }
 
         let historyNav = rootTab.viewControllers!.last! as! UINavigationController

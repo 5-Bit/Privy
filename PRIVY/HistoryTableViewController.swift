@@ -66,6 +66,7 @@ class HistoryTableViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         navigationController?.tabBarItem.badgeValue = nil
+        UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
 
 
