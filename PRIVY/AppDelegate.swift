@@ -113,8 +113,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let selectedIndex = rootTab.selectedIndex
 
-        if selectedIndex != rootTab.viewControllers!.count - 1 {
-            rootTab.tabBar.items?.last?.badgeValue = "new"
+        if application.applicationState == .Active {
+            if selectedIndex != rootTab.viewControllers!.count.predecessor() {
+                rootTab.tabBar.items?.last?.badgeValue = "new"
+            }
+        } else {
+            rootTab.selectedIndex = rootTab.tabBar.items!.count.predecessor()
         }
 
         let historyNav = rootTab.viewControllers!.last! as! UINavigationController
