@@ -31,19 +31,24 @@ final class PreviewCell: UITableViewCell {
         }
     }
 
+    let queue = NSOperationQueue()
+
     private func generateQrCode(color: UIColor?) {
         let operation = QRGeneratorOperation(
             qrString: PrivyUser.currentUser.qrString,
-            size: self.qrCodeImageView?.bounds.size ?? CGSize(width: 151, height: 151),
+            size: CGSize(width: 120.0, height: 120.0),
             scale: UIScreen.mainScreen().scale,
             correctionLevel: .Medium,
             backgroundColor: color ?? UIColor.blackColor()) { (image) in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
                     self?.qrCodeImageView.image = image
+                    print("done------------------------------")
+                    print(image)
+                    print(self?.qrCodeImageView)
                 }
         }
 
-        NSOperationQueue().addOperation(operation)
+        queue.addOperation(operation)
     }
 
     override func awakeFromNib() {
