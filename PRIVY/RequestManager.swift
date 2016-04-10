@@ -422,7 +422,7 @@ final class RequestManager {
         session.dataTaskWithRequest(request) { data, response, error in
             RequestManager.updateNetworkOperationState(isNetworking: false)
             completion(data: data, response: response, error: error)
-        }
+        }.resume()
     }
 
     private func completionOnMainThread(history: [HistoryUser]?, errorStatus: PrivyErrorStatus, completion: (history: [HistoryUser]?, errorStatus: PrivyErrorStatus) -> Void) {
