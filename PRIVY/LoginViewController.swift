@@ -180,6 +180,7 @@ class LoginViewController: UIViewController {
             switch error {
             case .Ok:
                 PrivyUser.currentUser.registrationInformation = response
+
                 let defaults = NSUserDefaults.standardUserDefaults()
 
                 if let currentUser = LocalStorage.defaultStorage.attemptLoginWithCredential(credential) {
@@ -194,6 +195,8 @@ class LoginViewController: UIViewController {
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     }
                 }
+
+                (UIApplication.sharedApplication().delegate as? AppDelegate)?.registerForNotifications()
             case .ServerError(let message):
                 self.showErrorAlert(message)
                 self.resetLoadingUI()
