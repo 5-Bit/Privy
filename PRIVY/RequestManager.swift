@@ -93,7 +93,7 @@ final class RequestManager {
         ]
 
         let url = Static.host
-            .URLByAppendingPathComponent("users/refresh")
+            .URLByAppendingPathComponent("users/history")
             .urlByAppendingQueryItems(queryItems)
 
         handleRequest(url, method: .GET) { data, response, error in
