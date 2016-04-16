@@ -10,6 +10,7 @@ import UIKit
 import ObjectMapper
 import Contacts
 import ContactsUI
+import CoreLocation
 
 struct Row {
     let title: String
@@ -28,7 +29,11 @@ class HistoryUserViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    var user: HistoryUser?
+    @IBOutlet private weak var locationButton: UIButton!
+
+    var allUsers = [HistoryUser]()
+
+    private var user: HistoryUser?
 
     private var accounts = [Section]() {
         didSet {
@@ -39,6 +44,12 @@ class HistoryUserViewController: UIViewController {
             numberOfAccounts = accounts.reduce(0) {
                 $0 + $1.rows.count
             }
+        }
+    }
+
+    var userIndex: Int? {
+        didSet {
+            user = userIndex != nil ? allUsers[userIndex!] : nil
         }
     }
 
@@ -89,6 +100,16 @@ class HistoryUserViewController: UIViewController {
 
     @IBAction private func locationButtonTapped(button: UIButton) {
         performSegueWithIdentifier("showLocations", sender: self)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let dest = segue.destinationViewController as? MapViewController
+            where segue.identifier == "showLocations" else {
+                return
+        }
+
+        dest.allUsers = allUsers
+        dest.currentUserIndex = userIndex
     }
 
     @objc private func addButtonTapped(barButton: UIBarButtonItem) {
@@ -163,8 +184,10 @@ class HistoryUserViewController: UIViewController {
 
         let json = Mapper<HistoryUser>().toJSON(user)
 
+        locationButton.hidden = user.location?.longitude == nil || user.location?.latitude == nil
+
         var sections = [Section]()
-        for (key, value) in json as! [String: [String: AnyObject]] {
+        for (key, value) in json as! [String: [String: AnyObject]] where key != "location" {
             var rows = [Row]()
 
             if key == "basic" {

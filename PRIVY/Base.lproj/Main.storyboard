@@ -815,7 +815,13 @@
                             <outlet property="delegate" destination="6Kd-7y-JcZ" id="7tT-st-oRp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="History" id="vvj-Pk-tSZ"/>
+                    <navigationItem key="navigationItem" title="History" id="vvj-Pk-tSZ">
+                        <barButtonItem key="leftBarButtonItem" image="LocationOff" id="5Od-Ic-eKD">
+                            <connections>
+                                <segue destination="2Ha-wj-MTZ" kind="show" identifier="showMap" id="vXf-UE-mjf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xho-0h-kph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1032,6 +1038,7 @@
                     </view>
                     <connections>
                         <outlet property="detailLabel" destination="oNz-ds-LiD" id="Qpi-bg-5NZ"/>
+                        <outlet property="locationButton" destination="sEM-CZ-5Nv" id="8Ei-U8-SGz"/>
                         <outlet property="nameLabel" destination="vAo-1J-D2b" id="ruf-X7-ahe"/>
                         <outlet property="profileImageView" destination="hpI-nI-Kdi" id="bTY-yS-VVA"/>
                         <outlet property="tableView" destination="E4J-bw-aZj" id="GyO-Bm-cIs"/>
@@ -1054,7 +1061,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fcV-zA-Z2N">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fcV-zA-Z2N">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <connections>
                                     <outlet property="delegate" destination="2Ha-wj-MTZ" id="MsM-N2-fev"/>
@@ -1163,6 +1170,7 @@
     </scenes>
     <resources>
         <image name="FlashOff.png" width="22" height="22"/>
+        <image name="LocationOff" width="23" height="23"/>
         <image name="LocationOn" width="23" height="23"/>
         <image name="camera-toggle" width="28" height="21"/>
         <image name="history" width="25" height="25"/>
@@ -1175,6 +1183,7 @@
         <image name="swap-selected" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="vXf-UE-mjf"/>
         <segue reference="Jzg-lA-avg"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

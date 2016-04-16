@@ -9,6 +9,7 @@
 import Foundation
 import ObjectMapper
 import CoreGraphics
+import CoreLocation
 
 /**
  *  @author Michael MacCallum, 2016-02-28 15:02:49-0500
@@ -108,8 +109,8 @@ struct InfoTypes: Mappable {
     var location: Location?
 
     struct Location: Mappable {
-        var latitude: CGFloat?
-        var longitude: CGFloat?
+        var latitude: CLLocationDegrees?
+        var longitude: CLLocationDegrees?
 
         init?(_ map: Map) {
             mapping(map)

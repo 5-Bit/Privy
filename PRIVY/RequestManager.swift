@@ -193,7 +193,7 @@ final class RequestManager {
         
         let url = RequestManager.Static.host.URLByAppendingPathComponent("/users/info").urlByAppendingQueryItems(queryItems)
 
-        handleRequest(url) { (data, response, error) in
+        handleRequest(url) { data, response, error in
             var infoTypes: InfoTypes?
             var errorStatus = PrivyErrorStatus.Ok
 
