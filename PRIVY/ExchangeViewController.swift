@@ -218,7 +218,7 @@ class ExchangeViewController: UIViewController {
         qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(ExchangeViewController.qrTimerFired(_:)), userInfo: nil, repeats: true)
 
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
