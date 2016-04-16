@@ -236,7 +236,6 @@ final class LocalStorage {
         return Mapper<HistoryUser>().mapArray(read) ?? [HistoryUser]()
     }
 
-
     func saveHistory(history: [HistoryUser]) {
         let jsonString = Mapper<HistoryUser>().toJSONString(history, prettyPrint: false)!
         let data = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
