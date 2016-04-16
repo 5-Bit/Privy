@@ -839,7 +839,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
 				PRODUCT_NAME = PrivyUITests;
-				TEST_TARGET_NAME = PRIVY;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = Privy;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -851,7 +852,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
 				PRODUCT_NAME = PrivyUITests;
-				TEST_TARGET_NAME = PRIVY;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = Privy;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
