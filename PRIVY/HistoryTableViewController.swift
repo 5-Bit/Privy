@@ -35,7 +35,7 @@ class HistoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.allowsSelectionDuringEditing = false
         tableView.allowsMultipleSelection = false
 
@@ -68,7 +68,6 @@ class HistoryTableViewController: UITableViewController {
         navigationController?.tabBarItem.badgeValue = nil
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -178,12 +177,17 @@ class HistoryTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let userViewController = segue.destinationViewController as? HistoryUserViewController,
-            indexPath = tableView.indexPathForCell(sender as! UITableViewCell) else {
+        if let userViewController = segue.destinationViewController as? HistoryUserViewController,
+            indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
+
+            userViewController.allUsers = datasource
+            userViewController.userIndex = indexPath.row
 
             return
         }
 
-        userViewController.user = datasource[indexPath.row]
+        if let mapVC = segue.destinationViewController as? MapViewController {
+            mapVC.allUsers = datasource
+        }
     }
 }
