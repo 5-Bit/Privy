@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 
 /**
- *  @author Michael MacCallum, 16-04-17 12:04:56
+ *  @author Michael MacCallum, 16-03-20
  *
  *  Represents the response from the server for a login or registration operation.
  *  
