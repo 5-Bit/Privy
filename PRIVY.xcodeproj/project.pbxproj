@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0001DEBC1CC35A0C00C42216 /* KYNavigationProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */; };
 		000B24BD1CAC7DB9001C6886 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B24BC1CAC7DB9001C6886 /* GradientView.swift */; };
 		000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */; };
 		002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3E441CAC3B2F00456482 /* SettingsViewController.swift */; };
@@ -95,6 +96,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KYNavigationProgress.framework; path = Carthage/Build/iOS/KYNavigationProgress.framework; sourceTree = "<group>"; };
 		000B24BC1CAC7DB9001C6886 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		002A3E441CAC3B2F00456482 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */,
 				009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */,
 				0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */,
+				0001DEBC1CC35A0C00C42216 /* KYNavigationProgress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +389,7 @@
 		00A7B9671C7E06E600E94C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */,
 				00317EF81C6D2F6500882EFC /* AVFoundation.framework */,
 				0040F18B1C4C833A0076F176 /* Carthage */,
 			);
@@ -563,6 +567,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RNCryptor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KYNavigationProgress.framework",
 			);
 			outputPaths = (
 			);
