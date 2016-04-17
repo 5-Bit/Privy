@@ -28,6 +28,10 @@ final class BasicInfoViewController: FormViewController {
         }.configure {
             $0.text = "Choose profile image from library"
             $0.rowHeight = 60
+            let imageView = $0.cell.iconView
+            RequestManager.sharedManager.fetchMyProfilePicture { image in
+                imageView.image = image
+            }
         }.onSelected { [weak self] _ in
             self?.former.deselect(true)
             self?.presentImagePicker()
