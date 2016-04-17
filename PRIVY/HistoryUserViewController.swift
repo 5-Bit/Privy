@@ -261,24 +261,6 @@ class HistoryUserViewController: UIViewController {
     }
 }
 
-extension HistoryUserViewController: UITableViewDelegate {
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-
-//    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return 200
-//    }
-
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-//
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 44.0
-//    }
-}
-
 extension HistoryUserViewController: UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return accounts.count
