@@ -113,6 +113,11 @@ struct InfoTypes: Mappable {
         var latitude: CLLocationDegrees?
         var longitude: CLLocationDegrees?
 
+        init(latitude: CLLocationDegrees?, longitude: CLLocationDegrees?) {
+            self.latitude = latitude
+            self.longitude = longitude
+        }
+
         init?(_ map: Map) {
             mapping(map)
         }
