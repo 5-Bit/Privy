@@ -13,23 +13,7 @@ typealias HistoryUser = InfoTypes
 class HistoryTableViewController: UITableViewController {
     var datasource = LocalStorage.defaultStorage.loadHistory() {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) {
-                if self.tabBarController?.tabBar.selectedItem === self.navigationController?.tabBarItem {
-                    if oldValue.count == self.datasource.count {
-                        self.tableView.reloadSections(
-                            NSIndexSet(index: 0),
-                            withRowAnimation: .None
-                        )
-                    } else {
-                        self.tableView.reloadSections(
-                            NSIndexSet(index: 0),
-                            withRowAnimation: .Top
-                        )
-                    }
-                }
-
-                LocalStorage.defaultStorage.saveHistory(self.datasource)
-            }
+            datasourceDidChange(oldValue)
         }
     }
 
@@ -83,6 +67,31 @@ class HistoryTableViewController: UITableViewController {
         }
     }
 
+    private func datasourceDidChange(oldValue: [HistoryUser]) {
+        dispatch_async(dispatch_get_main_queue()) {
+            if self.tabBarController?.tabBar.selectedItem === self.navigationController?.tabBarItem {
+                if oldValue.count == self.datasource.count {
+                    self.tableView.reloadSections(
+                        NSIndexSet(index: 0),
+                        withRowAnimation: .None
+                    )
+                } else {
+                    self.tableView.reloadSections(
+                        NSIndexSet(index: 0),
+                        withRowAnimation: .Top
+                    )
+                }
+            }
+
+            LocalStorage.defaultStorage.saveHistory(self.datasource)
+        }
+    }
+
+    /**
+     Triggers the networking operation to refresh the user's history.
+
+     - parameter completion: <#completion description#>
+     */
     func fetchHistory(completion: (success: Bool) -> Void) {
         RequestManager.sharedManager.refreshHistory { (history, errorStatus) in
             if let history = history {
