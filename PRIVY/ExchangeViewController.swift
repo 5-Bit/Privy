@@ -91,10 +91,8 @@ final class ExchangeViewController: UIViewController {
         commonInit()
     }
     
-    /**
-     <#Description#>
-     */
     private func commonInit() {
+        // Only attempt to setup the capture session if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         guard let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(.Video) else {
             return
@@ -120,6 +118,8 @@ final class ExchangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        // Only attempt to setup the preview layer if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         capturePreviewLayer.session = captureSession
         capturePreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -298,12 +298,6 @@ final class ExchangeViewController: UIViewController {
                 completion: nil
             )
         }
-    }
-
-    @IBAction private func flashButtonTapped(button: UIButton) {
-        #if os(iOS) && !(arch(i386) || arch(x86_64))
-            
-        #endif
     }
 
     /**
