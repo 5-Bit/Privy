@@ -597,77 +597,32 @@
                                                         <action selector="toggleCameraButtonTapped:" destination="MXp-jm-OZE" eventType="touchUpInside" id="Gcw-fB-uRi"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORv-Ed-gTk">
-                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="93L-j6-1Uf"/>
-                                                        <constraint firstAttribute="height" constant="36" id="MEy-k2-pDn"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="kFD-cr-gNb"/>
-                                                        <constraint firstAttribute="width" secondItem="ORv-Ed-gTk" secondAttribute="height" multiplier="1:1" id="trv-gv-CDT"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="ys2-0S-w6S"/>
-                                                    </constraints>
-                                                    <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
-                                                    <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                                    <state key="normal" image="FlashOff.png"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="93L-j6-1Uf"/>
-                                                            <exclude reference="MEy-k2-pDn"/>
-                                                            <exclude reference="kFD-cr-gNb"/>
-                                                            <exclude reference="trv-gv-CDT"/>
-                                                            <exclude reference="ys2-0S-w6S"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <include reference="93L-j6-1Uf"/>
-                                                            <include reference="MEy-k2-pDn"/>
-                                                            <include reference="kFD-cr-gNb"/>
-                                                            <exclude reference="trv-gv-CDT"/>
-                                                            <include reference="ys2-0S-w6S"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="flashButtonTapped:" destination="MXp-jm-OZE" eventType="touchUpInside" id="PFD-5d-yxR"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ORv-Ed-gTk" firstAttribute="top" secondItem="M7J-Y2-6OP" secondAttribute="top" id="4HY-oq-32u"/>
-                                                <constraint firstAttribute="bottom" secondItem="ORv-Ed-gTk" secondAttribute="bottom" id="8zy-4Q-S24"/>
                                                 <constraint firstItem="48N-em-ZTO" firstAttribute="top" secondItem="M7J-Y2-6OP" secondAttribute="top" id="G6o-0U-vdF"/>
                                                 <constraint firstAttribute="trailing" secondItem="48N-em-ZTO" secondAttribute="trailing" id="HJF-We-nWw">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                                 </constraint>
-                                                <constraint firstItem="ORv-Ed-gTk" firstAttribute="leading" secondItem="M7J-Y2-6OP" secondAttribute="leading" constant="8" id="HaF-HH-tkN"/>
                                                 <constraint firstAttribute="bottom" secondItem="48N-em-ZTO" secondAttribute="bottom" id="RbG-On-xby"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
                                                     <exclude reference="48N-em-ZTO"/>
-                                                    <exclude reference="ORv-Ed-gTk"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="G6o-0U-vdF"/>
                                                     <exclude reference="HJF-We-nWw"/>
                                                     <exclude reference="RbG-On-xby"/>
-                                                    <exclude reference="4HY-oq-32u"/>
-                                                    <exclude reference="8zy-4Q-S24"/>
-                                                    <exclude reference="HaF-HH-tkN"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="subviews">
                                                     <include reference="48N-em-ZTO"/>
-                                                    <include reference="ORv-Ed-gTk"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="G6o-0U-vdF"/>
                                                     <include reference="HJF-We-nWw"/>
                                                     <include reference="RbG-On-xby"/>
-                                                    <include reference="4HY-oq-32u"/>
-                                                    <include reference="8zy-4Q-S24"/>
-                                                    <include reference="HaF-HH-tkN"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -1169,7 +1124,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FlashOff.png" width="22" height="22"/>
         <image name="LocationOff" width="23" height="23"/>
         <image name="LocationOn" width="23" height="23"/>
         <image name="camera-toggle" width="28" height="21"/>
