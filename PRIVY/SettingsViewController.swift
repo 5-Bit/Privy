@@ -131,18 +131,45 @@ final class SettingsViewController: FormViewController {
     }
 
     @IBAction private func logout(button: UIBarButtonItem) {
+        let alertController = UIAlertController(
+            title: "Logout",
+            message: "Are you sure you want to logout?",
+            preferredStyle: .Alert
+        )
+
+        let logoutAction = UIAlertAction(
+            title: "Logout",
+            style: .Destructive) { [unowned self] action in
+                self.triggerLogout()
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel,
+            handler: nil
+        )
+
+        alertController.addAction(logoutAction)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    private func triggerLogout() {
+        // Had to have at least one pyramid of doom.
         RequestManager.sharedManager.logout { success in
             LocalStorage.defaultStorage.saveHistory([HistoryUser]())
+
             dispatch_async(dispatch_get_main_queue()) {
-                LocalStorage.defaultStorage.saveUser(nil, completion: { (error) in
+
+                LocalStorage.defaultStorage.saveUser(nil) { _ in
+
                     dispatch_async(dispatch_get_main_queue()) {
+
                         PrivyUser.currentUser.registrationInformation = nil
-
-                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: {
-
-                        })
+                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                     }
-                })
+                }
             }
         }
     }

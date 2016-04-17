@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedTextField: UITextField {
+final class RoundedTextField: UITextField {
     override var bounds: CGRect {
         didSet {
             layer.masksToBounds = true

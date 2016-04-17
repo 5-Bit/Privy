@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoundedGradientButton: UIButton {
+final class RoundedGradientButton: UIButton {
     private var gradientLayer: CAGradientLayer {
         return layer as! CAGradientLayer
     }

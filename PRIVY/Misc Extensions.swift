@@ -8,13 +8,18 @@
 
 import UIKit
 
-private extension NSMutableURLRequest {
+// MARK: - NSMutableURLRequest
+extension NSMutableURLRequest {
     func addValue(value: String, forHTTPHeaderField field: PrivyHttpHeaderField) {
         addValue(value, forHTTPHeaderField: field.rawValue)
     }
 }
 
+// MARK: - NSURL
 extension NSURL {
+    /**
+     Creates a new NSURL by appending queryItems to the receiver.
+     */
     func urlByAppendingQueryItems(queryItems: [NSURLQueryItem]) -> NSURL {
         let components = NSURLComponents(URL: self, resolvingAgainstBaseURL: true)
         components?.queryItems = queryItems
@@ -23,7 +28,11 @@ extension NSURL {
     }
 }
 
+// MARK: - NSData
 extension NSData {
+    /**
+     Creates a Hex encoded string representative of the receiver.
+     */
     func hexString() -> String {
         guard length > 0 else {
             return ""
@@ -55,7 +64,11 @@ extension NSData {
     }
 }
 
+// MARK: - UIImage
 extension UIImage {
+    /**
+     Returns the receiver after applying color as a tint use a screen blend mode.
+     */
     func tintedImageWithColor(color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, true, scale)
         let rect = CGRect(origin: CGPointZero, size: size)
@@ -71,22 +84,47 @@ extension UIImage {
     }
 }
 
+// MARK: - NSUserDefaults
 extension NSUserDefaults {
 
+    /**
+     Attempts for extract a UIColor object for the given key in the receiver.
+     */
     func colorForKey(key: String) -> UIColor? {
         var color: UIColor?
+
         if let colorData = dataForKey(key) {
             color = NSKeyedUnarchiver.unarchiveObjectWithData(colorData) as? UIColor
         }
+
         return color
     }
 
+    /**
+     Sets the given color for the given key in the receiver.
+     */
     func setColor(color: UIColor?, forKey key: String) {
         var colorData: NSData?
+
         if let color = color {
             colorData = NSKeyedArchiver.archivedDataWithRootObject(color)
         }
+
         setObject(colorData, forKey: key)
     }
-    
+}
+
+// MARK: - NSMutableURLRequest
+extension NSMutableURLRequest {
+
+    /// Bridges enum HttpMethod in the existing String HTTPMethod property on NSMutableURLRequest.
+    var method: HttpMethod {
+        get {
+            return HttpMethod(rawValue: HTTPMethod)!
+        }
+
+        set {
+            HTTPMethod = newValue.rawValue
+        }
+    }
 }

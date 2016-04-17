@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+final class MapViewController: UIViewController {
     @IBOutlet private weak var mapView: MKMapView!
 
     var allUsers = [HistoryUser]()

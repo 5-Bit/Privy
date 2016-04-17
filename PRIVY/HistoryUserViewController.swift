@@ -23,7 +23,7 @@ struct Section {
     let rows: [Row]
 }
 
-class HistoryUserViewController: UIViewController {
+final class HistoryUserViewController: UIViewController {
     @IBOutlet private weak var profileImageView: UIImageView!
 
     @IBOutlet private weak var nameLabel: UILabel!
@@ -259,24 +259,6 @@ class HistoryUserViewController: UIViewController {
 
         return emails
     }
-}
-
-extension HistoryUserViewController: UITableViewDelegate {
-//    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-
-//    func tableView(tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
-//        return 200
-//    }
-
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-//
-//    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 44.0
-//    }
 }
 
 extension HistoryUserViewController: UITableViewDataSource {

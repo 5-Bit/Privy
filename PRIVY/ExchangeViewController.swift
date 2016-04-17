@@ -18,7 +18,7 @@ private enum DetectionStatus {
 }
 
 /// <#Description#>
-class ExchangeViewController: UIViewController {
+final class ExchangeViewController: UIViewController {
     private let locationManager = CLLocationManager()
 
     private let captureSession = AVCaptureSession()
@@ -91,10 +91,8 @@ class ExchangeViewController: UIViewController {
         commonInit()
     }
     
-    /**
-     <#Description#>
-     */
     private func commonInit() {
+        // Only attempt to setup the capture session if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         guard let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(.Video) else {
             return
@@ -120,6 +118,8 @@ class ExchangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        // Only attempt to setup the preview layer if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         capturePreviewLayer.session = captureSession
         capturePreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -265,31 +265,39 @@ class ExchangeViewController: UIViewController {
 
             let fillColor: UIColor
             let borderColor: UIColor
+            let backgroundColor: UIColor
 
             switch status {
             case .Unknown:
                 fillColor = UIColor.clearColor()
                 borderColor = UIColor.clearColor()
+                backgroundColor = UIColor.clearColor()
             case .Failed:
                 fillColor = UIColor.redColor()
                 borderColor = UIColor.redColor()
+                backgroundColor = UIColor.clearColor()
             case .Succeeded, .Pending:
                 fillColor = UIColor.clearColor()
                 borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
             case .Processed:
                 fillColor = UIColor.greenColor()
                 borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
             }
 
-            view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
-            view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
+            UIView.animateWithDuration(
+                0.05,
+                delay: 0.0,
+                options: .BeginFromCurrentState,
+                animations: { 
+                    view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.backgroundColor = backgroundColor.colorWithAlphaComponent(0.25).CGColor
+                },
+                completion: nil
+            )
         }
-    }
-
-    @IBAction private func flashButtonTapped(button: UIButton) {
-        #if os(iOS) && !(arch(i386) || arch(x86_64))
-            
-        #endif
     }
 
     /**
