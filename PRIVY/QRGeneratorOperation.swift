@@ -11,7 +11,7 @@ import CoreImage
 import CoreGraphics
 
 /// An NSOperation subclass that generates a UIImage representing a QR code from an input string/size/scale.
-class QRGeneratorOperation: ObservableOperation {
+final class QRGeneratorOperation: ObservableOperation {
     private let qrString: String
     private let size: CGSize
     private let scale: CGFloat

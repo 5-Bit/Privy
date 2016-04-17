@@ -13,7 +13,7 @@ private enum ViewState: String {
     case Login, Registration
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     @IBOutlet private weak var confirmationButton: UIButton!
     @IBOutlet private weak var stateSwitcherButton: UIButton!
 

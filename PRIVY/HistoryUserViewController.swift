@@ -23,7 +23,7 @@ struct Section {
     let rows: [Row]
 }
 
-class HistoryUserViewController: UIViewController {
+final class HistoryUserViewController: UIViewController {
     @IBOutlet private weak var profileImageView: UIImageView!
 
     @IBOutlet private weak var nameLabel: UILabel!

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OutlinedTransformableView: UIView {
+final class OutlinedTransformableView: UIView {
     var corners: [CGPoint]? {
         didSet {
             drawAroundCorners()

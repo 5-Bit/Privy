@@ -18,7 +18,7 @@ private enum DetectionStatus {
 }
 
 /// <#Description#>
-class ExchangeViewController: UIViewController {
+final class ExchangeViewController: UIViewController {
     private let locationManager = CLLocationManager()
 
     private let captureSession = AVCaptureSession()
