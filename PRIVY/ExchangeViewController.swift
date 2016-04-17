@@ -13,8 +13,12 @@ import AVFoundation
 import ObjectMapper
 import CoreLocation
 
+private enum DetectionStatus {
+    case Unknown, Failed, Succeeded, Pending, Processed
+}
+
 /// <#Description#>
-class ExchangeViewController: UIViewController {
+final class ExchangeViewController: UIViewController {
     private let locationManager = CLLocationManager()
 
     private let captureSession = AVCaptureSession()
@@ -26,11 +30,14 @@ class ExchangeViewController: UIViewController {
     
     /// Creates a QRGeneratorOperation on access.
     private var qrGenOperation: QRGeneratorOperation {
+        let backgroundColor = NSUserDefaults.standardUserDefaults().colorForKey("defaultColor") ?? UIColor.blackColor()
+
         return QRGeneratorOperation(
             qrString: PrivyUser.currentUser.qrString,
             size: self.qrCodeImageView?.bounds.size ?? CGSize(width: 151, height: 151),
             scale: UIScreen.mainScreen().scale,
-            correctionLevel: .Medium) { (image) in
+            correctionLevel: .Medium,
+            backgroundColor: backgroundColor) { (image) in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
                     self?.qrCodeImage = image
                     print(PrivyUser.currentUser.qrString)
@@ -38,9 +45,10 @@ class ExchangeViewController: UIViewController {
         }
     }
 
-    private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate)]()
+    private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate, DetectionStatus)]()
 
     private var player: AVAudioPlayer?
+    private var lastKnownLocation: CLLocation?
 
     /*
      Property observers on qrCodeImage and qrCodeImageView guarentee that the QR code image
@@ -83,10 +91,8 @@ class ExchangeViewController: UIViewController {
         commonInit()
     }
     
-    /**
-     <#Description#>
-     */
     private func commonInit() {
+        // Only attempt to setup the capture session if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         guard let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(.Video) else {
             return
@@ -112,6 +118,8 @@ class ExchangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        // Only attempt to setup the preview layer if we're running on a real device. No support in simulator.
         #if os(iOS) && !(arch(i386) || arch(x86_64))
         capturePreviewLayer.session = captureSession
         capturePreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
@@ -198,8 +206,6 @@ class ExchangeViewController: UIViewController {
         #else
         toggleCameraButton.hidden = true
         #endif
-
-        locationManager.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -210,6 +216,11 @@ class ExchangeViewController: UIViewController {
         }
 
         qrTimer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: #selector(ExchangeViewController.qrTimerFired(_:)), userInfo: nil, repeats: true)
+
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -223,6 +234,7 @@ class ExchangeViewController: UIViewController {
         super.viewDidDisappear(animated)
 
         captureSession.stopRunning()
+        locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
     }
 
@@ -236,15 +248,12 @@ class ExchangeViewController: UIViewController {
     }
     
     override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Slide
+        return .Fade
     }
 
-
     @objc private func qrTimerFired(timer: NSTimer) {
-        let keys = detectedStringsMapping.keys
 
-        for key in keys {
-            let (view, date) = detectedStringsMapping[key]!
+        for (view, date, status) in detectedStringsMapping.values {
 
             if date.timeIntervalSinceNow < -0.05 {
                 view.removeFromSuperview()
@@ -253,6 +262,41 @@ class ExchangeViewController: UIViewController {
                     captureOutputView.addSubview(view)
                 }
             }
+
+            let fillColor: UIColor
+            let borderColor: UIColor
+            let backgroundColor: UIColor
+
+            switch status {
+            case .Unknown:
+                fillColor = UIColor.clearColor()
+                borderColor = UIColor.clearColor()
+                backgroundColor = UIColor.clearColor()
+            case .Failed:
+                fillColor = UIColor.redColor()
+                borderColor = UIColor.redColor()
+                backgroundColor = UIColor.clearColor()
+            case .Succeeded, .Pending:
+                fillColor = UIColor.clearColor()
+                borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
+            case .Processed:
+                fillColor = UIColor.greenColor()
+                borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
+            }
+
+            UIView.animateWithDuration(
+                0.05,
+                delay: 0.0,
+                options: .BeginFromCurrentState,
+                animations: { 
+                    view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.backgroundColor = backgroundColor.colorWithAlphaComponent(0.25).CGColor
+                },
+                completion: nil
+            )
         }
     }
 
@@ -336,12 +380,10 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
 
         let outlineView: OutlinedTransformableView
-        var firstDetection = false
 
-        if let (view, _) = detectedStringsMapping[object.stringValue] {
+        if let (view, _, _) = detectedStringsMapping[object.stringValue] {
             outlineView = view
         } else {
-            firstDetection = true
 
             outlineView = OutlinedTransformableView(frame: captureOutputView.bounds)
             captureOutputView.addSubview(outlineView)
@@ -353,36 +395,47 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
 
         // reset view and date associate with this QR string.
-        detectedStringsMapping[object.stringValue] = (outlineView, NSDate())
+        let oldState = detectedStringsMapping[object.stringValue]?.2 ?? DetectionStatus.Unknown
+        detectedStringsMapping[object.stringValue] = (outlineView, NSDate(), oldState)
 
         outlineView.corners = translatePoints(
             transformed.corners as! [NSDictionary]
         )
 
-        let color: CGColor
-        if let mapObject = Mapper<QRMapObject>().map(object.stringValue) {
-            if firstDetection {
-                for uuid in mapObject.uuids {
-                    print(uuid)
-                }
+        guard let mapObject = Mapper<QRMapObject>().map(object.stringValue) else {
+            var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+            state = .Failed
+            self.detectedStringsMapping[object.stringValue] = (view, date, state)
 
-                RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, completion: { (user, errorStatus) in
-                    if let user = user, history = self.tabBarController?.viewControllers?.last as? HistoryTableViewController {
-                        history.datasource.append(user)
-                        print("adding to history")
-                    }
-
-                    print(user?.basic.firstName)
-                })
-            }
-
-            color = UIColor.greenColor().colorWithAlphaComponent(0.5).CGColor
-        } else {
-            color = UIColor.redColor().colorWithAlphaComponent(0.5).CGColor
+            return
         }
 
-        outlineView.shapeLayer.fillColor = color
-        outlineView.shapeLayer.strokeColor = color
+        var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+
+        guard state != .Processed && state != .Pending else {
+            return
+        }
+
+        state = .Pending
+        detectedStringsMapping[object.stringValue] = (view, date, state)
+
+        var history = LocalStorage.defaultStorage.loadHistory()
+
+        RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, inLocation: lastKnownLocation) { (user, errorStatus) in
+
+            var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
+            if let user = user {
+                print("adding to history")
+                history.append(user)
+                LocalStorage.defaultStorage.saveHistory(history)
+
+                state = .Processed
+            } else {
+                state = .Succeeded
+            }
+
+            self.detectedStringsMapping[object.stringValue] = (view, date, state)
+        }
     }
 
     /**
@@ -411,6 +464,10 @@ extension ExchangeViewController: CLLocationManagerDelegate {
         case .Restricted:
             showLocationErrorDialogWithMessage("Location unavailable. If you want to use this feature, ask your parent to disable this restriction.")
         }
+    }
+
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        lastKnownLocation = newLocation
     }
 
     private func showLocationErrorDialogWithMessage(message: String) {

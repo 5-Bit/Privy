@@ -112,8 +112,13 @@ final class LocalStorage {
      - parameter user:       <#user description#>
      - parameter completion: <#completion description#>
      */
-    func saveUser(user: PrivyUser, completion: (error: ErrorType?) -> Void) {
+    func saveUser(user: PrivyUser?, completion: (error: ErrorType?) -> Void) {
         dispatch_barrier_async(saveQueue) {
+            guard let user = user else {
+                self.purgeUser()
+                completion(error: nil)
+                return
+            }
             var saveUserError: ErrorType?
             let password = NSUUID().UUIDString
 
@@ -131,6 +136,11 @@ final class LocalStorage {
                 saveUserError = error
             }
         }
+    }
+
+    private func purgeUser() {
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "current")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
 
     /**
@@ -214,8 +224,6 @@ final class LocalStorage {
             inDomains: .UserDomainMask
         )
 
-        print(paths.first)
-
         return paths[0]
     }
 
@@ -227,7 +235,6 @@ final class LocalStorage {
 
         return Mapper<HistoryUser>().mapArray(read) ?? [HistoryUser]()
     }
-
 
     func saveHistory(history: [HistoryUser]) {
         let jsonString = Mapper<HistoryUser>().toJSONString(history, prettyPrint: false)!

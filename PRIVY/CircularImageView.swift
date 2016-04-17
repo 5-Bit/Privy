@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CircularImageView: UIImageView {
+final class CircularImageView: UIImageView {
     override var frame: CGRect {
         didSet {
             layer.masksToBounds = true

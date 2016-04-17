@@ -69,5 +69,4 @@ extension String {
                 $0 + String(format: "%02x", $1)
         }
     }
-
 }

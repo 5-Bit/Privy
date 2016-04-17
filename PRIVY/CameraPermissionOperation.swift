@@ -13,7 +13,7 @@ import AVFoundation
 /**
  *
  */
-class CameraPermissionOperation: ObservableOperation {
+final class CameraPermissionOperation: ObservableOperation {
     let mediaType: AVMediaType
     
     private var rootViewController: UIViewController? {

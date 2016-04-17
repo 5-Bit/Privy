@@ -11,12 +11,13 @@ import CoreImage
 import CoreGraphics
 
 /// An NSOperation subclass that generates a UIImage representing a QR code from an input string/size/scale.
-class QRGeneratorOperation: ObservableOperation {
+final class QRGeneratorOperation: ObservableOperation {
     private let qrString: String
     private let size: CGSize
     private let scale: CGFloat
     private let correctionLevel: QrCorrectionLevel
     private let completionHandler: UIImage? -> Void
+    private let backgroundColor: UIColor
     private let queue = dispatch_queue_create("com.Privy.QRGeneratorOperation.queue", DISPATCH_QUEUE_SERIAL)
 
     /// Used exclusively by `waitUntilFinished`
@@ -40,28 +41,29 @@ class QRGeneratorOperation: ObservableOperation {
                                     created a QR code, a UIImage will be given. Otherwise, the closure's
                                     parameter will be nil.
      */
-    required init(qrString: String, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = 1.0, correctionLevel: QrCorrectionLevel = .High, completionHandler: UIImage? -> Void) {
+    required init(qrString: String, size: CGSize = CGSize(width: 151.0, height: 151.0), scale: CGFloat = UIScreen.mainScreen().scale, correctionLevel: QrCorrectionLevel = .High, backgroundColor color: UIColor, completionHandler: UIImage? -> Void) {
         self.qrString = qrString
         self.size = size
         self.scale = scale
         self.correctionLevel = correctionLevel
+        self.backgroundColor = color
         self.completionHandler = completionHandler
     }
     
     override func start() {
         super.start()
 
-        if let image = QRGeneratorOperation.imageFromQrString(self.qrString, size: self.size, scale: self.scale, correctionLevel: self.correctionLevel) {
-            self.finished = true
+        if let image = QRGeneratorOperation.imageFromQrString(qrString, size: size, scale: scale, correctionLevel: correctionLevel, backgroundColor: backgroundColor) {
+            finished = true
 
-            self.completionHandler(image)
+            completionHandler(image)
             return
         } else {
             self.cancel()
-            self.completionHandler(nil)
+            completionHandler(nil)
         }
         
-        dispatch_semaphore_signal(self.semaphore)
+        dispatch_semaphore_signal(semaphore)
     }
     
     override func waitUntilFinished() {
@@ -76,7 +78,7 @@ class QRGeneratorOperation: ObservableOperation {
      Generates a UIImage representation of a QR code from the input data at the input size and scale.
      Returns nil if not successful.
      */
-    private static func imageFromQrString(qrString: String, size: CGSize, scale: CGFloat, correctionLevel: QrCorrectionLevel) -> UIImage? {
+    private static func imageFromQrString(qrString: String, size: CGSize, scale: CGFloat, correctionLevel: QrCorrectionLevel, backgroundColor color: UIColor) -> UIImage? {
         guard let isoLatin = qrString.dataUsingEncoding(NSISOLatin1StringEncoding, allowLossyConversion: false) else {
             return nil
         }
@@ -96,15 +98,8 @@ class QRGeneratorOperation: ObservableOperation {
 
         let inverted = QRGeneratorOperation.invertImage(outputImage)
 
-        let background = UIColor(
-            red: 30.0 / 255.0,
-            green: 179.0 / 255.0,
-            blue: 225.0 / 255.0,
-            alpha: 1.0
-        )
-
         let uiInverted = UIImage(CIImage: inverted)
-        let colored = uiInverted.tintedImageWithColor(UIColor.privyDarkBlueColor)
+        let colored = uiInverted.tintedImageWithColor(color)
 
         return upscaledImageFromCIImage(
             CIImage(CGImage: colored.CGImage!),

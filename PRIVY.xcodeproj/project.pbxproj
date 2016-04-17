@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0001DEBC1CC35A0C00C42216 /* KYNavigationProgress.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */; };
 		000B24BD1CAC7DB9001C6886 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B24BC1CAC7DB9001C6886 /* GradientView.swift */; };
 		000B24BF1CAC7FC1001C6886 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */; };
 		002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002A3E441CAC3B2F00456482 /* SettingsViewController.swift */; };
+		002FF4241CB6CDD300DCBDA5 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002FF4231CB6CDD300DCBDA5 /* PreviewCell.swift */; };
+		002FF4261CB6CDDC00DCBDA5 /* PreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002FF4251CB6CDDC00DCBDA5 /* PreviewCell.xib */; };
 		00317EF91C6D2F6500882EFC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00317EF81C6D2F6500882EFC /* AVFoundation.framework */; };
 		003381D51CB03209002B3B99 /* NSDate+TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */; };
 		003381D71CB0324C002B3B99 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */; };
 		0040F14A1C4C5FF30076F176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1491C4C5FF30076F176 /* AppDelegate.swift */; };
-		0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F14B1C4C5FF30076F176 /* ViewController.swift */; };
 		0040F14F1C4C5FF30076F176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0040F14D1C4C5FF30076F176 /* Main.storyboard */; };
 		0040F1521C4C5FF30076F176 /* PRIVY.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1501C4C5FF30076F176 /* PRIVY.xcdatamodeld */; };
 		0040F1541C4C5FF30076F176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0040F1531C4C5FF30076F176 /* Assets.xcassets */; };
@@ -32,6 +34,7 @@
 		0040F1991C4CB7490076F176 /* QRScanOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F1951C4CB7490076F176 /* QRScanOperation.swift */; };
 		0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */; };
 		0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */; };
+		008021511CB5FC1500FA2475 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008021501CB5FC1500FA2475 /* MapViewController.swift */; };
 		008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1861C4C7E820076F176 /* DynamicButton.framework */; };
 		0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0040F1891C4C832A0076F176 /* NVActivityIndicatorView.framework */; };
 		009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009381E51CA4F43C0045CCAE /* Locksmith.framework */; };
@@ -92,15 +95,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KYNavigationProgress.framework; path = Carthage/Build/iOS/KYNavigationProgress.framework; sourceTree = "<group>"; };
 		000B24BC1CAC7DB9001C6886 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		000B24BE1CAC7FC1001C6886 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		002A3E441CAC3B2F00456482 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		002FF4231CB6CDD300DCBDA5 /* PreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
+		002FF4251CB6CDDC00DCBDA5 /* PreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCell.xib; sourceTree = "<group>"; };
 		00317EF81C6D2F6500882EFC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		003381D41CB03209002B3B99 /* NSDate+TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+TimeAgo.swift"; sourceTree = "<group>"; };
 		003381D61CB0324C002B3B99 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		0040F1461C4C5FF30076F176 /* Privy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Privy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0040F1491C4C5FF30076F176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0040F14B1C4C5FF30076F176 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0040F14E1C4C5FF30076F176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0040F1511C4C5FF30076F176 /* PRIVY.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PRIVY.xcdatamodel; sourceTree = "<group>"; };
 		0040F1531C4C5FF30076F176 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -126,6 +131,7 @@
 		0040F1951C4CB7490076F176 /* QRScanOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanOperation.swift; sourceTree = "<group>"; };
 		0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperation.swift; sourceTree = "<group>"; };
 		0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QrCorrectionLevel.swift; sourceTree = "<group>"; };
+		008021501CB5FC1500FA2475 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		009381E51CA4F43C0045CCAE /* Locksmith.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Locksmith.framework; path = Carthage/Build/iOS/Locksmith.framework; sourceTree = "<group>"; };
 		00A09FC51C849BFF00A47B2E /* RNCryptor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RNCryptor.framework; path = Carthage/Build/iOS/RNCryptor.framework; sourceTree = "<group>"; };
 		00A09FC71C849D4800A47B2E /* LocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
@@ -178,6 +184,7 @@
 				008695391C70E3AD00C7C35C /* DynamicButton.framework in Frameworks */,
 				009381E61CA4F43C0045CCAE /* Locksmith.framework in Frameworks */,
 				0086953A1C70E3AD00C7C35C /* NVActivityIndicatorView.framework in Frameworks */,
+				0001DEBC1CC35A0C00C42216 /* KYNavigationProgress.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +244,6 @@
 				00A7B9411C7CB4C400E94C68 /* ServerResponses.swift */,
 				0040F17C1C4C61070076F176 /* Extensions */,
 				0040F1841C4C772E0076F176 /* General */,
-				0040F14B1C4C5FF30076F176 /* ViewController.swift */,
 				0040F1811C4C64240076F176 /* RootTabBarController.swift */,
 				000B24BC1CAC7DB9001C6886 /* GradientView.swift */,
 				00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */,
@@ -362,6 +368,7 @@
 			children = (
 				00A7B9751C7E3D6600E94C68 /* HistoryTableViewController.swift */,
 				00A908291CACD0BD00A957C6 /* HistoryUserViewController.swift */,
+				008021501CB5FC1500FA2475 /* MapViewController.swift */,
 			);
 			name = History;
 			sourceTree = "<group>";
@@ -379,6 +386,7 @@
 		00A7B9671C7E06E600E94C68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0001DEBB1CC35A0C00C42216 /* KYNavigationProgress.framework */,
 				00317EF81C6D2F6500882EFC /* AVFoundation.framework */,
 				0040F18B1C4C833A0076F176 /* Carthage */,
 			);
@@ -392,9 +400,11 @@
 				00A7B94E1C7D30C900E94C68 /* ProfileImageCell.swift */,
 				00A7B94F1C7D30C900E94C68 /* ProfileFieldCell.swift */,
 				00A7B9501C7D30C900E94C68 /* ProfileLabelCell.swift */,
+				002FF4231CB6CDD300DCBDA5 /* PreviewCell.swift */,
 				00A7B9561C7D31F400E94C68 /* ProfileFieldCell.xib */,
 				00A7B9571C7D31F400E94C68 /* ProfileImageCell.xib */,
 				00A7B9581C7D31F400E94C68 /* ProfileLabelCell.xib */,
+				002FF4251CB6CDDC00DCBDA5 /* PreviewCell.xib */,
 			);
 			name = "Former Support";
 			sourceTree = "<group>";
@@ -512,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00A7B95B1C7D31F400E94C68 /* ProfileLabelCell.xib in Resources */,
+				002FF4261CB6CDDC00DCBDA5 /* PreviewCell.xib in Resources */,
 				0040F1571C4C5FF30076F176 /* LaunchScreen.storyboard in Resources */,
 				00A908241CACC8ED00A957C6 /* failure.mp3 in Resources */,
 				0040F1541C4C5FF30076F176 /* Assets.xcassets in Resources */,
@@ -553,6 +564,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RNCryptor.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Locksmith.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/KYNavigationProgress.framework",
 			);
 			outputPaths = (
 			);
@@ -567,7 +579,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0040F14C1C4C5FF30076F176 /* ViewController.swift in Sources */,
 				0040F1821C4C64240076F176 /* RootTabBarController.swift in Sources */,
 				00A7B9401C7C05FD00E94C68 /* RequestManager.swift in Sources */,
 				000B24BD1CAC7DB9001C6886 /* GradientView.swift in Sources */,
@@ -578,6 +589,7 @@
 				00A7B9601C7D598800E94C68 /* RoundedTextField.swift in Sources */,
 				00A7B94D1C7D308800E94C68 /* FormerInputAccessoryView.swift in Sources */,
 				00A7B9551C7D315600E94C68 /* String Extensions.swift in Sources */,
+				008021511CB5FC1500FA2475 /* MapViewController.swift in Sources */,
 				00BFF88B1C7A72D20027BFFE /* CaptureLayerView.swift in Sources */,
 				00A7B9621C7D5A5400E94C68 /* RoundedButton.swift in Sources */,
 				0040F19D1C4D4C500076F176 /* QRGeneratorOperation.swift in Sources */,
@@ -599,6 +611,7 @@
 				00A7B9461C7D245400E94C68 /* InfoViewController.swift in Sources */,
 				00A7B9521C7D30C900E94C68 /* ProfileFieldCell.swift in Sources */,
 				0040F19F1C4D4E6F0076F176 /* QrCorrectionLevel.swift in Sources */,
+				002FF4241CB6CDD300DCBDA5 /* PreviewCell.swift in Sources */,
 				00A7B9531C7D30C900E94C68 /* ProfileLabelCell.swift in Sources */,
 				00A7B9741C7E24F100E94C68 /* BloggingViewController.swift in Sources */,
 				00A7B9721C7E24E300E94C68 /* MediaViewController.swift in Sources */,
@@ -768,7 +781,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -790,7 +803,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.MacCDevTeam.privy;
 				PRODUCT_NAME = Privy;
-				PROVISIONING_PROFILE = "8b6b513d-b1f4-486f-a4ac-344926e32b6e";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Privy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
@@ -827,7 +840,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
 				PRODUCT_NAME = PrivyUITests;
-				TEST_TARGET_NAME = PRIVY;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = Privy;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -839,7 +853,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Michael-MacCallum.PrivyUITests";
 				PRODUCT_NAME = PrivyUITests;
-				TEST_TARGET_NAME = PRIVY;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = Privy;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;

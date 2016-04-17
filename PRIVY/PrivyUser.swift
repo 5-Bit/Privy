@@ -8,6 +8,8 @@
 
 import Foundation
 import ObjectMapper
+import CoreGraphics
+import CoreLocation
 
 /**
  *  @author Michael MacCallum, 2016-02-28 15:02:49-0500
@@ -104,11 +106,35 @@ final class PrivyUser: Mappable {
 struct InfoTypes: Mappable {
     var sessionid: String?
 
+    var location: Location?
+
+    struct Location: Mappable {
+        var latitude: CLLocationDegrees?
+        var longitude: CLLocationDegrees?
+
+        init?(_ map: Map) {
+            mapping(map)
+        }
+
+        mutating func mapping(map: Map) {
+            latitude     <- map["latitude"]
+            longitude    <- map["longitude"]
+        }
+    }
+
     struct Basic: Mappable {
         var firstName: String?
         var lastName: String?
         var emailAddress: String?
         var phoneNumber: String?
+        var profilePictureUrl: String?
+        var birthDay: NSDate?
+        var addressLine1: String?
+        var addressLine2: String?
+        var city: String?
+        var state: String?
+        var country: String?
+        var postalCode: String?
 
         init() {
 
@@ -119,10 +145,18 @@ struct InfoTypes: Mappable {
         }
 
         mutating func mapping(map: Map) {
-            firstName       <-  map["firstName"]
-            lastName        <-  map["lastName"]
-            emailAddress    <-  map["emailAddress"]
-            phoneNumber     <-  map["phoneNumber"]
+            firstName               <-  map["First Name"]
+            lastName                <-  map["Last Name"]
+            emailAddress            <-  map["Email Address"]
+            phoneNumber             <-  map["Phone Number"]
+            profilePictureUrl       <-  map["Profile Picture URL"]
+            birthDay                <-  (map["Birthday"], DateTransform())
+            addressLine1            <-  map["Address Line 1"]
+            addressLine2            <-  map["Address Line 2"]
+            city                    <-  map["City"]
+            state                   <-  map["State"]
+            country                 <-  map["Country"]
+            postalCode              <-  map["Zip Code"]
         }
     }
 
@@ -254,12 +288,13 @@ struct InfoTypes: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        sessionid   <-  map["sessionid"]
+        sessionid   <-  map["uuid"]
         basic       <-  map["basic"]
         social      <-  map["social"]
         business    <-  map["business"]
         developer   <-  map["developer"]
         media       <-  map["media"]
         blogging    <-  map["blogging"]
+        location    <-  map["location"]
     }
 }

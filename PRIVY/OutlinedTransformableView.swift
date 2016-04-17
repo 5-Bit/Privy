@@ -8,7 +8,8 @@
 
 import UIKit
 
-class OutlinedTransformableView: UIView {
+/// Draws a view whose visible area is defined by shape resulting from the specification of 4 corner points.
+final class OutlinedTransformableView: UIView {
     var corners: [CGPoint]? {
         didSet {
             drawAroundCorners()
@@ -42,10 +43,10 @@ class OutlinedTransformableView: UIView {
     
     private func drawAroundCorners() {
         guard let corners = corners where corners.count == 4 else {
-            print("no corners or not 4 corners")
             return
         }
-        
+
+        // Draw a path around the 4 input corners.
         let path = UIBezierPath()
         path.moveToPoint(corners[0])
         
@@ -56,9 +57,9 @@ class OutlinedTransformableView: UIView {
         path.addLineToPoint(corners[0])
         
         shapeLayer.removeAllAnimations()
-        
+
+        // Animate the current path of the backing shape layer to the new path.
         let pathAnimation = CABasicAnimation(keyPath: "path")
-//        pathAnimation.toValue = path.CGPath
         pathAnimation.fromValue = (shapeLayer.presentationLayer() as? CAShapeLayer)?.path
         pathAnimation.duration = 0.05
         pathAnimation.fillMode = kCAFillModeForwards
@@ -68,14 +69,8 @@ class OutlinedTransformableView: UIView {
         
         shapeLayer.addAnimation(pathAnimation, forKey: nil)
     }
-    
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
+
+    // This view needs to be backed by a CAChapeLayer instead of the default CALayer.
     override class func layerClass() -> AnyClass {
         return CAShapeLayer.self
     }

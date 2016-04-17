@@ -13,7 +13,7 @@ private enum ViewState: String {
     case Login, Registration
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     @IBOutlet private weak var confirmationButton: UIButton!
     @IBOutlet private weak var stateSwitcherButton: UIButton!
 
@@ -180,6 +180,7 @@ class LoginViewController: UIViewController {
             switch error {
             case .Ok:
                 PrivyUser.currentUser.registrationInformation = response
+
                 let defaults = NSUserDefaults.standardUserDefaults()
 
                 if let currentUser = LocalStorage.defaultStorage.attemptLoginWithCredential(credential) {
@@ -194,6 +195,8 @@ class LoginViewController: UIViewController {
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     }
                 }
+
+                (UIApplication.sharedApplication().delegate as? AppDelegate)?.registerForNotifications()
             case .ServerError(let message):
                 self.showErrorAlert(message)
                 self.resetLoadingUI()
@@ -350,14 +353,17 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     @IBAction private func textFieldDidChangeEditing(textField: UITextField) {
-        
+        let highAlpha: CGFloat = 0.8
+        let lowAlpha: CGFloat = 0.8
+        let passwordLength = 8
+
         if viewState == .Login {
             let enabled = !emailTextField.text.isNilOrEmpty
                 && !passwordTextField.text.isNilOrEmpty
-                && passwordTextField.text!.characters.count >= 8
+                && passwordTextField.text!.characters.count >= passwordLength
 
             confirmationButton.enabled = enabled
-            confirmationButton.alpha = enabled ? 1.0 : 0.8
+            confirmationButton.alpha = enabled ? highAlpha : lowAlpha
 
             passwordTextField.layer.borderColor = UIColor.clearColor().CGColor
             confirmPasswordTextField.layer.borderColor = UIColor.clearColor().CGColor
@@ -366,14 +372,14 @@ extension LoginViewController: UITextFieldDelegate {
                 passwordTextField.layer.borderColor = UIColor.clearColor().CGColor
                 confirmPasswordTextField.layer.borderColor = UIColor.clearColor().CGColor
                 confirmationButton.enabled = false
-                confirmationButton.alpha = 0.8
+                confirmationButton.alpha = lowAlpha
             } else {
                 let enabled = passwordTextField.text == confirmPasswordTextField.text
-                    && passwordTextField.text!.characters.count >= 8
+                    && passwordTextField.text!.characters.count >= passwordLength
                 let borderColor = enabled ? UIColor.clearColor().CGColor : UIColor.redColor().CGColor
                 
                 confirmationButton.enabled = enabled
-                confirmationButton.alpha = enabled ? 1.0 : 0.8
+                confirmationButton.alpha = enabled ? highAlpha : lowAlpha
                 passwordTextField.layer.borderColor = borderColor
                 confirmPasswordTextField.layer.borderColor = borderColor
             }

@@ -11,7 +11,7 @@ import AVFoundation
 
 typealias QRScanCompletion = String -> Void
 
-class QRScanOperation: ObservableOperation {
+final class QRScanOperation: ObservableOperation {
     private let session = AVCaptureSession()
     private let device: AVCaptureDevice
     private let completionHandler: QRScanCompletion
@@ -28,7 +28,6 @@ class QRScanOperation: ObservableOperation {
         super.init()
     }
 
-    
     override func start() {
         super.start()
         session.beginConfiguration()
