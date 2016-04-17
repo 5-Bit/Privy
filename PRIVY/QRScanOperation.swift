@@ -28,7 +28,6 @@ class QRScanOperation: ObservableOperation {
         super.init()
     }
 
-    
     override func start() {
         super.start()
         session.beginConfiguration()
