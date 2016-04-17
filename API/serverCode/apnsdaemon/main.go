@@ -3,8 +3,40 @@ package apnsdaemon
 import (
 	"fmt"
 	apns "github.com/anachronistic/apns"
-	// "time"
+	"time"
 )
+
+var removeAPNSFromStore func(apns string) error = nil
+
+func SetAPNSRemovalDelegate(funcToCall func(apns string) error) {
+	removeAPNSFromStore = funcToCall
+}
+
+// TODO: Possibly queue APNS removals to allow db to catch up
+func removeAPNSID(apns string) {
+	if removeAPNSFromStore != nil {
+		err := removeAPNSFromStore(apns)
+		if err != nil {
+			fmt.Println("Error removing APNS from db:", err)
+		}
+	} else {
+		fmt.Println("Cannot remove APNS token at this time")
+	}
+}
+
+func listenForFeedback(client *apns.Client) {
+	go client.ListenForFeedback()
+	for {
+		select {
+		case resp := <-apns.FeedbackChannel:
+			removeAPNSID(resp.DeviceToken)
+			fmt.Println("Removing device token ", resp.DeviceToken)
+			// todo: Send that this APNS token should not get notifciations
+		case <-apns.ShutdownChannel:
+			break
+		}
+	}
+}
 
 func SendNotification(apnsID string) {
 	apnsBuffer <- apnsID
@@ -14,7 +46,7 @@ var apnsBuffer = make(chan string, 200)
 
 // TODO: Batch this better!
 func daemon() {
-	// checkFeedback := time.NewTicker(30 * time.Minute)
+	checkFeedback := time.NewTicker(30 * time.Second)
 	payload := apns.NewPayload()
 	payload.Alert = "One of your contacts updated their information"
 	payload.Badge = 1
@@ -31,21 +63,10 @@ func daemon() {
 			if resp.Error != nil {
 				fmt.Println("Failed to send push notification:", resp.Error)
 			}
-			// TODO:
-			/*
-				go client.ListenForFeedback()
-				for {
-					select {
-					case resp := <-client.FeedbackChannel:
-
-					}
-				}
-			*/
+		case <-checkFeedback.C:
+			go listenForFeedback(client)
 		}
 	}
-}
-func sendAPSNRequest(apnsID string) {
-
 }
 
 func init() {

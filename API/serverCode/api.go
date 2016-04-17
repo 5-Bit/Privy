@@ -15,9 +15,9 @@ import (
 	"strings"
 
 	// FIXME: This import path will currently only work on this server.
-	pushNotifications "yumaikas/eaglelist/eagleslist-server/apnsdaemon"
-	"yumaikas/eaglelist/eagleslist-server/templates"
-	email "yumaikas/eaglelist/eagleslist-server/validation"
+	pushNotifications "./apnsdaemon"
+	"./templates"
+	email "./validation"
 
 	_ "github.com/lib/pq"
 )
@@ -205,7 +205,7 @@ func saveUserJSON(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 	sessionID, ok := target["sessionid"].(string)
 	if !ok {
-		fmt.Println(err)
+		fmt.Println("Missing sessionid in user json")
 		writeError(w, 400, "No sesssion!")
 		return
 	}
@@ -235,6 +235,7 @@ func saveUserJSON(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 	// TODO: Diff the saved data with the existing data so we know what UUIDs to send push notifications for
+	// FIXED: We only send the notifcation at the user level for now
 	rows, err := db.Query(`
 		Select distinct apns_token.apns_device_token
 		from privy_uuids
@@ -261,6 +262,13 @@ func saveUserJSON(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	w.WriteHeader(200)
 }
 
+func deleteAPNSToken(device_id string) error {
+	_, err := db.Query(`
+	Delete from apns_token where apsn_device_token = $1
+	`, device_id)
+	return err
+}
+
 func invalidateSession(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	// TODO: Implement this and route it
 	return
@@ -277,7 +285,7 @@ func invalidateSession(w http.ResponseWriter, r *http.Request, p httprouter.Para
 
 	_, err := db.Exec(`
 	Update sessions
-	set valid_til = TIMESTAMPTZ 'NOW' + INTERVAL '-1 MINUTE'
+		Set valid_til = TIMESTAMPTZ 'NOW' + INTERVAL '-1 MINUTE'
 	where cookieinfo = $1`, r.FormValue("sessionid"))
 	if err != nil {
 		fmt.Println(err)
@@ -444,39 +452,15 @@ func sendResetEmail(w http.ResponseWriter, r *http.Request, p httprouter.Params)
 	w.WriteHeader(200)
 }
 
-/*
-func emitUsers(w http.ResponseWriter, rows *sql.Rows, em EMIT_TYPE) {
-	users := make([]User, 0)
-	for rows.Next() {
-		user := User{}
-		rows.Scan(&user.Handle, &user.Email, &user.Bio, &user.ImageURL)
-		users = append(users, user)
-	}
-	rows.Close()
-	var data []byte
-	var err error
-	if em == EMIT_MANY {
-		data, err = json.Marshal(struct{ Users []User }{users})
-	} else {
-		data, err = json.Marshal(users[0])
-	}
-	// TODO: clean this up.
-	if err != nil {
-		writeError(w, 500, "Ukown error")
-		return
-	}
-	w.Write(data)
-}
-*/
-
 // This gets the JSON for a set of UUIDs.
 func getJsonForUUIDS(userID int, uuids string) ([]string, error) {
 	rows, err := db.Query(`
 		Select
-		-- This is a drop in for json_object_agg. I need to figure out how to build that...
+			-- This is a drop in for json_object_agg. I need to figure out how to build that...
 		     ('{' ||
 				string_agg(Distinct '"' || info_type || '": '
 						|| (privy_user.social_information->>info_type), ',')
+						|| ', "uuid": "' || coalesce(max(privy_uuids.id::text), 'null') || '"' 
 			|| '}' )::json as USER_JSON
 
 		from privy_user
@@ -528,9 +512,33 @@ func getJsonUserSubData(userID int) ([]string, error) {
 	return data, nil
 }
 
+func deleteSubscriptionToUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	if err := r.ParseForm(); err != nil {
+		fmt.Println(err.Error())
+		writeError(w, 400, "Bad form encoding")
+		return
+	}
+	fmt.Println("sessionid: ", r.FormValue("sessionid"))
+	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
+	uuid := r.FormValue("uuid")
+	if !ok || err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Invalid auth token")
+		return
+	}
+	// A note for those not familiar with PostGresql, this is how server side
+	// functions are executed
+	_, err = db.Exec(`
+	Select * from removeSubscriptions($1, $2)
+	`, userID, uuid)
+	if err != nil {
+		fmt.Println(err)
+		writeError(w, 500, "Server error!")
+	}
+}
+
 // This function needs to check that each UUID is one that the user is already connected to.
 func refreshUUIDList(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	fmt.Println("foo")
 	if err := r.ParseForm(); err != nil {
 		fmt.Println(err.Error())
 		writeError(w, 400, "Bad form encoding")
@@ -585,12 +593,12 @@ func lookupAndSubUUIDS(w http.ResponseWriter, r *http.Request, p httprouter.Para
 		return
 	}
 
+	lat := r.FormValue("latitude")
+	long := r.FormValue("longitude")
 	// Query, args -> Result, error
 	_, err = db.Exec(`
-	Insert into subscription (user_id, uuid)
-	Select $1, uuid_tools.id::uuid
-	from (select regexp_split_to_table($2, ',') as id)  as uuid_tools
-	`, userID, uuidsList)
+	Select upsertSubscription($1::int, $2::text, $3::double precision, $4::double precision)
+	`, userID, uuidsList, lat, long)
 	if err != nil {
 		fmt.Println("SQL error: ", err.Error())
 		writeError(w, 500, "Server error!")
@@ -636,6 +644,29 @@ func registerPushNotificationClient(w http.ResponseWriter, r *http.Request, p ht
 	w.WriteHeader(200)
 }
 
+func getMyImage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	if err := r.ParseForm(); err != nil {
+		writeError(w, 400, "Bad form encoding")
+		return
+	}
+	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
+	if !ok || err != nil {
+		fmt.Println(err)
+		writeError(w, 400, "Invalid auth token")
+		return
+	}
+	path := filepath.Join(config.UploadsRoot, fmt.Sprint(userID))
+	if _, err := os.Stat(path + ".png"); err == nil {
+		http.ServeFile(w, r, path+".png")
+		return
+	}
+	if _, err := os.Stat(path + ".jpg"); err == nil {
+		http.ServeFile(w, r, path+".jpg")
+		return
+	}
+	writeError(w, 404, "You haven't uploaded an image yet!")
+}
+
 func getImageForUUID(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	if err := r.ParseForm(); err != nil {
 		writeError(w, 400, "Bad form encoding")
@@ -650,12 +681,12 @@ func getImageForUUID(w http.ResponseWriter, r *http.Request, p httprouter.Params
 	}
 	var idToGrab int
 	err = db.QueryRow(
-		`Select user_id from privy_uuids 
+		`Select privy_uuids.user_id from privy_uuids 
 		inner join subscription on subscription.uuid = privy_uuids.id
 		where privy_uuids.id = $1::uuid
 		and subscription.user_id = $2
 		`,
-		uuidToCheck, userID).Scan(idToGrab)
+		uuidToCheck, userID).Scan(&idToGrab)
 	if err == sql.ErrNoRows {
 		fmt.Println("Search attempted without subscription")
 		writeError(w, 404, "Image not found")
@@ -666,20 +697,21 @@ func getImageForUUID(w http.ResponseWriter, r *http.Request, p httprouter.Params
 		writeError(w, 500, "Server error!")
 		return
 	}
-	path := filepath.Join(config.UploadsRoot, fmt.Sprint(userID))
+	path := filepath.Join(config.UploadsRoot, fmt.Sprint(idToGrab))
 	if _, err := os.Stat(path + ".png"); err == nil {
 		http.ServeFile(w, r, path+".png")
 		return
 	}
 	if _, err := os.Stat(path + ".jpg"); err == nil {
 		http.ServeFile(w, r, path+".jpg")
+		return
 	}
 	w.WriteHeader(400)
 }
 
 func saveUserImage(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	if err := r.ParseMultipartForm(1048567); err != nil {
-		writeError(w, 400, "Bad form encoding")
+	if err := r.ParseMultipartForm(104856700); err != nil {
+		writeError(w, 400, err.Error())
 		return
 	}
 	userID, ok, err := CheckSessionsKey(r.FormValue("sessionid"))
@@ -688,7 +720,7 @@ func saveUserImage(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		writeError(w, 400, "Invalid auth token")
 		return
 	}
-	file, fileHeader, err := r.FormFile("picture")
+	file, fileHeader, err := r.FormFile("image")
 	if err != nil {
 		fmt.Println(err)
 		writeError(w, 400, "Problem uploading image")
@@ -701,7 +733,7 @@ func saveUserImage(w http.ResponseWriter, r *http.Request, p httprouter.Params) 
 		return
 	}
 	ext := filepath.Ext(fileHeader.Filename)
-	err = ioutil.WriteFile(filepath.Join(config.UploadsRoot, fmt.Sprint(userID, ".", ext)), data, os.ModePerm|0755)
+	err = ioutil.WriteFile(filepath.Join(config.UploadsRoot, fmt.Sprint(userID, ext)), data, os.ModePerm|0755)
 	if err != nil {
 		fmt.Println(err.Error())
 		writeError(w, 500, "Server error!")

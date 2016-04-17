@@ -2,6 +2,7 @@
 package main
 
 import (
+	notifications "./apnsdaemon"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -43,6 +44,7 @@ func init() {
 	die(err)
 	connString := fmt.Sprint("user=", config.DbUserName, " password=", config.DbPass, " dbname=privy")
 	db, err = sql.Open("postgres", connString)
+	notifications.SetAPNSRemovalDelegate(deleteAPNSToken)
 	die(err)
 	die(db.Ping())
 }
@@ -66,13 +68,16 @@ func main() {
 	router.POST("/users/login", authUser)
 	//router.GET("/users/auth", checkAuth)     // TODO: Build method here.
 	router.GET("/users/info", lookupAndSubUUIDS)
-	router.GET("/users/refresh", refreshUUIDList)
+	router.GET("/users/history", refreshUUIDList)
+	// router.GET("/users/subscribedtome", nil)
 	router.DELETE("/users/subscription", deleteUUIDs)
+	router.DELETE("/users/followed", deleteSubscriptionToUser)
 	router.POST("/users/registerapnsclient", registerPushNotificationClient)
 	router.POST("/users/info", saveUserJSON)
 	router.POST("/users/resetpassword", sendResetEmail)
 	router.POST("/users/image", saveUserImage)
 	router.GET("/users/image", getImageForUUID)
+	router.GET("/users/myimage", getMyImage)
 	router.GET("/resetpassword/:changetoken", showResetPage)
 	router.POST("/resetpassword/:changetoken", processPasswordReset)
 	router.POST("/users/logout", invalidateSession)
