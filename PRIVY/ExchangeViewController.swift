@@ -265,24 +265,38 @@ class ExchangeViewController: UIViewController {
 
             let fillColor: UIColor
             let borderColor: UIColor
+            let backgroundColor: UIColor
 
             switch status {
             case .Unknown:
                 fillColor = UIColor.clearColor()
                 borderColor = UIColor.clearColor()
+                backgroundColor = UIColor.clearColor()
             case .Failed:
                 fillColor = UIColor.redColor()
                 borderColor = UIColor.redColor()
+                backgroundColor = UIColor.clearColor()
             case .Succeeded, .Pending:
                 fillColor = UIColor.clearColor()
                 borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
             case .Processed:
                 fillColor = UIColor.greenColor()
                 borderColor = UIColor.greenColor()
+                backgroundColor = UIColor.blackColor()
             }
 
-            view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
-            view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
+            UIView.animateWithDuration(
+                0.05,
+                delay: 0.0,
+                options: .BeginFromCurrentState,
+                animations: { 
+                    view.shapeLayer.fillColor = fillColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.borderColor = borderColor.colorWithAlphaComponent(0.5).CGColor
+                    view.shapeLayer.backgroundColor = backgroundColor.colorWithAlphaComponent(0.25).CGColor
+                },
+                completion: nil
+            )
         }
     }
 
