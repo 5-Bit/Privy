@@ -314,6 +314,11 @@ final class RequestManager {
         }
     }
 
+    /**
+     <#Description#>
+
+     - parameter completion: <#completion description#>
+     */
     func logout(completion: (success: Bool) -> Void) {
         guard let session = PrivyUser.currentUser.userInfo.sessionid else {
             completionOnMainThread(false, completion: completion)
@@ -342,10 +347,17 @@ final class RequestManager {
         }
     }
 
+    /**
+     <#Description#>
+
+     - parameter image:      <#image description#>
+     - parameter completion: <#completion description#>
+     */
     func uploadUserProfilePicture(image: UIImage?, completion: (success: Bool) -> Void) {
-        guard let sessionId = PrivyUser.currentUser.userInfo.sessionid else {
-//            completionOnMainThread(false, completion: completion)
-            return
+        guard let sessionId = PrivyUser.currentUser.userInfo.sessionid
+            ?? PrivyUser.currentUser.registrationInformation?.sessionid else {
+                completionOnMainThread(false, completion: completion)
+                return
         }
 
         let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/image")
@@ -355,28 +367,57 @@ final class RequestManager {
 
         let url = baseUrl.urlByAppendingQueryItems(queryItems)
 
-        let request = NSMutableURLRequest(
-            URL: url,
-            cachePolicy: .ReloadIgnoringLocalAndRemoteCacheData,
-            timeoutInterval: Static.defaultTimeout
-        )
+        let boundary = NSUUID().UUIDString
+        let headers = [
+            "Content-Type": "multipart/form-data; boundary=\"\(boundary)\""
+        ]
 
-        let imageData = image == nil ? nil : UIImagePNGRepresentation(image!)
+        let imageData = image == nil ? nil : UIImageJPEGRepresentation(image!, 0.5)
+        let multiPartData = multiPartDataStringFromData(imageData!, boundary: boundary)
 
-        let uploadTask = session.uploadTaskWithRequest(request, fromData: imageData) { data, response, error in
+        handleRequest(url, method: .POST, additionalHeaders: headers, body: multiPartData) { data, response, error in
+            var success = false
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
 
-            guard let response = response as? NSHTTPURLResponse else {
-                self.completionOnMainThread(false, completion: completion)
+            guard error == nil else {
                 return
             }
 
-            print(data)
-            print(error)
+            guard let status = (response as? NSHTTPURLResponse)?.statusCode where status == 200 else {
+                return
+            }
 
-            self.completionOnMainThread(true, completion: completion)
+            success = true
+        }
+    }
+
+    /**
+     <#Description#>
+
+     - parameter data:     <#data description#>
+     - parameter boundary: <#boundary description#>
+
+     - returns: <#return value description#>
+     */
+    private func multiPartDataStringFromData(data: NSData, boundary: String) -> NSData {
+        let body = NSMutableData()
+
+        func appendBoundary() {
+            body.appendData("--\(boundary)\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
         }
 
-        uploadTask.resume()
+        appendBoundary()
+
+        body.appendData("Content-Disposition: form-data; name=\"image\"; filename=\"image.jpg\"\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData("Content-Type: image/jpeg\r\n\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(data)
+        body.appendData("\r\n".dataUsingEncoding(NSUTF8StringEncoding)!)
+
+        appendBoundary()
+
+        return body
     }
 
     func fetchProfilePictureForUser(uuid: String, completion: (image: UIImage?) -> Void) {
@@ -410,7 +451,7 @@ final class RequestManager {
         }
     }
 
-    private func handleRequest(url: NSURL, method: HttpMethod = .GET, body: NSData? = nil, completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void) {
+    private func handleRequest(url: NSURL, method: HttpMethod = .GET, additionalHeaders: [String: String]? = nil, body: NSData? = nil, completion: (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void) {
         RequestManager.updateNetworkOperationState(isNetworking: true)
 
         let request = NSMutableURLRequest(
@@ -422,6 +463,12 @@ final class RequestManager {
         request.method = method
         if let body = body {
             request.HTTPBody = body
+        }
+
+        if let headers = additionalHeaders {
+            for (key, value) in headers {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
         }
 
         session.dataTaskWithRequest(request) { data, response, error in
