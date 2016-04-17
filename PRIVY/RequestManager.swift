@@ -420,13 +420,62 @@ final class RequestManager {
         return body
     }
 
-    func fetchProfilePictureForUser(uuid: String, completion: (image: UIImage?) -> Void) {
-        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/image")
+    func fetchMyProfilePicture(completion: (image: UIImage?) -> Void) {
+        guard let sessionId = PrivyUser.currentUser.userInfo.sessionid
+            ?? PrivyUser.currentUser.registrationInformation?.sessionid else {
+                completionOnMainThread(nil, completion: completion)
+                return
+        }
+
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/myimage")
         let queryItems = [
-            NSURLQueryItem(name: "uuid", value: uuid)
+            NSURLQueryItem(name: "sessionid", value: sessionId)
         ]
 
         let url = baseUrl.urlByAppendingQueryItems(queryItems)
+
+        handleImageRequest(url, completion: completion)
+    }
+
+    func fetchProfilePictureForUser(uuid: String, completion: (image: UIImage?) -> Void) {
+        guard let sessionId = PrivyUser.currentUser.userInfo.sessionid
+            ?? PrivyUser.currentUser.registrationInformation?.sessionid else {
+                completionOnMainThread(nil, completion: completion)
+                return
+        }
+
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("users/image")
+        let queryItems = [
+            NSURLQueryItem(name: "uuid", value: uuid),
+            NSURLQueryItem(name: "sessionid", value: sessionId)
+        ]
+
+        let url = baseUrl.urlByAppendingQueryItems(queryItems)
+
+        handleImageRequest(url, completion: completion)
+    }
+
+    private func handleImageRequest(url: NSURL, completion: (image: UIImage?) -> Void) {
+        handleRequest(url) { data, response, error in
+            var image: UIImage?
+            defer {
+                self.completionOnMainThread(image, completion: completion)
+            }
+
+            guard error == nil else {
+                return
+            }
+
+            guard let status = (response as? NSHTTPURLResponse)?.statusCode where status == 200 else {
+                return
+            }
+
+            guard let data = data else {
+                return
+            }
+
+            image = UIImage(data: data)
+        }
     }
 
     func requestPasswordReset(email: String, completion: (success: Bool) -> Void) {
@@ -437,7 +486,7 @@ final class RequestManager {
 
         let body = url.urlByAppendingQueryItems(queryItems).query?.dataUsingEncoding(NSUTF8StringEncoding)
 
-        handleRequest(url, method: .POST, body: body) { (data, response, error) in
+        handleRequest(url, method: .POST, body: body) { data, response, error in
             var success = false
             defer {
                 self.completionOnMainThread(success, completion: completion)
@@ -498,6 +547,12 @@ final class RequestManager {
     private func completionOnMainThread(success: Bool, completion: (success: Bool) -> Void) {
         dispatch_async(dispatch_get_main_queue()) {
             completion(success: success)
+        }
+    }
+
+    private func completionOnMainThread(image: UIImage?, completion: (image: UIImage?) -> Void) {
+        dispatch_async(dispatch_get_main_queue()) {
+            completion(image: image)
         }
     }
 }

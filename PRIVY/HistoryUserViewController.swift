@@ -11,6 +11,7 @@ import ObjectMapper
 import Contacts
 import ContactsUI
 import CoreLocation
+import KYNavigationProgress
 
 struct Row {
     let title: String
@@ -24,6 +25,7 @@ struct Section {
 
 class HistoryUserViewController: UIViewController {
     @IBOutlet private weak var profileImageView: UIImageView!
+
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var detailLabel: UILabel!
 
@@ -187,7 +189,7 @@ class HistoryUserViewController: UIViewController {
         locationButton.hidden = user.location?.longitude == nil || user.location?.latitude == nil
 
         var sections = [Section]()
-        for (key, value) in json as! [String: [String: AnyObject]] where key != "location" {
+        for (key, value) in json where key != "location" {
             var rows = [Row]()
 
             if key == "basic" {
@@ -209,10 +211,24 @@ class HistoryUserViewController: UIViewController {
                 nameLabel.text = names.joinWithSeparator(" ")
             }
 
-            for (subKey, subValue) in value where subKey != "Birthday" {
-                if key != "basic" || (subKey != "First Name" && subKey != "Last Name") {
-                    let row = Row(title: subKey.capitalizedString, description: subValue as! String)
-                    rows.append(row)
+            if let sub = value as? [String: AnyObject] {
+                for (subKey, subValue) in sub where subKey != "Birthday" {
+                    if key != "basic" || (subKey != "First Name" && subKey != "Last Name") {
+                        let row = Row(title: subKey.capitalizedString, description: subValue as! String)
+                        rows.append(row)
+                    }
+                }
+            } else if let uuid = value as? String where key == "uuid" {
+                navigationController?.setProgress(0.25, animated: true)
+                RequestManager.sharedManager.fetchProfilePictureForUser(uuid) { image in
+                    self.navigationController?.setProgress(0.25, animated: true)
+                    self.profileImageView.image = image
+
+                    if image == nil {
+                        self.navigationController?.cancelProgress()
+                    } else {
+                        self.navigationController?.finishProgress()
+                    }
                 }
             }
 

@@ -15,3 +15,6 @@ github "RNCryptor/RNCryptor" "RNCryptor-4.0.0"
 
 # Keychain Access
 github "matthewpalmer/Locksmith"
+
+# Navigation Bar Progress
+github "ykyouhei/KYNavigationProgress"

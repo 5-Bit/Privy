@@ -1183,8 +1183,8 @@
         <image name="swap-selected" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vXf-UE-mjf"/>
         <segue reference="Jzg-lA-avg"/>
+        <segue reference="ifU-oa-OXx"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
