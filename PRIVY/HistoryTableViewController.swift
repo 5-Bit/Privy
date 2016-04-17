@@ -102,7 +102,14 @@ class HistoryTableViewController: UITableViewController {
         }
     }
 
+    /**
+     Determines the number of different kinds of contact information we have for the given user.
+     */
     private func countInfo(user: HistoryUser) -> Int {
+        /*
+         This is terrible, but unfortunately the best we can do considering the structure of user data.
+         Create a [AnyObject?], and count the number of non-nil objects in it.
+         */
         let types = [
             user.basic.emailAddress, user.basic.phoneNumber, String(user.basic.birthDay),
             user.basic.addressLine1, user.basic.addressLine2, user.basic.city, user.basic.country,
