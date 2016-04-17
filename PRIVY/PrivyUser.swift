@@ -104,8 +104,9 @@ final class PrivyUser: Mappable {
  *  @since <#1.0#>
  */
 struct InfoTypes: Mappable {
-    var sessionid: String?
-
+    var uuid: String?
+    var sessionId: String?
+    
     var location: Location?
 
     struct Location: Mappable {
@@ -288,7 +289,8 @@ struct InfoTypes: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        sessionid   <-  map["uuid"]
+        uuid        <-  map["uuid"]
+        sessionId   <-  map["sessionid"]
         basic       <-  map["basic"]
         social      <-  map["social"]
         business    <-  map["business"]

@@ -59,7 +59,7 @@ final class RequestManager {
     private let session: NSURLSession
 
     private var sessionId: String? {
-        return PrivyUser.currentUser.userInfo.sessionid
+        return PrivyUser.currentUser.userInfo.sessionId
             ?? PrivyUser.currentUser.registrationInformation?.sessionid
     }
     
@@ -437,9 +437,9 @@ final class RequestManager {
      Gets all of the current user's profile data and returns it as a binary data blob.
      */
     private func userJsonData() -> NSData? {
-        PrivyUser.currentUser.userInfo.sessionid = PrivyUser.currentUser.registrationInformation?.sessionid
+        PrivyUser.currentUser.userInfo.sessionId = PrivyUser.currentUser.registrationInformation?.sessionid
 
-        guard PrivyUser.currentUser.userInfo.sessionid != nil else {
+        guard PrivyUser.currentUser.userInfo.sessionId != nil else {
             return nil
         }
 
