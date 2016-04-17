@@ -424,7 +424,11 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
         RequestManager.sharedManager.attemptLookupByUUIDs(mapObject.uuids, inLocation: lastKnownLocation) { (user, errorStatus) in
 
             var (view, date, state) = self.detectedStringsMapping[object.stringValue]!
-            if let user = user {
+            if var user = user {
+                user.location = HistoryUser.Location(
+                    latitude: self.lastKnownLocation?.coordinate.latitude,
+                    longitude: self.lastKnownLocation?.coordinate.longitude
+                )
                 print("adding to history")
                 history.append(user)
                 LocalStorage.defaultStorage.saveHistory(history)
