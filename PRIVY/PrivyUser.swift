@@ -288,7 +288,7 @@ struct InfoTypes: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        sessionid   <-  map["sessionid"]
+        sessionid   <-  map["uuid"]
         basic       <-  map["basic"]
         social      <-  map["social"]
         business    <-  map["business"]
