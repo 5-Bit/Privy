@@ -10,24 +10,36 @@ import UIKit
 
 typealias HistoryUser = InfoTypes
 
-class HistoryTableViewController: UITableViewController {
+
+/**
+ *  @author Michael MacCallum, 16-04-17
+ *
+ *  Shows a list of all the user's the current user has swapped information with in a tableview.
+ *
+ *  @since 1.0
+ */
+final class HistoryTableViewController: UITableViewController {
     var datasource = LocalStorage.defaultStorage.loadHistory() {
         didSet {
             datasourceDidChange(oldValue)
         }
     }
 
+    // MARK: - UIViewController Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        // Basic config
         tableView.allowsSelectionDuringEditing = false
         tableView.allowsMultipleSelection = false
 
         clearsSelectionOnViewWillAppear = true
 
-        navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationItem.rightBarButtonItem = editButtonItem()
 
 
+        // Add a pull to refresh control to the table to trigger a full refresh of the user's history.
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = .privyDarkBlueColor
         refreshControl.addTarget(
@@ -35,20 +47,25 @@ class HistoryTableViewController: UITableViewController {
             action: #selector(HistoryTableViewController.refreshControlTriggered(_:)),
             forControlEvents: UIControlEvents.ValueChanged
         )
+
         tableView.addSubview(refreshControl)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        // Reload the datasource whenever this controller appears on screen.
         datasource = LocalStorage.defaultStorage.loadHistory()
-        print(datasource)
         tableView.reloadData()
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        /*
+         Remove any badges indicating to the user that there were information updates, since they're
+         viewing them here.
+         */
         navigationController?.tabBarItem.badgeValue = nil
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
     }
@@ -58,9 +75,10 @@ class HistoryTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Helper
+
     @objc private func refreshControlTriggered(refreshControl: UIRefreshControl) {
         refreshControl.beginRefreshing()
-        print("refreshing")
 
         fetchHistory { _ in
             refreshControl.endRefreshing()
@@ -69,7 +87,9 @@ class HistoryTableViewController: UITableViewController {
 
     private func datasourceDidChange(oldValue: [HistoryUser]) {
         dispatch_async(dispatch_get_main_queue()) {
+            // Only bother reloading if this tab is the visible one.
             if self.tabBarController?.tabBar.selectedItem === self.navigationController?.tabBarItem {
+                // Only bother animating the reload if the datasource changed in quantity.
                 if oldValue.count == self.datasource.count {
                     self.tableView.reloadSections(
                         NSIndexSet(index: 0),
@@ -89,8 +109,6 @@ class HistoryTableViewController: UITableViewController {
 
     /**
      Triggers the networking operation to refresh the user's history.
-
-     - parameter completion: <#completion description#>
      */
     func fetchHistory(completion: (success: Bool) -> Void) {
         RequestManager.sharedManager.refreshHistory { (history, errorStatus) in
