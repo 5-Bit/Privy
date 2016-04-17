@@ -156,16 +156,20 @@ final class SettingsViewController: FormViewController {
     }
 
     private func triggerLogout() {
+        // Had to have at least one pyramid of doom.
         RequestManager.sharedManager.logout { success in
             LocalStorage.defaultStorage.saveHistory([HistoryUser]())
-            dispatch_async(dispatch_get_main_queue()) {
-                LocalStorage.defaultStorage.saveUser(nil, completion: { (error) in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        PrivyUser.currentUser.registrationInformation = nil
 
+            dispatch_async(dispatch_get_main_queue()) {
+
+                LocalStorage.defaultStorage.saveUser(nil) { _ in
+
+                    dispatch_async(dispatch_get_main_queue()) {
+
+                        PrivyUser.currentUser.registrationInformation = nil
                         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
                     }
-                })
+                }
             }
         }
     }
