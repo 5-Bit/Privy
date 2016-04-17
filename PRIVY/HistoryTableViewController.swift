@@ -171,11 +171,7 @@ class HistoryTableViewController: UITableViewController {
 
             userViewController.allUsers = datasource
             userViewController.userIndex = indexPath.row
-
-            return
-        }
-
-        if let mapVC = segue.destinationViewController as? MapViewController {
+        } else if let mapVC = segue.destinationViewController as? MapViewController {
             mapVC.allUsers = datasource
         }
     }
