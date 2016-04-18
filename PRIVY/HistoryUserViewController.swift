@@ -24,6 +24,8 @@ struct Section {
 }
 
 final class HistoryUserViewController: UIViewController {
+    weak var historyTableViewController: HistoryTableViewController?
+
     @IBOutlet private weak var profileImageView: UIImageView!
 
     @IBOutlet private weak var nameLabel: UILabel!
@@ -92,15 +94,32 @@ final class HistoryUserViewController: UIViewController {
         actions.append(UIPreviewAction(
             title: "Refresh",
             style: UIPreviewActionStyle.Default,
-            handler: { (action, viewController) in
-                print("handled")
+            handler: { [unowned self] (action, viewController) in
+                guard let historyTableVC = self.historyTableViewController else {
+                    return
+                }
+
+                historyTableVC.fetchHistory { _ in }
         }))
 
         actions.append(UIPreviewAction(
             title: "Delete",
             style: UIPreviewActionStyle.Destructive,
-            handler: { (action, viewController) in
-                print("handled")
+            handler: { [unowned self] (action, viewController) in
+                guard let historyTableVC = self.historyTableViewController else {
+                    return
+                }
+
+                guard let user = self.user, row = self.allUsers.indexOf(user) else {
+                    return
+                }
+
+                let indexPath = NSIndexPath(
+                    forRow: row,
+                    inSection: 0
+                )
+
+                historyTableVC.deleteUserAtIndexPath(indexPath)
         }))
 
         return actions
