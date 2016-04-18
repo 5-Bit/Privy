@@ -1055,6 +1055,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="fcV-zA-Z2N" id="uuF-XI-B5M"/>
+                        <segue destination="6nj-fI-vG9" kind="show" identifier="showUserFromPin" id="7oT-2i-pTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCR-cp-LWN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1137,7 +1138,7 @@
         <image name="swap-selected" width="19" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jzg-lA-avg"/>
+        <segue reference="7oT-2i-pTx"/>
         <segue reference="ifU-oa-OXx"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
