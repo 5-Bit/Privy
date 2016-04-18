@@ -339,6 +339,38 @@ final class RequestManager {
         }
     }
 
+    func removeFromHistory(uuid: String, completion: (success: Bool) -> Void) {
+        guard let sessionId = sessionId else {
+            completionOnMainThread(false, completion: completion)
+            return
+        }
+
+        let baseUrl = RequestManager.Static.host.URLByAppendingPathComponent("/users/followed")
+        let queryItems = [
+            NSURLQueryItem(name: "uuid", value: uuid),
+            NSURLQueryItem(name: "sessionid", value: sessionId)
+        ]
+
+        let url = baseUrl.urlByAppendingQueryItems(queryItems)
+
+        handleRequest(url, method: .DELETE) { data, response, error in
+            var success = false
+            defer {
+                self.completionOnMainThread(success, completion: completion)
+            }
+
+            guard error == nil else {
+                return
+            }
+
+            guard let status = (response as? NSHTTPURLResponse)?.statusCode where status == 200 else {
+                return
+            }
+
+            success = true
+        }
+    }
+
     /**
      Registers the given token data with the server as an APNS id for the current device.
      This essentially adds the current device to the list of devices that will receive push
