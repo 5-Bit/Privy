@@ -27,22 +27,6 @@ final class ExchangeViewController: UIViewController {
     // Serial dispatch queue used for AVCaptureMetadataOutputObjectsDelegate callbacks.
     private let captureCallbackQueue = dispatch_queue_create("com.Privy.qrScan", DISPATCH_QUEUE_SERIAL)
     private let infoSwappingQueue = NSOperationQueue()
-    
-    /// Creates a QRGeneratorOperation on access.
-    private var qrGenOperation: QRGeneratorOperation {
-        let backgroundColor = NSUserDefaults.standardUserDefaults().colorForKey("defaultColor") ?? UIColor.blackColor()
-
-        return QRGeneratorOperation(
-            qrString: PrivyUser.currentUser.qrString,
-            size: self.qrCodeImageView?.bounds.size ?? CGSize(width: 151, height: 151),
-            scale: UIScreen.mainScreen().scale,
-            correctionLevel: .Medium,
-            backgroundColor: backgroundColor) { (image) in
-                dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                    self?.qrCodeImage = image
-                }
-        }
-    }
 
     private var detectedStringsMapping = [String: (OutlinedTransformableView, NSDate, DetectionStatus)]()
 
@@ -73,6 +57,8 @@ final class ExchangeViewController: UIViewController {
 
     @IBOutlet private weak var captureOutputView: CaptureLayerView!
     @IBOutlet private weak var toggleCameraButton: UIButton!
+
+    @IBOutlet private weak var cardBackgroundView: UIView!
 
     private var qrTimer: NSTimer?
 
@@ -139,7 +125,41 @@ final class ExchangeViewController: UIViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
+    private func applyCurrentTheme() {
+        let currentTheme = ThemeManager.defaultManager.defaultTheme
+
+        nameLabel.textColor = currentTheme.primaryColor
+        primaryDetailLabel.textColor = currentTheme.primaryColor
+        secondaryDetailLabel.textColor = currentTheme.primaryColor
+        ternaryDetailLabel.textColor = currentTheme.primaryColor
+
+        cardBackgroundView.backgroundColor = currentTheme.secondaryColor
+
+        regenerateQrCode()
+    }
+
+    private func regenerateQrCode() {
+        let operation = QRGeneratorOperation(
+            qrString: PrivyUser.currentUser.qrString,
+            size: self.qrCodeImageView?.bounds.size ?? CGSize(width: 151, height: 151),
+            scale: UIScreen.mainScreen().scale,
+            correctionLevel: .Medium,
+            backgroundColor: ThemeManager.defaultManager.defaultTheme.secondaryColor) { image in
+                dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                    self?.qrCodeImage = image
+                }
+        }
+
+        infoSwappingQueue.addOperation(operation)
+    }
+
+
+//    private var qrGenOperation: QRGeneratorOperation {
+//        let backgroundColor = NSUserDefaults.standardUserDefaults().colorForKey("defaultColor") ?? UIColor.blackColor()
+//
+//    }
+
     /**
      <#Description#>
      
@@ -148,7 +168,7 @@ final class ExchangeViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        infoSwappingQueue.addOperation(qrGenOperation)
+        applyCurrentTheme()
 
         let basicInfo = PrivyUser.currentUser.userInfo.basic
         
