@@ -176,7 +176,22 @@ final class HistoryTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            deleteUserAtIndexPath(indexPath)
+        }
+    }
 
+    func deleteUserAtIndexPath(indexPath: NSIndexPath) {
+        guard let uuid = datasource[indexPath.row].uuid else {
+            return
+        }
+
+        RequestManager.sharedManager.removeFromHistory(uuid) { success in
+            self.datasource.removeAtIndex(indexPath.row)
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
+            if success {
+                LocalStorage.defaultStorage.saveHistory(self.datasource)
+            }
         }
     }
 
@@ -189,6 +204,7 @@ final class HistoryTableViewController: UITableViewController {
 
             userViewController.allUsers = datasource
             userViewController.userIndex = indexPath.row
+            userViewController.historyTableViewController = self
         } else if let mapVC = segue.destinationViewController as? MapViewController {
             mapVC.allUsers = datasource
         }
