@@ -29,19 +29,77 @@ final class SettingsViewController: FormViewController {
         // Create RowFomers
         let previewRow = CustomRowFormer<PreviewCell>(instantiateType: .Nib(nibName: "PreviewCell")) {
             print($0)
+            
 //            $0.title = "Dynamic height"
 //            $0.body = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 ////            $0.bodyColor = colors[0]
+            let basicInfo = PrivyUser.currentUser.userInfo.basic
+
+            if let first = basicInfo.firstName, last = basicInfo.lastName {
+                $0.nameLabel.text = "\(first) \(last)"
+            } else {
+                $0.nameLabel.text = nil
+            }
+
+            var candidates = [
+                basicInfo.emailAddress, basicInfo.phoneNumber,
+            ]
+
+            let socialInfo = PrivyUser.currentUser.userInfo.social
+
+            if let twitter = socialInfo.twitter {
+                candidates.append("@" + twitter)
+            } else {
+                if let googlePlus = socialInfo.googlePlus {
+                    candidates.append("+" + googlePlus)
+                } else {
+                    candidates.append(socialInfo.snapchat ?? socialInfo.instagram ?? socialInfo.facebook)
+                }
+            }
+
+            let bloggingInfo = PrivyUser.currentUser.userInfo.blogging
+            candidates.append(bloggingInfo.website ?? bloggingInfo.wordpress ?? bloggingInfo.tumblr ?? bloggingInfo.medium)
+
+            let mediaInfo = PrivyUser.currentUser.userInfo.media
+            candidates.append(mediaInfo.youtube ?? mediaInfo.vimeo ?? mediaInfo.vine ?? mediaInfo.soundcloud ?? mediaInfo.flickr ?? mediaInfo.pintrest)
+
+            let devInfo = PrivyUser.currentUser.userInfo.developer
+            candidates.append(devInfo.github ?? devInfo.stackoverflow ?? devInfo.bitbucket)
+
+            var flattened = candidates.flatMap { $0 }
+
+            let fields = [$0.secondLabel, $0.thirdLabel, $0.fourthLabel]
+            
+            for field in fields {
+                if flattened.count > 0 {
+                    field.text = flattened.removeFirst()
+                } else {
+                    field.text = nil
+                }
+            }
+
             }.configure {
                 $0.rowHeight = 152.0
-                $0.cell.color = UIColor.greenColor()
+
+                let primary = ThemeManager.defaultManager.defaultTheme.primaryColor
+                let secondary = ThemeManager.defaultManager.defaultTheme.secondaryColor
+
+                $0.cell.primaryColor = primary
+                $0.cell.secondaryColor = secondary
+
+                let defaults = NSUserDefaults.standardUserDefaults()
+
+                if let fontName = defaults.objectForKey("userFontName") as? String,
+                    font = UIFont(name: fontName, size: 23.0) {
+
+                    $0.cell.nameLabel.font = font
+                }
         }
 
         let fontPickingRow = InlinePickerRowFormer<FormInlinePickerCell, UIFont>(instantiateType: .Class) {
             $0.titleLabel.text = "Font"
             $0.titleLabel.textColor = UIColor.privyDarkBlueColor
             $0.titleLabel.font = .boldSystemFontOfSize(16)
-//            $0.displayLabel.textColor = .formerSubColor()
             $0.displayLabel.font = .boldSystemFontOfSize(14)
         }.configure {
             $0.pickerItems = fonts.map { font in
@@ -64,7 +122,7 @@ final class SettingsViewController: FormViewController {
             let defaults = NSUserDefaults.standardUserDefaults()
 
             if let fontName = defaults.objectForKey("userFontName") as? String,
-                font = UIFont(name: fontName, size: UIFont.systemFontSize()) {
+                font = UIFont(name: fontName, size: 23.0) {
                 $0.selectedRow = fonts.indexOf({ $0.fontName == font.fontName }) ?? 0
                 print($0.selectedRow)
             } else {
@@ -78,6 +136,29 @@ final class SettingsViewController: FormViewController {
             let defaults = NSUserDefaults.standardUserDefaults()
             defaults.setObject($0.value?.fontName, forKey: "userFontName")
             defaults.synchronize()
+        }
+
+        let stylePickingRow = InlinePickerRowFormer<FormInlinePickerCell, Theme>(instantiateType: .Class) {
+            $0.titleLabel.text = "Theme"
+            $0.titleLabel.textColor = UIColor.privyDarkBlueColor
+            $0.titleLabel.font = .boldSystemFontOfSize(16)
+            $0.displayLabel.font = .boldSystemFontOfSize(14)
+        }.configure {
+            $0.pickerItems = ThemeManager.defaultManager.allThemes.map {
+                InlinePickerItem(
+                    title: $0.name,
+                    displayTitle: nil,
+                    value: $0
+                )
+            }
+
+            $0.selectedRow = ThemeManager.defaultManager.allThemes.indexOf {
+                $0 == ThemeManager.defaultManager.defaultTheme
+            } ?? 0
+        }.onValueChanged {
+            ThemeManager.defaultManager.defaultTheme = $0.value!
+            previewRow.cell.primaryColor = $0.value?.primaryColor
+            previewRow.cell.secondaryColor = $0.value?.secondaryColor
         }
 
         // Create Headers
@@ -94,7 +175,7 @@ final class SettingsViewController: FormViewController {
         ).set(headerViewFormer: createHeader("Preview"))
 
         let fontSection = SectionFormer(
-            rowFormer: fontPickingRow
+            rowFormer: fontPickingRow, stylePickingRow
         ).set(headerViewFormer: createHeader("Customize Your Card"))
 
         former.append(sectionFormer: previewSection, fontSection)
