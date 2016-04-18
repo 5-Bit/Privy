@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreImage.CIColor
 
 // MARK: - NSMutableURLRequest
 extension NSMutableURLRequest {
@@ -126,5 +127,16 @@ extension NSMutableURLRequest {
         set {
             HTTPMethod = newValue.rawValue
         }
+    }
+}
+
+// MARK: - UIColor
+extension UIColor {
+    convenience init(string: String) {
+        self.init(CIColor: CoreImage.CIColor(string: string))
+    }
+
+    var stringValue: String {
+        return CoreImage.CIColor(CGColor: self.CGColor).stringRepresentation
     }
 }

@@ -9,6 +9,10 @@
 import UIKit
 import MapKit
 
+final class UserAnnotation: MKPointAnnotation {
+    var user: HistoryUser!
+}
+
 final class MapViewController: UIViewController {
     @IBOutlet private weak var mapView: MKMapView!
 
@@ -19,6 +23,13 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "Back",
+            style: .Plain,
+            target: nil,
+            action: nil
+        )
+
         if allUsers.count == 1 {
             title = "Showing \(allUsers.count) contact"
         } else {
@@ -26,7 +37,8 @@ final class MapViewController: UIViewController {
         }
 
         for (index, user) in allUsers.enumerate() where user.location != nil && user.location!.latitude != nil && user.location!.longitude != nil {
-            let annotation = MKPointAnnotation()
+            let annotation = UserAnnotation()
+            annotation.user = user
 
             annotation.coordinate = CLLocationCoordinate2D(
                 latitude: user.location!.latitude!,
@@ -61,25 +73,39 @@ final class MapViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let destination = segue.destinationViewController as? HistoryUserViewController,
+            user = (sender as? UserAnnotation)?.user else {
+                return
+        }
+
+        destination.allUsers = allUsers
+        destination.userIndex = allUsers.indexOf { $0 == user }
     }
 }
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
-        var zoomRect = MKMapRectNull
-
         for view in views where view.annotation != nil {
-            if view.annotation === currentUserAnnotation {
-                mapView.selectAnnotation(view.annotation!, animated: true)
+            if view.annotation !== currentUserAnnotation {
+                continue
             }
 
-            let point = MKMapPointForCoordinate(view.annotation!.coordinate)
-            let pointRect = MKMapRectMake(point.x, point.y, 0.1, 0.1)
-            zoomRect = MKMapRectUnion(zoomRect, pointRect)
+            mapView.setVisibleMapRect(
+                MKMapRect(
+                    origin: MKMapPointForCoordinate(
+                        view.annotation!.coordinate
+                    ),
+                    size: MKMapSize(
+                        width: Double(mapView.bounds.width),
+                        height: Double(mapView.bounds.height)
+                    )
+                ),
+                animated: true
+            )
         }
+    }
 
-        mapView.setVisibleMapRect(zoomRect, animated: true)
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        performSegueWithIdentifier("showUserFromPin", sender: view.annotation)
     }
 }

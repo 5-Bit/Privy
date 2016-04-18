@@ -104,13 +104,19 @@ final class PrivyUser: Mappable {
  *  @since <#1.0#>
  */
 struct InfoTypes: Mappable {
-    var sessionid: String?
-
+    var uuid: String?
+    var sessionId: String?
+    
     var location: Location?
 
     struct Location: Mappable {
         var latitude: CLLocationDegrees?
         var longitude: CLLocationDegrees?
+
+        init(latitude: CLLocationDegrees?, longitude: CLLocationDegrees?) {
+            self.latitude = latitude
+            self.longitude = longitude
+        }
 
         init?(_ map: Map) {
             mapping(map)
@@ -288,7 +294,8 @@ struct InfoTypes: Mappable {
     }
 
     mutating func mapping(map: Map) {
-        sessionid   <-  map["uuid"]
+        uuid        <-  map["uuid"]
+        sessionId   <-  map["sessionid"]
         basic       <-  map["basic"]
         social      <-  map["social"]
         business    <-  map["business"]
@@ -297,4 +304,10 @@ struct InfoTypes: Mappable {
         blogging    <-  map["blogging"]
         location    <-  map["location"]
     }
+}
+
+extension InfoTypes: Equatable { }
+
+func == (lhs: InfoTypes, rhs: InfoTypes) -> Bool {
+    return lhs.toJSONString() == rhs.toJSONString()
 }
