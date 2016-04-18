@@ -124,7 +124,6 @@ final class SettingsViewController: FormViewController {
             if let fontName = defaults.objectForKey("userFontName") as? String,
                 font = UIFont(name: fontName, size: 23.0) {
                 $0.selectedRow = fonts.indexOf({ $0.fontName == font.fontName }) ?? 0
-                print($0.selectedRow)
             } else {
                 $0.selectedRow = 0
             }
