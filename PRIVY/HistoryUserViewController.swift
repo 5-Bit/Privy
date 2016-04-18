@@ -75,6 +75,17 @@ final class HistoryUserViewController: UIViewController {
         )
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let selections = tableView.indexPathsForSelectedRows {
+            for selectedIndex in selections {
+                tableView.deselectRowAtIndexPath(selectedIndex, animated: true)
+            }
+        }
+    }
+
+
     override func previewActionItems() -> [UIPreviewActionItem] {
         var actions = [UIPreviewActionItem]()
 
@@ -147,17 +158,7 @@ final class HistoryUserViewController: UIViewController {
     }
 
     private func showSavePicker() {
-        guard let user = user else {
-            return
-        }
-
-        let contact = CNMutableContact()
-
-        contact.givenName = user.basic.firstName ?? ""
-        contact.familyName = user.basic.lastName ?? ""
-
-        contact.emailAddresses = extractEmails()
-
+        let contact = applyCurrentUserInfoToContact(CNContact())
 
         let picker = CNContactViewController(forNewContact: contact)
         picker.delegate = self
@@ -168,11 +169,60 @@ final class HistoryUserViewController: UIViewController {
     }
 
     private func showContactPicker() {
+        let picker = CNContactPickerViewController()
+        picker.view.tintColor = UIColor.privyDarkBlueColor
 
-        let picker = CNContactViewController()
         picker.delegate = self
 
         presentViewController(picker, animated: true, completion: nil)
+    }
+
+    private func applyCurrentUserInfoToContact(contact: CNContact) -> CNContact {
+        guard let user = user else {
+            return contact
+        }
+
+        let workingContact = contact.mutableCopy() as! CNMutableContact
+
+        workingContact.givenName = user.basic.firstName ?? ""
+        workingContact.familyName = user.basic.lastName ?? ""
+
+        if let image = profileImageView.image {
+            workingContact.imageData = UIImageJPEGRepresentation(image, 0.5)
+        }
+
+        if workingContact.phoneNumbers.isEmpty {
+            workingContact.phoneNumbers = extractPhoneNumbers()
+        } else {
+            workingContact.phoneNumbers.appendContentsOf(extractPhoneNumbers())
+        }
+
+        if workingContact.emailAddresses.isEmpty {
+            workingContact.emailAddresses = extractEmails()
+        } else {
+            workingContact.emailAddresses.appendContentsOf(extractEmails())
+        }
+
+        if let birthDay = user.basic.birthDay,
+               calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian) {
+            workingContact.birthday = calendar.componentsInTimeZone(
+                NSTimeZone.localTimeZone(),
+                fromDate: birthDay
+            )
+        }
+
+        if workingContact.socialProfiles.isEmpty {
+            workingContact.socialProfiles = extractSocialProfiles()
+        } else {
+            workingContact.socialProfiles.appendContentsOf(extractSocialProfiles())
+        }
+
+        return workingContact
+    }
+
+    private func saveContact(contact: CNMutableContact) {
+        let saveRequest = CNSaveRequest()
+        saveRequest.addContact(contact, toContainerWithIdentifier: nil)
     }
 
     /**
@@ -233,7 +283,7 @@ final class HistoryUserViewController: UIViewController {
             }
 
             if !rows.isEmpty {
-                sections.append(Section(title: key, rows: rows))
+                sections.append(Section(title: key.capitalizedString, rows: rows))
             }
         }
 
@@ -241,6 +291,39 @@ final class HistoryUserViewController: UIViewController {
             $0.title < $1.title
         }
     }
+
+    private func extractPhoneNumbers() -> [CNLabeledValue] {
+        var phoneNumbers = [CNLabeledValue]()
+
+        guard let user = user else {
+            return phoneNumbers
+        }
+
+        if !user.basic.phoneNumber.isNilOrEmpty {
+            phoneNumbers.append(
+                CNLabeledValue(
+                    label: CNLabelHome,
+                    value: CNPhoneNumber(
+                        stringValue: user.basic.phoneNumber!
+                    )
+                )
+            )
+        }
+
+        if !user.business.phoneNumber.isNilOrEmpty {
+            phoneNumbers.append(
+                CNLabeledValue(
+                    label: CNLabelWork,
+                    value: CNPhoneNumber(
+                        stringValue: user.business.phoneNumber!
+                    )
+                )
+            )
+        }
+
+        return phoneNumbers
+    }
+
 
     private func extractEmails() -> [CNLabeledValue] {
         var emails = [CNLabeledValue]()
@@ -258,6 +341,40 @@ final class HistoryUserViewController: UIViewController {
         }
 
         return emails
+    }
+
+    private func extractSocialProfiles() -> [CNLabeledValue] {
+        var profiles = [CNLabeledValue]()
+
+        guard let user = user else {
+            return profiles
+        }
+
+        if !user.social.twitter.isNilOrEmpty {
+            profiles.append(CNLabeledValue(label: CNSocialProfileServiceTwitter, value: user.social.twitter!))
+        }
+
+        return profiles
+    }
+
+    private func openRow(row: Row) {
+        let schemes = [
+            "Phone Number"      :   "tel:",
+            "Email Address"     :   "mailto:",
+            "Github"            :   "https://github.com/",
+            "Stackoverflow"     :   "https://stackoverflow.com/users/",
+            "Twitter"           :   "https://twitter.com/",
+            "Facebook"          :   "https://facebook.com/",
+            "Googleplus"        :   "https://plus.google.com/",
+        ]
+
+        guard let scheme = schemes[row.title],
+            description = row.description.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
+                url = NSURL(string: scheme + description) else {
+            return
+        }
+
+        UIApplication.sharedApplication().openURL(url)
     }
 }
 
@@ -286,21 +403,53 @@ extension HistoryUserViewController: UITableViewDataSource {
     }
 }
 
+extension HistoryUserViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let alertController = UIAlertController(
+            title: "Warning",
+            message: "You are about to leave Privy. Are you sure?",
+            preferredStyle: .Alert
+        )
+
+        let continueAction = UIAlertAction(
+            title: "Continue",
+            style: .Default) { [unowned self] action in
+                self.openRow(self.accounts[indexPath.section].rows[indexPath.row])
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .Cancel) { _ in
+                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+
+        alertController.addAction(continueAction)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+
+
 extension HistoryUserViewController: CNContactViewControllerDelegate {
     func contactViewController(viewController: CNContactViewController, didCompleteWithContact contact: CNContact?) {
         viewController.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-
-        if let contact = contact as? CNMutableContact { // Selected done
-            saveContact(contact)
+        guard let contact = contact as? CNMutableContact else {
+            return
         }
-    }
 
-    private func saveContact(contact: CNMutableContact) {
-        let saveRequest = CNSaveRequest()
-        saveRequest.addContact(contact, toContainerWithIdentifier: nil)
+        saveContact(contact)
     }
-
-//    func contactViewController(viewController: CNContactViewController, shouldPerformDefaultActionForContactProperty property: CNContactProperty) -> Bool {
-//        
-//    }
 }
+
+extension HistoryUserViewController: CNContactPickerDelegate {
+    func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
+        guard let contact = applyCurrentUserInfoToContact(contact).mutableCopy() as? CNMutableContact else {
+            return
+        }
+
+        saveContact(contact)
+    }
+}
+

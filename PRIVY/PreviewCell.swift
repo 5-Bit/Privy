@@ -10,10 +10,10 @@ import UIKit
 import Former
 
 final class PreviewCell: UITableViewCell {
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var secondLabel: UILabel!
-    @IBOutlet private weak var thirdLabel: UILabel!
-    @IBOutlet private weak var fourthLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var secondLabel: UILabel!
+    @IBOutlet weak var thirdLabel: UILabel!
+    @IBOutlet weak var fourthLabel: UILabel!
     @IBOutlet private weak var qrCodeImageView: UIImageView!
 
     var fontName: String? {
@@ -24,10 +24,25 @@ final class PreviewCell: UITableViewCell {
         }
     }
 
-    var color: UIColor? {
+    var primaryColor: UIColor? {
         didSet {
-            contentView.backgroundColor = color
-            generateQrCode(color)
+            guard let color = primaryColor else {
+                return
+            }
+
+            let newColor = UIColor(CGColor: color.CGColor)
+
+            nameLabel.textColor = newColor
+            secondLabel.textColor = newColor
+            thirdLabel.textColor = newColor
+            fourthLabel.textColor = newColor
+        }
+    }
+
+    var secondaryColor: UIColor? {
+        didSet {
+            contentView.backgroundColor = secondaryColor
+            generateQrCode(secondaryColor)
         }
     }
 

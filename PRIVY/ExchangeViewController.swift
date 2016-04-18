@@ -40,7 +40,6 @@ final class ExchangeViewController: UIViewController {
             backgroundColor: backgroundColor) { (image) in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
                     self?.qrCodeImage = image
-                    print(PrivyUser.currentUser.qrString)
                 }
         }
     }

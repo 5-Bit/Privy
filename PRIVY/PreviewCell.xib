@@ -31,6 +31,11 @@
                                 <fontDescription key="fontDescription" name="Pacifico-Regular" family="Pacifico" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Cp-6Q-krL"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W5g-IG-O54">
                                 <rect key="frame" x="8" y="70" width="330" height="21"/>
@@ -46,17 +51,25 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="LPd-IO-ypV"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="uIk-4d-Err">
                                 <rect key="frame" x="346" y="8" width="120" height="120"/>
                                 <color key="backgroundColor" red="0.90980392160000001" green="0.2666666667" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="uIk-4d-Err" secondAttribute="height" multiplier="1:1" id="1y9-E1-24e"/>
                                     <constraint firstAttribute="height" constant="120" id="6Q7-FL-1bk"/>
                                     <constraint firstAttribute="width" constant="120" id="Gqb-0k-UnA"/>
                                     <constraint firstAttribute="width" secondItem="uIk-4d-Err" secondAttribute="height" multiplier="1:1" id="jFc-xH-eVd"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="6Q7-FL-1bk"/>
+                                        <exclude reference="Gqb-0k-UnA"/>
                                         <exclude reference="jFc-xH-eVd"/>
                                     </mask>
                                 </variation>
@@ -70,6 +83,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aZD-vd-eab"/>
+                                        <exclude reference="bMh-uF-T4h"/>
+                                    </mask>
+                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -100,7 +119,7 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <exclude reference="uIk-4d-Err"/>
+                                <include reference="uIk-4d-Err"/>
                             </mask>
                         </variation>
                     </view>
