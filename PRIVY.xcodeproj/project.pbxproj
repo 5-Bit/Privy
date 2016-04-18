@@ -74,6 +74,8 @@
 		00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */; };
 		00C168A21C56F66700D734BF /* QRGeneratorOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */; };
 		00D4B7E01CAED6B8004FD84B /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */; };
+		00ED7B401CC47397000667C5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ED7B3F1CC47397000667C5 /* Theme.swift */; };
+		00ED7B421CC473D3000667C5 /* Themes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00ED7B411CC473D3000667C5 /* Themes.plist */; };
 		00F2B7311C83953300249975 /* RequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00F2B7301C83953300249975 /* RequestManagerTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +171,8 @@
 		00BFF88E1C7B67E80027BFFE /* OutlinedTransformableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlinedTransformableView.swift; sourceTree = "<group>"; };
 		00C168A11C56F66600D734BF /* QRGeneratorOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRGeneratorOperationTests.swift; sourceTree = "<group>"; };
 		00D4B7DF1CAED6B8004FD84B /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
+		00ED7B3F1CC47397000667C5 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		00ED7B411CC473D3000667C5 /* Themes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Themes.plist; sourceTree = "<group>"; };
 		00F2B7301C83953300249975 /* RequestManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -260,6 +264,7 @@
 				00A908251CACC8F300A957C6 /* success.mp3 */,
 				00A908231CACC8ED00A957C6 /* failure.mp3 */,
 				0040F1581C4C5FF30076F176 /* Info.plist */,
+				00ED7B411CC473D3000667C5 /* Themes.plist */,
 				0040F1501C4C5FF30076F176 /* PRIVY.xcdatamodeld */,
 			);
 			name = Privy;
@@ -321,6 +326,7 @@
 				0040F19C1C4D4C500076F176 /* QRGeneratorOperation.swift */,
 				0040F19E1C4D4E6F0076F176 /* QrCorrectionLevel.swift */,
 				0040F1901C4CA6970076F176 /* NSQualityOfService+qos_class_t.swift */,
+				00ED7B3F1CC47397000667C5 /* Theme.swift */,
 				0040F1851C4C773A0076F176 /* Views */,
 			);
 			name = General;
@@ -521,6 +527,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00ED7B421CC473D3000667C5 /* Themes.plist in Resources */,
 				00A7B95B1C7D31F400E94C68 /* ProfileLabelCell.xib in Resources */,
 				002FF4261CB6CDDC00DCBDA5 /* PreviewCell.xib in Resources */,
 				0040F1571C4C5FF30076F176 /* LaunchScreen.storyboard in Resources */,
@@ -606,6 +613,7 @@
 				002A3E451CAC3B2F00456482 /* SettingsViewController.swift in Sources */,
 				0040F17B1C4C60510076F176 /* PRVGradientView.swift in Sources */,
 				00A7B96E1C7E24B900E94C68 /* BusinessViewController.swift in Sources */,
+				00ED7B401CC47397000667C5 /* Theme.swift in Sources */,
 				00BFF88F1C7B67E80027BFFE /* OutlinedTransformableView.swift in Sources */,
 				0040F1971C4CB7490076F176 /* CameraPermissionOperation.swift in Sources */,
 				00A7B9461C7D245400E94C68 /* InfoViewController.swift in Sources */,
