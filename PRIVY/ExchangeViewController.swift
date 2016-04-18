@@ -128,13 +128,15 @@ final class ExchangeViewController: UIViewController {
 
     private func applyCurrentTheme() {
         let currentTheme = ThemeManager.defaultManager.defaultTheme
+        let primaryColor = UIColor(CGColor: currentTheme.primaryColor.CGColor)
+        let secondaryColor = UIColor(CGColor: currentTheme.secondaryColor.CGColor)
 
-        nameLabel.textColor = currentTheme.primaryColor
-        primaryDetailLabel.textColor = currentTheme.primaryColor
-        secondaryDetailLabel.textColor = currentTheme.primaryColor
-        ternaryDetailLabel.textColor = currentTheme.primaryColor
+        nameLabel.textColor = primaryColor
+        primaryDetailLabel.textColor = primaryColor
+        secondaryDetailLabel.textColor = primaryColor
+        ternaryDetailLabel.textColor = primaryColor
 
-        cardBackgroundView.backgroundColor = currentTheme.secondaryColor
+        cardBackgroundView.backgroundColor = secondaryColor
 
         regenerateQrCode()
     }
@@ -153,12 +155,6 @@ final class ExchangeViewController: UIViewController {
 
         infoSwappingQueue.addOperation(operation)
     }
-
-
-//    private var qrGenOperation: QRGeneratorOperation {
-//        let backgroundColor = NSUserDefaults.standardUserDefaults().colorForKey("defaultColor") ?? UIColor.blackColor()
-//
-//    }
 
     /**
      <#Description#>
@@ -448,9 +444,13 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
                     latitude: self.lastKnownLocation?.coordinate.latitude,
                     longitude: self.lastKnownLocation?.coordinate.longitude
                 )
-                print("adding to history")
-                history.append(user)
-                LocalStorage.defaultStorage.saveHistory(history)
+
+                if !history.contains(user) {
+                    history.append(user)
+                    LocalStorage.defaultStorage.saveHistory(history)
+
+                    self.tabBarController?.tabBar.items?.last?.badgeValue = "New"
+                }
 
                 state = .Processed
             } else {
@@ -462,11 +462,7 @@ extension ExchangeViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     /**
-     <#Description#>
-     
-     - parameter points: <#points description#>
-     
-     - returns: <#return value description#>
+     Maps an AVFoundation points dictionary map into a consumable CGPoint Array.
      */
     private func translatePoints(points: [NSDictionary]) -> [CGPoint] {
         return points.map {
