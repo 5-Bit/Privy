@@ -305,3 +305,9 @@ struct InfoTypes: Mappable {
         location    <-  map["location"]
     }
 }
+
+extension InfoTypes: Equatable { }
+
+func == (lhs: InfoTypes, rhs: InfoTypes) -> Bool {
+    return lhs.toJSONString() == rhs.toJSONString()
+}
