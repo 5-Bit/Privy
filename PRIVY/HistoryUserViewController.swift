@@ -352,11 +352,21 @@ final class HistoryUserViewController: UIViewController {
         }
 
         if !user.basic.emailAddress.isNilOrEmpty {
-            emails.append(CNLabeledValue(label: CNLabelHome, value: user.basic.emailAddress!))
+            emails.append(
+                CNLabeledValue(
+                    label: CNLabelHome,
+                    value: user.basic.emailAddress!
+                )
+            )
         }
 
         if !user.business.emailAddress.isNilOrEmpty {
-            emails.append(CNLabeledValue(label: CNLabelWork, value: user.business.emailAddress!))
+            emails.append(
+                CNLabeledValue(
+                    label: CNLabelWork,
+                    value: user.business.emailAddress!
+                )
+            )
         }
 
         return emails
@@ -370,7 +380,143 @@ final class HistoryUserViewController: UIViewController {
         }
 
         if !user.social.twitter.isNilOrEmpty {
-            profiles.append(CNLabeledValue(label: CNSocialProfileServiceTwitter, value: user.social.twitter!))
+            profiles.append(
+                CNLabeledValue(
+                    label: CNSocialProfileServiceTwitter,
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.social.twitter,
+                        userIdentifier: nil,
+                        service: CNSocialProfileServiceTwitter
+                    )
+                )
+            )
+        }
+
+        if !user.social.facebook.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: CNSocialProfileServiceFacebook,
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.social.facebook,
+                        userIdentifier: nil,
+                        service: CNSocialProfileServiceFacebook
+                    )
+                )
+            )
+        }
+
+        if !user.social.instagram.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Instagram",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.social.instagram,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.social.snapchat.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Snapchat",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.social.snapchat,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.media.flickr.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: CNSocialProfileServiceFlickr,
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.flickr,
+                        userIdentifier: nil,
+                        service: CNSocialProfileServiceFlickr
+                    )
+                )
+            )
+        }
+
+        if !user.media.pintrest.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Pintrest",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.pintrest,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.media.soundcloud.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Sound Cloud",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.soundcloud,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.media.vimeo.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Vimeo",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.vimeo,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.media.vine.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "Vine",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.vine,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
+        }
+
+        if !user.media.youtube.isNilOrEmpty {
+            profiles.append(
+                CNLabeledValue(
+                    label: "YouTube",
+                    value: CNSocialProfile(
+                        urlString: nil,
+                        username: user.media.youtube,
+                        userIdentifier: nil,
+                        service: nil
+                    )
+                )
+            )
         }
 
         return profiles
