@@ -27,8 +27,6 @@
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeBookmark</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>shortcutSubtitle3</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>View History</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -42,8 +40,6 @@
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeSearch</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>shortcutSubtitle1</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Swap</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -57,8 +53,6 @@
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeContact</string>
-			<key>UIApplicationShortcutItemSubtitle</key>
-			<string>shortcutSubtitle2</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Edit Info</string>
 			<key>UIApplicationShortcutItemType</key>
