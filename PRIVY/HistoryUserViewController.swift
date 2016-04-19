@@ -203,8 +203,8 @@ final class HistoryUserViewController: UIViewController {
 
         let workingContact = contact.mutableCopy() as! CNMutableContact
 
-        workingContact.givenName = user.basic.firstName ?? ""
-        workingContact.familyName = user.basic.lastName ?? ""
+        workingContact.givenName = user.basic.firstName ?? workingContact.givenName
+        workingContact.familyName = user.basic.lastName ?? workingContact.familyName
 
         if let image = profileImageView.image {
             workingContact.imageData = UIImageJPEGRepresentation(image, 0.5)
@@ -239,9 +239,13 @@ final class HistoryUserViewController: UIViewController {
         return workingContact
     }
 
-    private func saveContact(contact: CNMutableContact) {
+    private func saveContact(contact: CNMutableContact, shouldCreate create: Bool) {
         let saveRequest = CNSaveRequest()
-        saveRequest.addContact(contact, toContainerWithIdentifier: nil)
+        if create {
+            saveRequest.addContact(contact, toContainerWithIdentifier: "Privy")
+        } else {
+            saveRequest.updateContact(contact)
+        }
     }
 
     /**
@@ -604,7 +608,7 @@ extension HistoryUserViewController: CNContactViewControllerDelegate {
             return
         }
 
-        saveContact(contact)
+        saveContact(contact, shouldCreate: true)
     }
 }
 
@@ -614,7 +618,7 @@ extension HistoryUserViewController: CNContactPickerDelegate {
             return
         }
 
-        saveContact(contact)
+        saveContact(contact, shouldCreate: false)
     }
 }
 
